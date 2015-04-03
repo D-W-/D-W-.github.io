@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[D W]]></title>
   <link href="http://d-w-.github.io/atom.xml" rel="self"/>
   <link href="http://d-w-.github.io/"/>
-  <updated>2015-04-03T21:46:58+00:00</updated>
+  <updated>2015-04-03T23:06:24+08:00</updated>
   <id>http://d-w-.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Harry]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Monster Storm]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/25/Monster-Storm/"/>
-    <updated>2015-03-25T00:00:00-01:00</updated>
+    <updated>2015-03-25T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/25/Monster-Storm</id>
     <content type="html"><![CDATA[<p>Monster Storm</p>
 
@@ -82,7 +82,7 @@ m_matrixLeftBottomX的值 ＝ （ 屏幕的宽 － 寿司的宽＊N个寿司 －
   <entry>
     <title type="html"><![CDATA[Review VCool Website]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/23/Review_Vcool-Website/"/>
-    <updated>2015-03-23T00:00:00-01:00</updated>
+    <updated>2015-03-23T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/23/Review_Vcool-Website</id>
     <content type="html"><![CDATA[<p>以前做过的一些东西的简单回顾，避免面试官问起来都忘了，也能在简历上面写得更加得心应手</p>
 
@@ -162,7 +162,7 @@ m_matrixLeftBottomX的值 ＝ （ 屏幕的宽 － 寿司的宽＊N个寿司 －
   <entry>
     <title type="html"><![CDATA[Morris Traversal]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/22/Morris-Traversal/"/>
-    <updated>2015-03-22T00:00:00-01:00</updated>
+    <updated>2015-03-22T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/22/Morris-Traversal</id>
     <content type="html"><![CDATA[<p>Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度只要O(1),时间复杂度也只有O(n)
 这里根据<a href="http://www.cnblogs.com/AnnieKim/archive/2013/06/15/MorrisTraversal.html">博客园上的文章</a>进行了学习.整个算法我感觉主要有两部分不太容易懂 ,一是具体的算法部分,也就是如何利用线索二叉树找前驱节点的方法的;另一个就是如何证明这个算法是O(n)的.对于第一部分可以在代码里面说明,这里先说一下第二部分,借用原文中的话:</p>
@@ -248,7 +248,7 @@ if __name__ == '__main__':
   <entry>
     <title type="html"><![CDATA[豆瓣笔试]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/20/douban-paper-test/"/>
-    <updated>2015-03-20T00:00:00-01:00</updated>
+    <updated>2015-03-20T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/20/douban-paper-test</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
@@ -276,7 +276,7 @@ if __name__ == '__main__':
   <entry>
     <title type="html"><![CDATA[LeetCode上面的Distinct Subsequences总结]]></title>
     <link href="http://d-w-.github.io/blog/2014/12/20/Distinct-Subsequences/"/>
-    <updated>2014-12-20T00:00:00-01:00</updated>
+    <updated>2014-12-20T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2014/12/20/Distinct-Subsequences</id>
     <content type="html"><![CDATA[<p>最近做了挺多东西,从中也学了不少,觉得总结一下比较好,一直没有时间就一直拖着,现在终于有点空闲的时间,觉得像我这种记性不太好的人还是多做一些code review,否则做一点忘一点,最后反而学不到什么东西.</p>
 
@@ -398,7 +398,7 @@ t 0 0 0 0 0 0 0 3<br/>
   <entry>
     <title type="html"><![CDATA[LeetCode上面的WordLadder总结]]></title>
     <link href="http://d-w-.github.io/blog/2014/11/25/Word-Ladder/"/>
-    <updated>2014-11-25T00:00:00-01:00</updated>
+    <updated>2014-11-25T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2014/11/25/Word-Ladder</id>
     <content type="html"><![CDATA[<p>按通过率来说,WordLadder应该是Leetcode上面最难的一道题了
 其中的第二道我提交了8次才成功,多数原因是TLE,这实在令人沮丧</p>
@@ -451,7 +451,7 @@ t 0 0 0 0 0 0 0 3<br/>
   <entry>
     <title type="html"><![CDATA[Linux文件系统基础]]></title>
     <link href="http://d-w-.github.io/blog/2014/11/14/Linux-File-System/"/>
-    <updated>2014-11-14T00:00:00-01:00</updated>
+    <updated>2014-11-14T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2014/11/14/Linux-File-System</id>
     <content type="html"><![CDATA[<h2>鸟哥的Linux私房菜学习笔记(0)</h2>
 
@@ -502,7 +502,7 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   <entry>
     <title type="html"><![CDATA[第一篇博客]]></title>
     <link href="http://d-w-.github.io/blog/2014/10/15/First-Blog/"/>
-    <updated>2014-10-15T00:00:00+00:00</updated>
+    <updated>2014-10-15T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2014/10/15/First-Blog</id>
     <content type="html"><![CDATA[<h2>我这个人，执行力很差。</h2>
 
@@ -534,7 +534,7 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   <entry>
     <title type="html"><![CDATA[Markdown Style Guide]]></title>
     <link href="http://d-w-.github.io/blog/2014/03/03/Hello-World/"/>
-    <updated>2014-03-03T00:00:00-01:00</updated>
+    <updated>2014-03-03T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2014/03/03/Hello-World</id>
     <content type="html"><![CDATA[<p>This is a demo of all styled elements in Jekyll Now.</p>
 

@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Morris Traversal - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度只要O(1),时间复杂度也只有O(n)
+这里根据博客园上的文章进行了学习.整个算法我感觉主要有两部分不太容易懂 ,一是具体的算法部分,也就是如何利用线索二叉树找前驱节点的方法的;另一个就是如何证明这个算法是O(n)的. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://d-w-.github.io/blog/2015/03/22/Morris-Traversal/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="d-w-.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Morris Traversal</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-22T00:00:00-01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度只要O(1),时间复杂度也只有O(n)
+这里根据<a href="http://www.cnblogs.com/AnnieKim/archive/2013/06/15/MorrisTraversal.html">博客园上的文章</a>进行了学习.整个算法我感觉主要有两部分不太容易懂 ,一是具体的算法部分,也就是如何利用线索二叉树找前驱节点的方法的;另一个就是如何证明这个算法是O(n)的.对于第一部分可以在代码里面说明,这里先说一下第二部分,借用原文中的话:</p>
+
+<blockquote><p>直觉上，认为它的复杂度是O(nlgn)，因为找单个节点的前驱节点与树的高度有关。但事实上，寻找所有节点的前驱节点只需要O(n)时间。n个节点的二叉树中一共有n-1条边，整个过程中每条边<strong>最多只走2次</strong>，一次是为了定位到某个节点，另一次是为了寻找上面某个节点的前驱节点，如下图所示，其中红色是为了定位到某个节点，黑色线是为了找到前驱节点。所以复杂度为O(n)。
+<img src="http://images.cnitblog.com/blog/300640/201306/15150628-5285f29bab234750a62e2309394b6e14.jpg" alt="此处输入图片的描述" /></p></blockquote>
+
+<p>原文在这里讲的已经很详细了,这里补充一点,我感觉每条边并不是最多只会被走两次,而是最多会走3次,因为找前驱结点的话会走两次,a:第一次遍历到该节点,找到它的前驱节点,并把前驱节点的右孩子设为当前节点;b:第二次遍历到该节点,找到它的前驱结点,这时前驱结点的右孩子是当前节点(形成了一个环),这时把前驱结点恢复成NULL,并设置当前孩子的右孩子为当前节点.</p>
+
+<p>这里我用python实现了一下<strong>中序遍历</strong></p>
+
+<pre><code>#!/usr/bin/env python
+#coding:utf-8
+
+# Morris traversal
+# O(1) space O(n) time
+
+# 算法基本思想:类似于线索二叉树,找到每个节点的前驱节点,并用前驱节点的右孩子指向当前节点,最后再把该指针删除
+
+'''算法步骤
+1. 如果当前节点的左孩子为空，则输出当前节点并将其右孩子作为当前节点。
+
+2. 如果当前节点的左孩子不为空，在当前节点的左子树中找到当前节点在中序遍历下的前驱节点。
+
+   a) 如果前驱节点的右孩子为空，将它的右孩子设置为当前节点。当前节点更新为当前节点的左孩子。
+
+   b) 如果前驱节点的右孩子为当前节点，将它的右孩子重新设为空（恢复树的形状）。输出当前节点。当前节点更新为当前节点的右孩子。
+
+3. 重复以上1、2直到当前节点为空。
+'''
+
+# 二叉树
+class TreeNode:
+    def __init__(self,x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class MorrisTraversal:
+    '只是一个封装类,把各种遍历封装起来'
+    @staticmethod
+    def inOrder(root):
+        now = root
+        while now:
+            if now.left == None:
+                print now.val
+                now = now.right
+            else:
+                pre = now.left
+                # 寻找前驱,当第二次寻找now的时候now的前驱的right已经被设定成了now,也就是成了一个环,要注意,这里用 pre.right != now 来避免
+                # 左边的最右就是前驱
+                while pre.right and pre.right != now:
+                    pre = pre.right
+                if pre.right == now:
+                    pre.right = None
+                    print now.val
+                    now = now.right
+                else:
+                    pre.right = now
+                    now = now.left
+
+if __name__ == '__main__':
+    t1 = TreeNode(1)
+    t2 = TreeNode(2)
+    t3 = TreeNode(3)
+    t4 = TreeNode(4)
+    t5 = TreeNode(5)
+    t6 = TreeNode(6)
+    t7 = TreeNode(7)
+
+    t1.left = t2
+    t1.right = t3
+    t2.left = t4
+    t2.right = t5
+    t3.left = t6
+    t3.right = t7
+
+    MorrisTraversal.inOrder(t1)
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2015-03-22T00:00:00-01:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2015</span></span> <span class='time'>12:00 am</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://d-w-.github.io/blog/2015/03/22/Morris-Traversal/" data-via="" data-counturl="http://d-w-.github.io/blog/2015/03/22/Morris-Traversal/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/03/20/douban-paper-test/" title="Previous Post: 豆瓣笔试">&laquo; 豆瓣笔试</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2015/03/23/Review_Vcool-Website/" title="Next Post: Review VCool Website">Review VCool Website &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/03/25/Monster-Storm/">Monster Storm</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/03/23/Review_Vcool-Website/">Review VCool Website</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/03/22/Morris-Traversal/">Morris Traversal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/03/20/douban-paper-test/">豆瓣笔试</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/20/Distinct-Subsequences/">LeetCode上面的Distinct Subsequences总结</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

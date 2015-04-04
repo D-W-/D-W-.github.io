@@ -9,7 +9,7 @@
   <meta name="author" content="Harry">
 
   
-  <meta name="description" content="前言 最近在读侯捷老师的《STL源码剖析》一书，收获简直太大。一激动就想把学的东西赶紧记下来写篇博客，然后想到我以前的博客系统，bug无穷，于是决定亲自配一个Octopress的博客，因为之前的博客是Jekyll的，博文都用的markdown写的，Octopress也是markdown语法， &hellip;">
+  <meta name="description" content="之前学习git的过程中就遇到了这个问题，电脑并不能使用ssh连接远程仓库，例如clone git://xx@git.com/xx.git 这样的工程会失败。我就必须改成使用HTTPS协议，把连接改成 https 的，或者直接配置一个环境变量 git config --global url." &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-04T23:38:50+00:00" pubdate data-updated="true"></time>
+        
+        
+           | <a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/#comments">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>之前学习git的过程中就遇到了这个问题，电脑并不能使用ssh连接远程仓库，例如clone git://xx@git.com/xx.git 这样的工程会失败。我就必须改成使用HTTPS协议，把连接改成 https 的，或者直接配置一个环境变量</p>
+
+<pre><code>git config --global url."https://".insteadOf git://
+</code></pre>
+
+<p>这样处理有一个弊端，我在Ubuntu上面任何时候需要连接远程仓库，必须输入我的用户名和密码，这样有点麻烦，而SSH协议是用本地存储的公钥私钥验证的，只要配置好了就不用输入用户名密码，我决定改成SSH连接。</p>
+
+<h2>原因</h2>
+
+<p>电脑无法用SSH连接远程仓库的原因是SSH协议用的是22端口，但是有些防火墙会把这个端口<a href="http://stackoverflow.com/questions/7144811/git-ssh-error-connect-to-host-bad-file-number">block掉</a></p>
+
+<h2>解决方案</h2>
+
+<p>既然不让用22号端口，换个端口就可以了，就像上面stack overflow的解决方案一样，改用443端口，在 <code>~/.ssh/</code>
+建立一个config文件，写上</p>
+
+<pre><code>Host github.com
+User git
+Hostname ssh.github.com
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/id_rsa
+Port 443
+</code></pre>
+
+<p>这里还有个坑，就是建立的这个config文件不能太公开，否则git不答应，使用</p>
+
+<pre><code>chmod go-rw ~/.ssh/config
+</code></pre>
+
+<p>这句话就是把g（group当前组）和o（other其他用户）的对config这个文件的权限去掉读和写。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -945,113 +1013,9 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/03/Hello-World/">Markdown Style Guide</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-03T00:00:00-01:00" pubdate data-updated="true"></time>
-        
-        
-           | <a href="/blog/2014/03/03/Hello-World/#comments">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is a demo of all styled elements in Jekyll Now.</p>
-
-<p><a href="https://raw.githubusercontent.com/barryclark/www.jekyllnow.com/gh-pages/_posts/2014-6-19-Markdown-Style-Guide.md">View the markdown used to create this post</a>.</p>
-
-<p>This is a paragraph, it&rsquo;s surrounded by whitespace. Next up are some headers, they&rsquo;re heavily influenced by GitHub&rsquo;s markdown style.</p>
-
-<h2>Header 2 (H1 is reserved for post titles)</h2>
-
-<h3>Header 3</h3>
-
-<h4>Header 4</h4>
-
-<p>A link to <a href="http://github.com/barryclark/jekyll-now/">Jekyll Now</a>. A big ass literal link <a href="http://github.com/barryclark/jekyll-now/">http://github.com/barryclark/jekyll-now/</a></p>
-
-<p>An image, located within /images</p>
-
-<p><img src="/images/jekyll-logo.png" title="an image title" alt="an image alt text" /></p>
-
-<ul>
-<li>A bulletted list</li>
-<li>alternative syntax 1</li>
-<li><p>alternative syntax 2</p>
-
-<ul>
-<li>an indented list item</li>
-</ul>
-</li>
-<li><p>An</p></li>
-<li>ordered</li>
-<li>list</li>
-</ul>
-
-
-<p>Inline markup styles:</p>
-
-<ul>
-<li><em>italics</em></li>
-<li><strong>bold</strong></li>
-<li><code>code()</code></li>
-</ul>
-
-
-<blockquote><p>Blockquote</p>
-
-<blockquote><p>Nested Blockquote</p></blockquote></blockquote>
-
-<p>Syntax highlighting can be used by wrapping your code in a liquid tag like so:</p>
-
-<p>{% highlight javascript %}
-/<em> Some pointless Javascript </em>/
-var rawr = [&ldquo;r&rdquo;, &ldquo;a&rdquo;, &ldquo;w&rdquo;, &ldquo;r&rdquo;];
-{% endhighlight %}</p>
-
-<p>creates&hellip;</p>
-
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="cm">/* Some pointless Javascript */</span>
-<span class="kd">var</span> <span class="nx">rawr</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">];</span></code></pre></div>
-
-
-<p>Use two trailing spaces
-on the right
-to create linebreak tags</p>
-
-<p>Finally, horizontal lines</p>
-
-<hr />
-
-<hr />
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="2">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -1082,6 +1046,10 @@ to create linebreak tags</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/04/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a>
       </li>
     
@@ -1095,10 +1063,6 @@ to create linebreak tags</p>
     
       <li class="post">
         <a href="/blog/2015/03/22/Morris-Traversal/">Morris Traversal</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/20/douban-paper-test/">豆瓣笔试</a>
       </li>
     
   </ul>

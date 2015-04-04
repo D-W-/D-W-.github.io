@@ -9,9 +9,7 @@
   <meta name="author" content="Harry">
 
   
-  <meta name="description" content="Monster Storm 边学边写的cocos2d-x游戏,基于3.0版本 这个游戏的主要难点有两个
-1. 怎么把所有需要消除的精灵摆对位置
-2. 怎么找到某个精灵周围的同类精灵 摆放精灵 找到精灵摆放点的左下角的(x,y)坐标,这里直接借用泰然网教程上说的 &hellip;">
+  <meta name="description" content="前言 最近在读侯捷老师的《STL源码剖析》一书，收获简直太大。一激动就想把学的东西赶紧记下来写篇博客，然后想到我以前的博客系统，bug无穷，于是决定亲自配一个Octopress的博客，因为之前的博客是Jekyll的，博文都用的markdown写的，Octopress也是markdown语法， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -74,6 +72,121 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2015/04/04/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-04T21:34:53+00:00" pubdate data-updated="true"></time>
+        
+        
+           | <a href="/blog/2015/04/04/moving-my-blog-to-octopress/#comments">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>前言</h2>
+
+<p>最近在读侯捷老师的《STL源码剖析》一书，收获简直太大。一激动就想把学的东西赶紧记下来写篇博客，然后想到我以前的博客系统，bug无穷，于是决定亲自配一个Octopress的博客，因为之前的博客是Jekyll的，博文都用的markdown写的，Octopress也是markdown语法，这样可以直接连文字带样式轻松移植过来，想的挺轻松，但是实际操纵起来简直折腾了我好几天。。</p>
+
+<p>在octopress上面搭建博客的过程真的是一波三折，由于原来简介的jekell模板有点问题，我决定把自己亲手重新装一个octopress的博客</p>
+
+<h2>双系统的问题</h2>
+
+<p>首先，由于双系统，我希望我能在任何一个系统上面写博客并同时push到github上面，由于octopress博客写完博客需要生成一下，我就不得不在两个系统上都装上生成博客需要的ruby环境和javascript环境。</p>
+
+<p>装ruby的一些包时候遇到了一些问题，由于GRW的问题，直接从远程仓库安装安装不了，这时候需要借助<a href="http://ruby.taobao.org/">淘宝搭建的一个国内的仓库</a>，15min一更新还是很快的</p>
+
+<p>使用如下的命令就可以了</p>
+
+<pre><code>$ gem sources --remove https://rubygems.org/
+$ gem sources -a https://ruby.taobao.org/
+$ gem sources -l
+*** CURRENT SOURCES ***
+
+https://ruby.taobao.org
+# 请确保只有 ruby.taobao.org
+$ gem install rails
+</code></pre>
+
+<h2>博客主题的选择</h2>
+
+<p>octopress对于主题的安装还是很简便的，调了一番，终于找了个比较中意的主题
+<a href="https://github.com/martinbmadsen/classic-martinb.git">classic-martinb</a></p>
+
+<pre><code>$ cd octopress
+$ git submodule add git://github.com/fapper/classic-martinb.git .themes/classic-martinb
+$ rake install['classic-martinb']
+$ rake generate
+</code></pre>
+
+<h2>linux下面我的博客无法找到</h2>
+
+<p>不知道什么原因，我的博客在linux的系统（包括我的ubuntu系统和安卓手机）的浏览器上面加载不到。。
+后来我发现，我的博客域名是d-w-.github.io，在linux下面ping都无法ping通，应该是三级域名结尾是 - 的原因，我试了一下，只要结尾不是 - ，都可以ping的通。。这个问题还等后续解决，比如买个域名撘过来。。我甚至想把github的用户名给换了</p>
+
+<h2>更改了主题或者更新了博客后 <code>rake deploy</code> 的push被rejecte</h2>
+
+<p>这个问题一直出现，在stackoverflow上面有各式各样的解答，都可以起到作用，但是我每次deploy都要按照上面的方法执行一遍岂不是太麻烦了。。我观察了一下，原因应该是远程分支有两个，git并不知道push到哪一个的原因，又看了一下octopress的文档，有这么一句</p>
+
+<blockquote><p>Note: With new repositories, Github sets the default branch based on the branch you push first, and it looks there for the generated site content. If you&rsquo;re having trouble getting Github to publish your site, go to the admin panel for your repository and make sure that the master branch is the default branch.</p></blockquote>
+
+<p>看来只要master branch设为了默认分支就好了，这个是不是合适的解决方案还待后续检验。
+后来经过我无数次删除repo，重装的循环，终于发现了原因。。是因为windows和Linux的换行符不一样，比如我在Linux下面初始化了一个repo，换行符是LF，然后我到了windows系统下面打开了这个项目目录，想去push，但是windows上面换行符是CRLF，这时候和远程的仓库比对，发现换行符不同。。就会被rejecte，因为git不知道用哪个好。。解决的办法在stack overflow上找到了，<a href="http://stackoverflow.com/questions/1967370/git-replacing-lf-with-crlf">只要改一下配置就好</a>，看来git确实强大。</p>
+
+<h2>git的SSH验证和HTTPS验证</h2>
+
+<p>由于端口的问题，我这边并没有开SSH的端口，都是采用HTTPS验证，在windows端可以直接用github的桌面版，push起来也挺轻松，但是在linux端，由于是HTTPS验证，每次push都要输入用户名和密码，这个问题待解决。</p>
+
+<h2>对第三方主题进行更改</h2>
+
+<p>既然折腾了就要折腾到底，单纯clone一个别人写好的主题显然不能满足我的要求，毕竟我以前的博客就有一些不错的特技。所以要对fork过来的第三方主题进行改装，来到 .theme 文件夹下面的相应的主题包里面，进行需要的修改，这里需要注意的就是修改结束之后需要再</p>
+
+<pre><code>rake install[name]
+</code></pre>
+
+<p>一下，这样所做的修改才会生效</p>
+
+<h2>添加多说评论系统</h2>
+
+<p>这个比较简单，参照了<a href="http://havee.me/internet/2013-02/add-duoshuo-commemt-system-into-octopress.html">为 Octopress 添加多说评论系统</a>这篇文章，需要注意的一点是文章需要在前面的yml上面注明 <code>comments: true</code> 。</p>
+
+<h2>在文章中添加本地图片</h2>
+
+<p>这个是因为我用了泰然网上的两个图片，没想到有防盗链。。只能下载到本地才能正常显示，当然我在文章里面注明了图片的出处，个人认为这种防盗链确实没什么必要。。
+参照<a href="http://blog.csdn.net/hankai1024/article/details/12833423">Octopress在页面和内容中加入代码、图片、带标题图片方法</a>
+图片放到 <code>octopress\source\images</code> 里面
+通过</p>
+
+<pre><code>    r'&lt;img src="/images/pic_name.png"&gt;'
+</code></pre>
+
+<p>引用就可以了。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2015/03/25/Monster-Storm/">Monster Storm</a></h1>
     
     
@@ -90,7 +203,7 @@
   
 
 
-<time datetime="2015-03-25T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-25T00:00:00-01:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2015/03/25/Monster-Storm/#comments">Comments</a>
@@ -191,7 +304,7 @@
   
 
 
-<time datetime="2015-03-23T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-23T00:00:00-01:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2015/03/23/Review_Vcool-Website/#comments">Comments</a>
@@ -301,7 +414,7 @@
   
 
 
-<time datetime="2015-03-22T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-22T00:00:00-01:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2015/03/22/Morris-Traversal/#comments">Comments</a>
@@ -417,7 +530,7 @@ if __name__ == '__main__':
   
 
 
-<time datetime="2015-03-20T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-20T00:00:00-01:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2015/03/20/douban-paper-test/#comments">Comments</a>
@@ -475,7 +588,7 @@ if __name__ == '__main__':
   
 
 
-<time datetime="2014-12-20T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2014-12-20T00:00:00-01:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2014/12/20/Distinct-Subsequences/#comments">Comments</a>
@@ -627,7 +740,7 @@ t 0 0 0 0 0 0 0 3
   
 
 
-<time datetime="2014-11-25T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2014-11-25T00:00:00-01:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2014/11/25/Word-Ladder/#comments">Comments</a>
@@ -710,7 +823,7 @@ t 0 0 0 0 0 0 0 3
   
 
 
-<time datetime="2014-11-14T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2014-11-14T00:00:00-01:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2014/11/14/Linux-File-System/#comments">Comments</a>
@@ -791,7 +904,7 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   
 
 
-<time datetime="2014-10-15T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2014-10-15T00:00:00+00:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2014/10/15/First-Blog/#comments">Comments</a>
@@ -853,7 +966,7 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   
 
 
-<time datetime="2014-03-03T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2014-03-03T00:00:00-01:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2014/03/03/Hello-World/#comments">Comments</a>
@@ -969,6 +1082,10 @@ to create linebreak tags</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/04/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/03/25/Monster-Storm/">Monster Storm</a>
       </li>
     
@@ -982,10 +1099,6 @@ to create linebreak tags</p>
     
       <li class="post">
         <a href="/blog/2015/03/20/douban-paper-test/">豆瓣笔试</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/12/20/Distinct-Subsequences/">LeetCode上面的Distinct Subsequences总结</a>
       </li>
     
   </ul>

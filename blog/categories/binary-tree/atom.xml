@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Binary Tree | D W]]></title>
   <link href="http://d-w-.github.io/blog/categories/binary-tree/atom.xml" rel="self"/>
   <link href="http://d-w-.github.io/"/>
-  <updated>2015-04-04T21:20:23+08:00</updated>
+  <updated>2015-04-04T23:22:29+00:00</updated>
   <id>http://d-w-.github.io/</id>
   <author>
     <name><![CDATA[Harry]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Morris Traversal]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/22/Morris-Traversal/"/>
-    <updated>2015-03-22T00:00:00+08:00</updated>
+    <updated>2015-03-22T00:00:00-01:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/22/Morris-Traversal</id>
     <content type="html"><![CDATA[<p>Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度只要O(1),时间复杂度也只有O(n)
 这里根据<a href="http://www.cnblogs.com/AnnieKim/archive/2013/06/15/MorrisTraversal.html">博客园上的文章</a>进行了学习.整个算法我感觉主要有两部分不太容易懂 ,一是具体的算法部分,也就是如何利用线索二叉树找前驱节点的方法的;另一个就是如何证明这个算法是O(n)的.对于第一部分可以在代码里面说明,这里先说一下第二部分,借用原文中的话:</p>

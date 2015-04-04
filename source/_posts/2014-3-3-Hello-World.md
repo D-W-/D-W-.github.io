@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Markdown Style Guide
+comments: true
+categories: [Documentation]
 ---
 
 This is a demo of all styled elements in Jekyll Now.

@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Review VCool Website
+comments: true
+categories: [Review, web.py ,python]
 ---
 
 以前做过的一些东西的简单回顾，避免面试官问起来都忘了，也能在简历上面写得更加得心应手

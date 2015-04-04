@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Monster Storm
+comments: true
+categories: [Review, cocos2d-x]
 ---
 
 Monster Storm
@@ -14,7 +16,9 @@ Monster Storm
 
 ##摆放精灵
 1. 找到精灵摆放点的左下角的(x,y)坐标,这里直接借用[泰然网教程上说的][1]
-> ![此处输入图片的描述][2]
+
+> {% img /images/1.png %}
+
 m_matrixLeftBottomX的值 ＝ （ 屏幕的宽 － 寿司的宽＊N个寿司 － （ N-1 ）＊寿司之间的间隙） ／ 2。
 
 2. 从下到上,从左到右遍历整个matrix,为每个精灵编号,例如,左下角的精灵行号0,列号0……这样每个精灵都有了一个坐标,而每个坐标对应了屏幕上的一个位置,只需要根据左下角的坐标加加减减就可以得到某个坐标对应的具体位置,这样就建立了坐标和精灵,坐标和图上的位置分别以一对应的关系.
@@ -28,7 +32,7 @@ m_matrixLeftBottomX的值 ＝ （ 屏幕的宽 － 寿司的宽＊N个寿司 －
 3. 然后要判断一下用户的第二次点击,点击的是不是第一次点的那个区域,判断的方法就是得到第二次点击的精灵(的地址),和已经存到list(第一次点击之后的所有同类精灵)里面的所有精灵进行比较,如果有相同的,则True,不是就False,清空list,blabla...
 4. 点击完了,也消除完了相应的精灵,要完成上面精灵的下落和精灵列的左移,这在[泰然教程][3]上面说的很清楚
 
-> ![此处输入图片的描述][4]
+> {% img /images/2.png %}
 
 注意由于游戏不同,这里只有过程一,也就是不必填充,只让上面的下落:对于每一列从下到上查找空白数,等到了空白数大于0就说明精灵要下落了
 
@@ -43,9 +47,7 @@ m_matrixLeftBottomX的值 ＝ （ 屏幕的宽 － 寿司的宽＊N个寿司 －
                     }
             }
         }
-    
+
 让精灵列左移也是,从左到右,只要检查每列的第一个元素是否为NULL即可,然后整列左移
   [1]: http://www.tairan.com/archives/5929
-  [2]: http://www.tairan.com/wp-content/uploads/2014/03/bottomPoint.png
   [3]: http://www.tairan.com/archives/5929
-  [4]: http://www.tairan.com/wp-content/uploads/2014/04/theory2.png

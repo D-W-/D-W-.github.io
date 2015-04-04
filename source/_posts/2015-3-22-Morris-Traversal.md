@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Morris Traversal
+comments: true
+categories: [Algorithm, Binary Tree]
 ---
 
 Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度只要O(1),时间复杂度也只有O(n)
@@ -15,31 +17,31 @@ Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度�
 
     #!/usr/bin/env python
     #coding:utf-8
-    
+
     # Morris traversal
     # O(1) space O(n) time
-    
+
     # 算法基本思想:类似于线索二叉树,找到每个节点的前驱节点,并用前驱节点的右孩子指向当前节点,最后再把该指针删除
-    
+
     '''算法步骤
     1. 如果当前节点的左孩子为空，则输出当前节点并将其右孩子作为当前节点。
-    
+
     2. 如果当前节点的左孩子不为空，在当前节点的左子树中找到当前节点在中序遍历下的前驱节点。
-    
+
        a) 如果前驱节点的右孩子为空，将它的右孩子设置为当前节点。当前节点更新为当前节点的左孩子。
-    
+
        b) 如果前驱节点的右孩子为当前节点，将它的右孩子重新设为空（恢复树的形状）。输出当前节点。当前节点更新为当前节点的右孩子。
-    
+
     3. 重复以上1、2直到当前节点为空。
     '''
-    
+
     # 二叉树
     class TreeNode:
         def __init__(self,x):
             self.val = x
             self.left = None
             self.right = None
-    
+
     class MorrisTraversal:
         '只是一个封装类,把各种遍历封装起来'
         @staticmethod
@@ -62,7 +64,7 @@ Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度�
                     else:
                         pre.right = now
                         now = now.left
-    
+
     if __name__ == '__main__':
         t1 = TreeNode(1)
         t2 = TreeNode(2)
@@ -71,14 +73,14 @@ Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度�
         t5 = TreeNode(5)
         t6 = TreeNode(6)
         t7 = TreeNode(7)
-    
+
         t1.left = t2
         t1.right = t3
         t2.left = t4
         t2.right = t5
         t3.left = t6
         t3.right = t7
-    
+
         MorrisTraversal.inOrder(t1)
 
 

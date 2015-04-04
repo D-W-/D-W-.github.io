@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Algorithm | D W]]></title>
+  <link href="http://d-w-.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
+  <link href="http://d-w-.github.io/"/>
+  <updated>2015-04-04T21:20:23+08:00</updated>
+  <id>http://d-w-.github.io/</id>
+  <author>
+    <name><![CDATA[Harry]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Morris Traversal]]></title>
+    <link href="http://d-w-.github.io/blog/2015/03/22/Morris-Traversal/"/>
+    <updated>2015-03-22T00:00:00+08:00</updated>
+    <id>http://d-w-.github.io/blog/2015/03/22/Morris-Traversal</id>
+    <content type="html"><![CDATA[<p>Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度只要O(1),时间复杂度也只有O(n)
+这里根据<a href="http://www.cnblogs.com/AnnieKim/archive/2013/06/15/MorrisTraversal.html">博客园上的文章</a>进行了学习.整个算法我感觉主要有两部分不太容易懂 ,一是具体的算法部分,也就是如何利用线索二叉树找前驱节点的方法的;另一个就是如何证明这个算法是O(n)的.对于第一部分可以在代码里面说明,这里先说一下第二部分,借用原文中的话:</p>
+
+<blockquote><p>直觉上，认为它的复杂度是O(nlgn)，因为找单个节点的前驱节点与树的高度有关。但事实上，寻找所有节点的前驱节点只需要O(n)时间。n个节点的二叉树中一共有n-1条边，整个过程中每条边<strong>最多只走2次</strong>，一次是为了定位到某个节点，另一次是为了寻找上面某个节点的前驱节点，如下图所示，其中红色是为了定位到某个节点，黑色线是为了找到前驱节点。所以复杂度为O(n)。
+<img src="http://images.cnitblog.com/blog/300640/201306/15150628-5285f29bab234750a62e2309394b6e14.jpg" alt="此处输入图片的描述" /></p></blockquote>
+
+<p>原文在这里讲的已经很详细了,这里补充一点,我感觉每条边并不是最多只会被走两次,而是最多会走3次,因为找前驱结点的话会走两次,a:第一次遍历到该节点,找到它的前驱节点,并把前驱节点的右孩子设为当前节点;b:第二次遍历到该节点,找到它的前驱结点,这时前驱结点的右孩子是当前节点(形成了一个环),这时把前驱结点恢复成NULL,并设置当前孩子的右孩子为当前节点.</p>
+
+<p>这里我用python实现了一下<strong>中序遍历</strong></p>
+
+<pre><code>#!/usr/bin/env python
+#coding:utf-8
+
+# Morris traversal
+# O(1) space O(n) time
+
+# 算法基本思想:类似于线索二叉树,找到每个节点的前驱节点,并用前驱节点的右孩子指向当前节点,最后再把该指针删除
+
+'''算法步骤
+1. 如果当前节点的左孩子为空，则输出当前节点并将其右孩子作为当前节点。
+
+2. 如果当前节点的左孩子不为空，在当前节点的左子树中找到当前节点在中序遍历下的前驱节点。
+
+   a) 如果前驱节点的右孩子为空，将它的右孩子设置为当前节点。当前节点更新为当前节点的左孩子。
+
+   b) 如果前驱节点的右孩子为当前节点，将它的右孩子重新设为空（恢复树的形状）。输出当前节点。当前节点更新为当前节点的右孩子。
+
+3. 重复以上1、2直到当前节点为空。
+'''
+
+# 二叉树
+class TreeNode:
+    def __init__(self,x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class MorrisTraversal:
+    '只是一个封装类,把各种遍历封装起来'
+    @staticmethod
+    def inOrder(root):
+        now = root
+        while now:
+            if now.left == None:
+                print now.val
+                now = now.right
+            else:
+                pre = now.left
+                # 寻找前驱,当第二次寻找now的时候now的前驱的right已经被设定成了now,也就是成了一个环,要注意,这里用 pre.right != now 来避免
+                # 左边的最右就是前驱
+                while pre.right and pre.right != now:
+                    pre = pre.right
+                if pre.right == now:
+                    pre.right = None
+                    print now.val
+                    now = now.right
+                else:
+                    pre.right = now
+                    now = now.left
+
+if __name__ == '__main__':
+    t1 = TreeNode(1)
+    t2 = TreeNode(2)
+    t3 = TreeNode(3)
+    t4 = TreeNode(4)
+    t5 = TreeNode(5)
+    t6 = TreeNode(6)
+    t7 = TreeNode(7)
+
+    t1.left = t2
+    t1.right = t3
+    t2.left = t4
+    t2.right = t5
+    t3.left = t6
+    t3.right = t7
+
+    MorrisTraversal.inOrder(t1)
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LeetCode上面的Distinct Subsequences总结]]></title>
+    <link href="http://d-w-.github.io/blog/2014/12/20/Distinct-Subsequences/"/>
+    <updated>2014-12-20T00:00:00+08:00</updated>
+    <id>http://d-w-.github.io/blog/2014/12/20/Distinct-Subsequences</id>
+    <content type="html"><![CDATA[<p>最近做了挺多东西,从中也学了不少,觉得总结一下比较好,一直没有时间就一直拖着,现在终于有点空闲的时间,觉得像我这种记性不太好的人还是多做一些code review,否则做一点忘一点,最后反而学不到什么东西.</p>
+
+<h2>0.先在这里记录一下要整理的东西</h2>
+
+<p>1.模拟登陆与抓包(以模拟登陆新浪微博为主,还包括一些编码加密方式)
+2.简易python框架的使用和编写(参照<a href="http://www.liaoxuefeng.com/">廖雪峰的博客</a>)
+3.cookie和session的区别
+4.支持向量机学习笔记
+5.图片分类算法(图像处理课堂作业总结)
+6.一些在LeetCode上面做过的题目的总结</p>
+
+<p>还是先回归正题,以后有空了再把那几个坑填上..
+先总结一下今天做的这道题,LeetCode上面的<a href="https://oj.leetcode.com/problems/distinct-subsequences/">Distinct Subsequences</a></p>
+
+<h2>1.题目描述</h2>
+
+<p>首先这道题题目描述不是很容易理解,我看了半天还是没明白题意,可能是英语水平有限.这里重新描述一下这道题</p>
+
+<p>给两个字符串S,T 要求在S中找子串(subsequence),使S的子串等于T,在S中找到最多的这样的子串个数</p>
+
+<h2>2.解题思路</h2>
+
+<p>这道题很明显是一道DP,作为一个初学者,我首先想到了最长公共子串</p>
+
+<pre><code>    if(s1[i] == s2[i])
+        dp[i][j] = dp[i-1][j-1]+1;
+    else
+        dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
+</code></pre>
+
+<p>可惜和这题没什么关系
+DP很重要的是观察前后元素的关系,在这道题目中,如果用M*N的space来存储计算结果,其中<strong>dp[i][j]</strong>代表了<strong>T[0,i]</strong>中包含的等于<strong>T[0,j]</strong>的子串的数目.
+重点就是得到<strong>dp[i][j]</strong>和前面的值之间的关系,我就先画了一张二维数组的表
+r a b b b i t
+0 0 0 0 0 0 0 0
+r 0 1 1 1 1 1 1 1
+a 0 0 1 1 1 1 1 1
+b 0 0 0 1 2 3 3 3
+b 0 0 0 0 1 3 3 3
+i 0 0 0 0 0 0 3 1
+t 0 0 0 0 0 0 0 3
+表中的数值都是人工计算出来的,这里的重点是<strong>b重复了3次的那个地方</strong>,再找个重复多次的例子看了一下,发现了规律,(对于一个初学者直接写出递推式实在太困难,这样找规律的方法更容易理解一些)</p>
+
+<pre><code>    if(s[i] == t[j])
+        dp[i][j] = dp[i][j-1]+dp[i-1][j-1];
+    else
+        dp[i][j] = dp[i][j-1];
+</code></pre>
+
+<p>这些代码的<strong>数学解释</strong>就是:
+当s[i]和t[j]匹配的时候
+对应的值就是以s[i]结尾的子串的个数和不以s[i]结尾的子串的个数的和
+例如rabb<strong>b</strong> 和 rab<strong>b</strong>匹配到最后一个b的时候,对应的值就是rabbb中以最后一个b结尾的还要和<strong>rab</strong>相等的子串的个数为2(123,124),不以最后一个b结尾的还要和<strong>rabb</strong>相等的子串的个数为1(1234),总和就是3,具体可以再用rabbbbbb和rabb匹配实验一下&hellip;
+当不匹配的时候
+直接等于上一个就好了..</p>
+
+<h2>3.代码实现</h2>
+
+<pre><code>    class Solution {
+    public:
+        int numDistinct(string S, string T) {
+            //DP
+            /*dp[i][j] stores  number of S[0,i]'s substr which equals T[0,j]*/
+            int **dp = new int*[T.length()+1];
+            for (int i = 0; i &lt;= T.length(); ++i){
+                dp[i] = new int[S.length()+1];
+                memset(dp[i], 0, sizeof(int)*S.length());
+            }
+            for (int i = 0; i &lt;= S.length(); ++i)
+                dp[0][i] = 1;
+            bool flag = false;
+            int next = 0;
+            for (int i = 0; i &lt; T.length(); ++i){
+                for (int j = next; j &lt; S.length(); ++j){
+                    if (S[j] == T[i]){
+                        dp[i + 1][j + 1] = dp[i][j] + dp[i + 1][j];
+                        if (!flag){
+                            flag = true;
+                            next = j + 1;
+                        }
+                    }
+                    else
+                        dp[i + 1][j + 1] = dp[i + 1][j];
+                }
+                flag = false;
+            }
+            return dp[T.length()][S.length()];
+        }
+    };
+</code></pre>
+
+<h2>3.代码优化</h2>
+
+<p>0.我的代码一开始有一个比较大的问题,就是没对数组初始化..后来进行了修改</p>
+
+<ol>
+<li><p>内层循环的开始不必是0,这点我已经在实现的时候优化,
+比如rabbbit和rabbit匹配的时候匹配到了t的时候,只要从(rabbit中的)i的下一个开始匹配就可以了,因为要匹配t,必须在前面所有字符已经匹配结束的基础上匹配t</p></li>
+<li><p>比较重要的一个优化,leetcode论坛上面一个大牛的优化,将空间复杂度降到了O(n)</p></li>
+</ol>
+
+
+<p>具体是这样的</p>
+
+<pre><code>    vector&lt;int&gt; path(m+1, 0);
+    path[0] = 1;            // initial condition
+
+    for (int j = 1; j &lt;= n; j++) {
+        // traversing backwards so we are using path[i-1] from last time step
+        for (int i = m; i &gt;= 1; i--) {
+            path[i] = path[i] + (T[i-1] == S[j-1] ? path[i-1] : 0);
+        }
+    }
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LeetCode上面的WordLadder总结]]></title>
+    <link href="http://d-w-.github.io/blog/2014/11/25/Word-Ladder/"/>
+    <updated>2014-11-25T00:00:00+08:00</updated>
+    <id>http://d-w-.github.io/blog/2014/11/25/Word-Ladder</id>
+    <content type="html"><![CDATA[<p>按通过率来说,WordLadder应该是Leetcode上面最难的一道题了
+其中的第二道我提交了8次才成功,多数原因是TLE,这实在令人沮丧</p>
+
+<p>在此应该总结一下,强化自己的答题技巧</p>
+
+<p><em>题目描述</em> :通过每次改变单词的一个字母,找到一个单词到另一个单词的最短通路</p>
+
+<ol>
+<li>核心算法BFS
+ 因为题目要求最短的路径,BFS将所有的结点分层,找到结尾单词(end)最先出现的
+ 层就是最短的路径</li>
+<li>BFS分层
+ BFS分层的方法有两种
+
+<ol>
+<li>在队列中插入分隔符, 每当取出一个分隔符的时候就在队列尾插入一个分隔符两个分隔符之间的结点都处于同一层</li>
+<li>记录已经查找过的元素的层号, 找到合适的子结点的时候就把子结点的层号设为父节点的层号加1</li>
+</ol>
+</li>
+<li>记录路径的方向, 防止无限循环
+ 防止 hot找到了dot, dot又找到了hot 这种无限循环问题
+
+<ol>
+<li>找到合适的子结点就把它在集合里面删掉因为当时考虑到如果一个字符串出现了一次,它的下一次出现肯定会比这一次出现造成的wordladder长(因为广度优先遍历,后面出现的元素层数大于等于前面出现的元素的层数)</li>
+<li>找到了合适的子结点就标记一下, 增加一个查找标记数组的步骤
+这两种方法有一个bug,详见第四条</li>
+</ol>
+</li>
+<li>3中解决方法的bug 两个不同的结点有相同的后继(1中第一次出现就会把后继删掉了,2中第一次出现就把后继标记过了)
+
+<ol>
+<li>3.1的补救办法,将删除子结点的过程延迟到每一层结束的时候,每一层结束的时候统一在dict里面删除该层所有的子结点</li>
+<li>将2.2和3.2结合,同时记录查找过的元素的内容和层号,存到一个unordered_map里面,找到合适的元素的时候看一下map里面是否存在了,如果存在了的话再比较层号,层号相同则新找到的路径也是合理的路径,记录下来</li>
+</ol>
+</li>
+<li>WordLadderII要求记录所有最短路径,如何保存最短路径
+
+<ol>
+<li>BFS的时候一边找一边存,具体做法建立一个和BFS队列操作相同的队列,存储myqueue中当前元素所在的vector</li>
+<li>BFS的过程中记录下每一条通路的边,保存起来,BFS结束之后再跑一遍DFS,通过DFS的递归可以轻易得到结果集</li>
+</ol>
+</li>
+<li>5.2的优化,将所有通路的边倒序存储,DFS倒序遍历,可以砍掉很多不必要的结点(比如从start开始结果并不是end的那些边)</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

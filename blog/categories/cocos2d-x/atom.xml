@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Cocos2d-x | D W]]></title>
+  <link href="http://d-w-.github.io/blog/categories/cocos2d-x/atom.xml" rel="self"/>
+  <link href="http://d-w-.github.io/"/>
+  <updated>2015-04-04T21:20:23+08:00</updated>
+  <id>http://d-w-.github.io/</id>
+  <author>
+    <name><![CDATA[Harry]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Monster Storm]]></title>
+    <link href="http://d-w-.github.io/blog/2015/03/25/Monster-Storm/"/>
+    <updated>2015-03-25T00:00:00+08:00</updated>
+    <id>http://d-w-.github.io/blog/2015/03/25/Monster-Storm</id>
+    <content type="html"><![CDATA[<p>Monster Storm</p>
+
+<p>边学边写的cocos2d-x游戏,基于3.0版本</p>
+
+<p>这个游戏的主要难点有两个
+1. 怎么把所有需要消除的精灵摆对位置
+2. 怎么找到某个精灵周围的同类精灵</p>
+
+<h2>摆放精灵</h2>
+
+<ol>
+<li>找到精灵摆放点的左下角的(x,y)坐标,这里直接借用<a href="http://www.tairan.com/archives/5929">泰然网教程上说的</a></li>
+</ol>
+
+
+<blockquote><p><img src="/images/1.png"></p></blockquote>
+
+<p>m_matrixLeftBottomX的值 ＝ （ 屏幕的宽 － 寿司的宽＊N个寿司 － （ N-1 ）＊寿司之间的间隙） ／ 2。</p>
+
+<ol>
+<li>从下到上,从左到右遍历整个matrix,为每个精灵编号,例如,左下角的精灵行号0,列号0……这样每个精灵都有了一个坐标,而每个坐标对应了屏幕上的一个位置,只需要根据左下角的坐标加加减减就可以得到某个坐标对应的具体位置,这样就建立了坐标和精灵,坐标和图上的位置分别以一对应的关系.</li>
+<li>有了上面一一对应的关系,只要在对应位置的上空XX米创建出来精灵,并把它移到对应位置就可以了</li>
+</ol>
+
+
+<h2>查找并消除精灵</h2>
+
+<ol>
+<li>定位到用户点击的精灵,想完成消灭小星星的消除,首先要知道用户点了那个精灵,这里我当时写的算法很low,是先获取用户点击的坐标,然后遍历整个精灵matrix,看一下哪个精灵所在的square包含了那个坐标就是点击的坐标,当然,已经被消除了的精灵是不在那个matrix里面的;
+
+<ul>
+<li>比较好的一个做法应该是根据点击的坐标和左下角的距离关系直接找出对应的位置,然后检查该位置是否有精灵..</li>
+</ul>
+</li>
+<li>定位完了就要找该精灵周边同类的精灵了,寻找过程类似于深度优先遍历,我是用递归写的,比如对于定位到的精灵,分别找它上下左右的精灵,如果上下左右的精灵是同类的话,就加入list,并更新上下左右的精灵为当前的精灵,继续递归查找上下左右.注意:查找的过程要注意重复,每次找到新的都要判断一下是否已经找过当前精灵..
+
+<ul>
+<li>当前另一个想法是类似于广度优先遍历,,用一个队列来维护,广度优先的好处是避免了递归</li>
+</ul>
+</li>
+<li>然后要判断一下用户的第二次点击,点击的是不是第一次点的那个区域,判断的方法就是得到第二次点击的精灵(的地址),和已经存到list(第一次点击之后的所有同类精灵)里面的所有精灵进行比较,如果有相同的,则True,不是就False,清空list,blabla&hellip;</li>
+<li>点击完了,也消除完了相应的精灵,要完成上面精灵的下落和精灵列的左移,这在<a href="http://www.tairan.com/archives/5929">泰然教程</a>上面说的很清楚</li>
+</ol>
+
+
+<blockquote><p><img src="/images/2.png"></p></blockquote>
+
+<p>注意由于游戏不同,这里只有过程一,也就是不必填充,只让上面的下落:对于每一列从下到上查找空白数,等到了空白数大于0就说明精灵要下落了</p>
+
+<blockquote><pre><code>  // 从下向上
+    for (int row = 0; row &lt; m_height; row++) {
+        sushi = m_matrix[row * m_width + col];
+        if (NULL == sushi) {
+            removedSushiOfCol++;
+        } else {
+            if (removedSushiOfCol &gt; 0) {
+                //计算寿司精灵的新行数
+                }
+        }
+    }
+</code></pre></blockquote>
+
+<p>让精灵列左移也是,从左到右,只要检查每列的第一个元素是否为NULL即可,然后整列左移</p>
+]]></content>
+  </entry>
+  
+</feed>

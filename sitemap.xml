@@ -45,4 +45,34 @@
   <url>
     <loc>http://d-w-.github.io/about/</loc>
   </url>
+  <url>
+    <loc>http://d-w-.github.io/blog/categories/documentation/</loc>
+  </url>
+  <url>
+    <loc>http://d-w-.github.io/blog/categories/sui-bi/</loc>
+  </url>
+  <url>
+    <loc>http://d-w-.github.io/blog/categories/linux/</loc>
+  </url>
+  <url>
+    <loc>http://d-w-.github.io/blog/categories/algorithm/</loc>
+  </url>
+  <url>
+    <loc>http://d-w-.github.io/blog/categories/leetcode/</loc>
+  </url>
+  <url>
+    <loc>http://d-w-.github.io/blog/categories/binary-tree/</loc>
+  </url>
+  <url>
+    <loc>http://d-w-.github.io/blog/categories/review/</loc>
+  </url>
+  <url>
+    <loc>http://d-w-.github.io/blog/categories/web-dot-py/</loc>
+  </url>
+  <url>
+    <loc>http://d-w-.github.io/blog/categories/python/</loc>
+  </url>
+  <url>
+    <loc>http://d-w-.github.io/blog/categories/cocos2d-x/</loc>
+  </url>
 </urlset>

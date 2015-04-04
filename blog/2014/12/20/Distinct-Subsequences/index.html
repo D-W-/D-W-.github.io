@@ -99,11 +99,11 @@
 
 <h2>0.先在这里记录一下要整理的东西</h2>
 
-<p>1.模拟登陆与抓包(以模拟登陆新浪微博为主,还包括一些编码加密方式)<br/>
-2.简易python框架的使用和编写(参照<a href="http://www.liaoxuefeng.com/">廖雪峰的博客</a>)<br/>
-3.cookie和session的区别<br/>
-4.支持向量机学习笔记<br/>
-5.图片分类算法(图像处理课堂作业总结)<br/>
+<p>1.模拟登陆与抓包(以模拟登陆新浪微博为主,还包括一些编码加密方式)
+2.简易python框架的使用和编写(参照<a href="http://www.liaoxuefeng.com/">廖雪峰的博客</a>)
+3.cookie和session的区别
+4.支持向量机学习笔记
+5.图片分类算法(图像处理课堂作业总结)
 6.一些在LeetCode上面做过的题目的总结</p>
 
 <p>还是先回归正题,以后有空了再把那几个坑填上..
@@ -115,7 +115,7 @@
 
 <p>给两个字符串S,T 要求在S中找子串(subsequence),使S的子串等于T,在S中找到最多的这样的子串个数</p>
 
-<h2>2.解题思路 ##</h2>
+<h2>2.解题思路</h2>
 
 <p>这道题很明显是一道DP,作为一个初学者,我首先想到了最长公共子串</p>
 
@@ -125,17 +125,17 @@
         dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
 </code></pre>
 
-<p>可惜和这题没什么关系<br/>
-DP很重要的是观察前后元素的关系,在这道题目中,如果用M*N的space来存储计算结果,其中<strong>dp[i][j]</strong>代表了<strong>T[0,i]</strong>中包含的等于<strong>T[0,j]</strong>的子串的数目.<br/>
-重点就是得到<strong>dp[i][j]</strong>和前面的值之间的关系,我就先画了一张二维数组的表<br/>
-r a b b b i t<br/>
-0 0 0 0 0 0 0 0<br/>
-r 0 1 1 1 1 1 1 1<br/>
-a 0 0 1 1 1 1 1 1<br/>
-b 0 0 0 1 2 3 3 3<br/>
-b 0 0 0 0 1 3 3 3<br/>
-i 0 0 0 0 0 0 3 1<br/>
-t 0 0 0 0 0 0 0 3<br/>
+<p>可惜和这题没什么关系
+DP很重要的是观察前后元素的关系,在这道题目中,如果用M*N的space来存储计算结果,其中<strong>dp[i][j]</strong>代表了<strong>T[0,i]</strong>中包含的等于<strong>T[0,j]</strong>的子串的数目.
+重点就是得到<strong>dp[i][j]</strong>和前面的值之间的关系,我就先画了一张二维数组的表
+r a b b b i t
+0 0 0 0 0 0 0 0
+r 0 1 1 1 1 1 1 1
+a 0 0 1 1 1 1 1 1
+b 0 0 0 1 2 3 3 3
+b 0 0 0 0 1 3 3 3
+i 0 0 0 0 0 0 3 1
+t 0 0 0 0 0 0 0 3
 表中的数值都是人工计算出来的,这里的重点是<strong>b重复了3次的那个地方</strong>,再找个重复多次的例子看了一下,发现了规律,(对于一个初学者直接写出递推式实在太困难,这样找规律的方法更容易理解一些)</p>
 
 <pre><code>    if(s[i] == t[j])
@@ -234,6 +234,12 @@ t 0 0 0 0 0 0 0 3<br/>
 <time datetime="2014-12-20T00:00:00+08:00" pubdate data-updated="true"></time>
       
 
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/algorithm/'>algorithm</a>, <a class='category' href='/blog/categories/leetcode/'>leetcode</a>
+  
+</span>
+
 
     </p>
     
@@ -257,6 +263,27 @@ t 0 0 0 0 0 0 0 3<br/>
   </footer>
 </article>
 
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite"><!-- 多说评论框 start -->
+<div class="ds-thread" data-title="LeetCode上面的Distinct Subsequences总结"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"d-w"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
 
 </div>
 

@@ -108,11 +108,16 @@
 <h2>摆放精灵</h2>
 
 <ol>
-<li><p>找到精灵摆放点的左下角的(x,y)坐标,这里直接借用<a href="http://www.tairan.com/archives/5929">泰然网教程上说的</a></p>
+<li>找到精灵摆放点的左下角的(x,y)坐标,这里直接借用<a href="http://www.tairan.com/archives/5929">泰然网教程上说的</a></li>
+</ol>
 
-<blockquote><p><img src="http://www.tairan.com/wp-content/uploads/2014/03/bottomPoint.png" alt="此处输入图片的描述" />
-m_matrixLeftBottomX的值 ＝ （ 屏幕的宽 － 寿司的宽＊N个寿司 － （ N-1 ）＊寿司之间的间隙） ／ 2。</p></blockquote></li>
-<li><p>从下到上,从左到右遍历整个matrix,为每个精灵编号,例如,左下角的精灵行号0,列号0……这样每个精灵都有了一个坐标,而每个坐标对应了屏幕上的一个位置,只需要根据左下角的坐标加加减减就可以得到某个坐标对应的具体位置,这样就建立了坐标和精灵,坐标和图上的位置分别以一对应的关系.</p></li>
+
+<blockquote><p><img src="/images/1.png"></p></blockquote>
+
+<p>m_matrixLeftBottomX的值 ＝ （ 屏幕的宽 － 寿司的宽＊N个寿司 － （ N-1 ）＊寿司之间的间隙） ／ 2。</p>
+
+<ol>
+<li>从下到上,从左到右遍历整个matrix,为每个精灵编号,例如,左下角的精灵行号0,列号0……这样每个精灵都有了一个坐标,而每个坐标对应了屏幕上的一个位置,只需要根据左下角的坐标加加减减就可以得到某个坐标对应的具体位置,这样就建立了坐标和精灵,坐标和图上的位置分别以一对应的关系.</li>
 <li>有了上面一一对应的关系,只要在对应位置的上空XX米创建出来精灵,并把它移到对应位置就可以了</li>
 </ol>
 
@@ -137,7 +142,7 @@ m_matrixLeftBottomX的值 ＝ （ 屏幕的宽 － 寿司的宽＊N个寿司 －
 </ol>
 
 
-<blockquote><p><img src="http://www.tairan.com/wp-content/uploads/2014/04/theory2.png" alt="此处输入图片的描述" /></p></blockquote>
+<blockquote><p><img src="/images/2.png"></p></blockquote>
 
 <p>注意由于游戏不同,这里只有过程一,也就是不必填充,只让上面的下落:对于每一列从下到上查找空白数,等到了空白数大于0就说明精灵要下落了</p>
 
@@ -180,6 +185,12 @@ m_matrixLeftBottomX的值 ＝ （ 屏幕的宽 － 寿司的宽＊N个寿司 －
 <time datetime="2015-03-25T00:00:00+08:00" pubdate data-updated="true"></time>
       
 
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cocos2d-x/'>cocos2d-x</a>, <a class='category' href='/blog/categories/review/'>review</a>
+  
+</span>
+
 
     </p>
     
@@ -201,6 +212,27 @@ m_matrixLeftBottomX的值 ＝ （ 屏幕的宽 － 寿司的宽＊N个寿司 －
   </footer>
 </article>
 
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite"><!-- 多说评论框 start -->
+<div class="ds-thread" data-title="Monster Storm"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"d-w"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
 
 </div>
 

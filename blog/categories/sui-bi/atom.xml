@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 随笔 | D W]]></title>
+  <link href="http://d-w-.github.io/blog/categories/sui-bi/atom.xml" rel="self"/>
+  <link href="http://d-w-.github.io/"/>
+  <updated>2015-04-04T21:20:23+08:00</updated>
+  <id>http://d-w-.github.io/</id>
+  <author>
+    <name><![CDATA[Harry]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[第一篇博客]]></title>
+    <link href="http://d-w-.github.io/blog/2014/10/15/First-Blog/"/>
+    <updated>2014-10-15T00:00:00+08:00</updated>
+    <id>http://d-w-.github.io/blog/2014/10/15/First-Blog</id>
+    <content type="html"><![CDATA[<h2>我这个人，执行力很差。</h2>
+
+<hr />
+
+<p>很久之前，大约在大一下，我第一次听组长说有个人写了一个可以爬学生周知的东西。就很想写一个爬NBA比赛结果的东西，
+当时只是想一想，因为感觉放在微信上的话会很方便，再加上当时刚刚接触编程，觉得什么都很难，这件事就搁置了。
+后来我学会了一点网络爬虫，PHP，知道了一些简单的爬网页的知识，大二上的时候写了一个爬NBA比分的东西，后来基于
+爬虫又弄了挺多东西。可是当时已经出现了一个叫做虎扑看球的东西。。。我知道了一点正则表达式匹配的东西就觉得自己
+挺了解爬虫了，没有继续学习，直到现在我才发现爬东西不一定要正则表达式，python的一些包也可以爬东西。看到的
+《python基础教程》一书里面就介绍了三种爬虫技巧。</p>
+
+<p>回到博客，也是大一左右，偶然看到一篇东西说程序员写点博客挺好，当时心血来潮直接注册了一个博客园的博客。后来基本
+没怎么动过。再后来看到了一个学长的博客，感觉界面挺好看的，觉得自己也应该弄个博客。网上一搜教程，看上去挺难的，
+又搁置了。直到现在，发现弄一个博客原来很简单。</p>
+
+<p>数不胜数的事情都因为我的放弃变得看上去很难。</p>
+
+<p>开通这个博客，首先应当提醒自己坚持的重要性。</p>
+
+<p>然后这是一个记录心情和经验的地方。偶尔停下来总结一下也挺好。</p>
+
+<p>然后把最近的计划写一写，争取有计划有规律的学习。</p>
+
+<p>希望能踏实学好算法，通过python再把网络编程熟悉一下。英语也不能拉下。毕竟钱都交了。</p>
+]]></content>
+  </entry>
+  
+</feed>

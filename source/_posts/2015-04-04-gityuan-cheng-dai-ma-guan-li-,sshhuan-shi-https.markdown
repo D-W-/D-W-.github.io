@@ -34,4 +34,8 @@ categories:
 
 这句话就是把g（group当前组）和o（other其他用户）的对config这个文件的权限去掉读和写。
 
+https://help.github.com/articles/changing-a-remote-s-url/
+这个有用
+https://help.github.com/articles/using-ssh-over-the-https-port/
+
   [1]: http://stackoverflow.com/questions/7144811/git-ssh-error-connect-to-host-bad-file-number

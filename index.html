@@ -9,7 +9,7 @@
   <meta name="author" content="Harry">
 
   
-  <meta name="description" content="之前学习git的过程中就遇到了这个问题，电脑并不能使用ssh连接远程仓库，例如clone git://xx@git.com/xx.git 这样的工程会失败。我就必须改成使用HTTPS协议，把连接改成 https 的，或者直接配置一个环境变量 git config --global url." &hellip;">
+  <meta name="description" content="之前学习git的过程中就遇到了这个问题，电脑并不能使用ssh连接远程仓库，例如clone git@github.com/xx.git 这样的工程会失败。我就必须改成使用HTTPS协议，把连接改成 https 的，或者直接配置一个环境变量 git config --global url."https &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -98,7 +98,7 @@
   </header>
 
 
-  <div class="entry-content"><p>之前学习git的过程中就遇到了这个问题，电脑并不能使用ssh连接远程仓库，例如clone git://xx@git.com/xx.git 这样的工程会失败。我就必须改成使用HTTPS协议，把连接改成 https 的，或者直接配置一个环境变量</p>
+  <div class="entry-content"><p>之前学习git的过程中就遇到了这个问题，电脑并不能使用ssh连接远程仓库，例如<code>clone git@github.com/xx.git</code> 这样的工程会失败。我就必须改成使用HTTPS协议，把连接改成 https 的，或者直接配置一个环境变量</p>
 
 <pre><code>git config --global url."https://".insteadOf git://
 </code></pre>
@@ -129,9 +129,47 @@ Port 443
 
 <p>这句话就是把g（group当前组）和o（other其他用户）的对config这个文件的权限去掉读和写。</p>
 
-<p><a href="https://help.github.com/articles/changing-a-remote-s-url/">https://help.github.com/articles/changing-a-remote-s-url/</a>
-这个有用
-<a href="https://help.github.com/articles/using-ssh-over-the-https-port/">https://help.github.com/articles/using-ssh-over-the-https-port/</a></p>
+<h2>两个有用的文档</h2>
+
+<ol>
+<li><a href="https://help.github.com/articles/changing-a-remote-s-url/">git里面用命令行更改远程仓库的URL/使用的协议</a></li>
+<li><a href="https://help.github.com/articles/using-ssh-over-the-https-port/">用https的端口（443）代替被封掉的ssh端口（22）</a></li>
+</ol>
+
+
+<h2>后续</h2>
+
+<p>修改完这些。。我以为一切都结束了，可视连接远程仓库还是连接不上，这时候我发现在我项目目录下的 <code>.git/config</code> 里面，远程仓库的地址写的是<code>git://github.com/xxx.git</code>,并不是ssh里面标明的 <code>git@github.com/xx.git</code> 的形式。
+那么问题来了，<code>git://</code> 和 <code>git@</code>有什么区别？
+进过一番查询，找到了一个<a href="http://serverfault.com/questions/189070/what-firewall-ports-need-to-be-open-to-allow-access-to-external-git-repositories">解释的比较清楚的答案</a></p>
+
+<blockquote><p>It depends on the repository.
+The native git transport uses TCP port 9418. However, git can also run
+over ssh (often used for pushing), http, https, and less often others.</p>
+
+<p>You can look at the repository URL to find out which port it uses.
+Notice that many public repositories have several alternate URLs; for
+instance, the kernel.org repositories have git://, <a href="http://,">http://,</a> and
+<a href="https://">https://</a> URLs.</p>
+
+<p>The common URL schemes for git repositories are:</p>
+
+<ul>
+<li>ssh:// - default port 22</li>
+<li>git:// - default port 9418</li>
+<li><a href="http://">http://</a> - default port 80</li>
+<li><a href="https://">https://</a> - default port 443</li>
+</ul>
+
+
+<p>If the URL does not have a scheme, it it using ssh with a slightly
+different syntax.</p>
+
+<p>See the git fetch manpage for more details on the available URL
+schemes.</p></blockquote>
+
+<p>大体意思就是<code>git://</code>使用的是 native git协议，用的是9418端口，有些防火墙会封掉，而<code>git@</code>也就是<code>ssh:</code>用的是ssh协议，端口是22，也会被一些防火墙封掉，上面那些操作只能解决ssh连不上的问题，也就是说执行了上面的配置，只能保证git@github.com这样的远程仓库能连接，而写成git://就无法解决，解决这个，只能利用git的全局配置把所有的<code>git://</code>连接转成<code>https://</code>连接，这样就避免了使用native git协议。
+<a href="http://stackoverflow.com/questions/4891527/git-protocol-blocked-by-company-how-can-i-get-around-that">这篇文章</a>对上面的问题说的挺好。</p>
 </div>
   
   

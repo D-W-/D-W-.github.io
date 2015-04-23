@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | D W]]></title>
   <link href="http://d-w-.github.io/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://d-w-.github.io/"/>
-  <updated>2015-04-05T18:34:17+00:00</updated>
+  <updated>2015-04-23T23:33:50+08:00</updated>
   <id>http://d-w-.github.io/</id>
   <author>
     <name><![CDATA[Harry]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[git远程代码管理，SSH还是HTTPS]]></title>
-    <link href="http://d-w-.github.io/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/"/>
-    <updated>2015-04-04T23:38:50+00:00</updated>
-    <id>http://d-w-.github.io/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https</id>
+    <link href="http://d-w-.github.io/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/"/>
+    <updated>2015-04-05T07:38:50+08:00</updated>
+    <id>http://d-w-.github.io/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https</id>
     <content type="html"><![CDATA[<p>之前学习git的过程中就遇到了这个问题，电脑并不能使用ssh连接远程仓库，例如<code>clone git@github.com/xx.git</code> 这样的工程会失败。我就必须改成使用HTTPS协议，把连接改成 https 的，或者直接配置一个环境变量</p>
 
 <pre><code>git config --global url."https://".insteadOf git://

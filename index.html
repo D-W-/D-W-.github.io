@@ -9,7 +9,7 @@
   <meta name="author" content="Harry">
 
   
-  <meta name="description" content="之前学习git的过程中就遇到了这个问题，电脑并不能使用ssh连接远程仓库，例如clone git@github.com/xx.git 这样的工程会失败。我就必须改成使用HTTPS协议，把连接改成 https 的，或者直接配置一个环境变量 git config --global url."https &hellip;">
+  <meta name="description" content="距离上次写博客已经过去了半个多月,我兴致勃勃迁移博客的热情也减少了很多,从开学充满激情海投简历到现在也认清了自己的水平,昨天受到腾讯大连HR的启发,准备对自己的人生进行思考,规划自己的生涯. 过去的二十多天里,发生的事情有很多,比如我拿到了人生第一份实习offer-去哪儿网的offer, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,7 +72,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/">Half Way Conclusion of 3rd Grade in College</a></h1>
     
     
       <p class="meta">
@@ -88,10 +88,109 @@
   
 
 
-<time datetime="2015-04-04T23:38:50+00:00" pubdate data-updated="true"></time>
+<time datetime="2015-04-23T21:11:15+08:00" pubdate data-updated="true"></time>
         
         
-           | <a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/#comments">Comments</a>
+           | <a href="/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/#comments">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>距离上次写博客已经过去了半个多月,我兴致勃勃迁移博客的热情也减少了很多,从开学充满激情海投简历到现在也认清了自己的水平,昨天受到腾讯大连HR的启发,准备对自己的人生进行思考,规划自己的生涯.</p>
+
+<p>过去的二十多天里,发生的事情有很多,比如我拿到了人生第一份实习offer-去哪儿网的offer,比如寒假的数模成绩终于出来,拿到了M奖,比如终于决定保研,开始复习数学,练习口语,比如报名叉院的硕博连读,考核用到机器学习的东西,又要重拾机器学习,比如一些课结课了,我却觉得收获甚微,比如热火近六年首次无缘季后赛&hellip;时值期中,开学第二个月末尾,希望总结一下,以便之后的提升.</p>
+
+<h2>找实习</h2>
+
+<p>找实习这事儿,一开始看的很重,因为自认为水平还不错,至少和身边的同学比起来总是有一种膨胀的优越感,因为做编程作业时,我总是比大部分人快,需要学新东西我也比很多人学得快.事情开始了才认清自己的水平,虽然成绩不错,但是到了面试阶段根本不看你的成绩,虽然有一些项目经历,但是做的项目都太小,拿出来一说面试官根本不放在眼里.导致阿里电面和豆瓣电面都以失败告终,还有很多公司直接在简历投递阶段被刷了下来..就连之前信心满满的腾讯,居然笔试都没过,身边挺多同学都过了,就我没过,笔试题上面的问题我很多都会并且有信心答对,这份试题我做完感觉是能够体现我的能力的,没想到没有通过,对我的打击也很大.看看身边的同学,反而是那些项目做得挺好的拿起offer来毫不手软,基本上都是一个电面就能搞定.
+后来终于等到了机会,有机会现场面试去哪儿网,一行人奔波来到本部,我吸取上次面试交流生的教训,特别注意穿着,但是现场还是有点紧张,不过面试官人真的很nice,遇到我想不到的问题直接说,没事随便说..开始先说三道笔试题,第一道是循环数组找元素,leetcode上面有原题,我说完之后,他问我你这二分取中间值</p>
+
+<pre><code>int mid = (low+high)/2;
+</code></pre>
+
+<p>万一溢出了怎么办?我当时没想到..说了比较复杂的两个方法,暴力转到longlong和先用double分别除2加起来在强转回int,他笑着说,直接这样嘛</p>
+
+<pre><code>int mid = low + (high-low)/2;
+</code></pre>
+
+<p>想想昨天还和对象讨论过这两种写法..后面又说到了我当时没做出来的第三题,面试官让我说了一下思路,又问了我一下时间复杂度,我说了个最坏的,他又问我平均的..又没说出来,接着问项目,他说在你项目里面挑一个最熟悉的吧(估计是看我写的比较多),我直接说简微博那个,听我提到接SDK,就问起了OAuth认证,我去正好啊,之前刚看了一遍,我就说了一遍,他又问我为什么要通过两次申请才给你权限,为什么不一次直接返回token,这些我都不会,只能随便猜,后来他看我懂一些机器学习,又问我为什么用SVM.什么情况下用SVM,这些高大上的问题我显然也不会..但是最后他居然给了我offer,直接让我去HR那里报个到..后来顺利拿到</p>
+
+<h3>后续</h3>
+
+<p>到现在我倾向拒掉这个机会..首先去那基本是写java,虽然我不排斥,现在还是希望在大四提升自己的C++和python能力,然后是我加了实习交流群之后群里面同学表现出来的水平也让我深深的担忧..老是问一些基础问题,倒不是我逼格有多高,我担心的是去到连函数也写不上的公司或者并不能锻炼我能力的公司对于实习确实没什么意义..但是真的感谢这个公司和很nice的面试官,毕竟他们是我投的十多家公司里面唯一肯定我的一家..</p>
+
+<p>这周末去面阿里,听同学说哈尔滨站刷了很多人,估计是内推招了不少,这个网申直接提高标准了,不管怎样还是加油复习,毕竟这是我近期最后一次面试了.</p>
+
+<h2>做比赛</h2>
+
+<p>开学比较重要的一件事就是准备&#8221;微软创新杯&#8221;,因为很早报了名,但是一直没准备,只好开了学加快速度赶工..整个游戏大概写了两周,主体代码大约两天就完成了,但是做出来多少有点成就感,比赛截止日前两天才听旁边实验室开始动工,他们拿了去年的项目修改一下直接参赛..而且听说一个项目他们连续拿去参加了好几届,最后校内评选我们意外落选..听负责人说要6支队伍,我们排到第7..而且排名是旁边实验室老师一个人定的,当时简直失落的不行</p>
+
+<p>后来准备把游戏投到腾讯比赛,这个现在还没开始弄..</p>
+
+<p>然后就是寒假数模得了个M,这次获奖没什么兴奋,因为应该算是我们努力几乎半个寒假的产物吧,然后周围有听说了一些H奖和F奖的,也觉得自己的奖没什么,不过这个奖多少让我心里石头落地</p>
+
+<p>然后是英语竞赛,上次我以一分之差失去机会,这次成绩没出来但是感觉做的也尽力了..</p>
+
+<h2>保研</h2>
+
+<p>这也许是我最近看的最重要的事情了,因为找实习都困难,离我预想的有比较大的差距..只能尝试再用几年锻炼自己,而且我在后几年有比较清楚的目标,就是熟悉linux系统,然后弄几个github上的好项目练手,然后写点大的项目,比如写个python框架,要学的东西还有很多,直接去工作可能会学到不少实战经验,但是空余时间可能不足使我提高自己,或者说学我想学的.</p>
+
+<p>咨询了几个学长,学姐,看了很多经验贴.去年学院大丰收,清华北大去了9个,有一些成绩和我差不多的学长都去到清华软院,但是学长都很努力的准备了保研,包括刷题练英语,早上六点晚上十点,我感觉我的努力程度还差很多,而且面试这种我还是觉得需要运气,毕竟需要得到看好你的导师不是那么容易.于是我开始复习数学,开始练口语,并尽力形成routine,但是事情太多也总是耽搁.</p>
+
+<h2>Last</h2>
+
+<p>昨天听到腾讯的HR和我们交流就业经验,听他口里的找实习和工作包括跳槽一切都显得这么理所当然,可能每个时期都有每个时期想要的,也都有各自的迷茫,只有经过了某个阶段才能对自己的过去侃侃而谈.最近我一直在被上面的事情们包围着,心情也低落,因为好像我失去了重心,被生活推着走.突然好像我什么也干不成,突然好像我一直失败,这可能是我准备的太多又过度关注周围的原因.找到合适实习的大牛现在正式过上了享受的大三生活,每天打打球,看看书,轻松惬意.我却要为了保研复习,这样比起来虽然并不公平,但是是因为我们追求的不一样,他们为了这种机会一直在朝这个方向努力,而这也是他们想做的.所以我也要找到自己想做的.</p>
+
+<p>我承认技不如人,所以我需要学习,我希望自己可以找到自己想要的生活.我希望规划好我的生活,腾讯HR说,年轻比offer,年长比健康,比来比去比的都是生活,我不希望自己拿自己的生活和别人的生活相比,也不希望自己陷入和别人以收入攀比的怪圈,更不希望用offer定义我的价值.我希望的是以后我的工作是我喜欢的事情,或者我能过上我想要的生活.</p>
+
+<p>我想要的生活是什么样子呢?我忽然想起来以前去海贝广场那边的海边,夜晚走在安静的小区的时候.我觉得我的生活需要学习,需要奋斗.所以,但求能够学到东西,能有那样的夜晚.</p>
+
+<p>所以我需要5年计划和3年计划,如果我后续生活是专硕,我应该如何利用剩下的在学校的3年?如果是硕博连读,我应该如何利用剩下的在学校的5年?</p>
+
+<ol>
+<li>所有准备用于提高自己的专业书籍尽量看英文的</li>
+<li>数据结构和算法是核心(1.c语言描述 2.算法导论)</li>
+<li>精通一门语言(视情况而定,排序如下 1.C++ 2.Python 3.Java)</li>
+<li>熟悉linux系统,至少读一下源码</li>
+<li>做一个拿得出手的东西(操作系统,编译器,框架,应用&hellip;)</li>
+<li>为开源项目做贡献,持续更新github</li>
+<li>持续锻炼,别死的太早- -</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-04-05T07:38:50+08:00" pubdate data-updated="true"></time>
+        
+        
+           | <a href="/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/#comments">Comments</a>
         
       </p>
     
@@ -182,7 +281,7 @@ schemes.</p></blockquote>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/04/04/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/04/05/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a></h1>
     
     
       <p class="meta">
@@ -198,10 +297,10 @@ schemes.</p></blockquote>
   
 
 
-<time datetime="2015-04-04T21:34:53+00:00" pubdate data-updated="true"></time>
+<time datetime="2015-04-05T05:34:53+08:00" pubdate data-updated="true"></time>
         
         
-           | <a href="/blog/2015/04/04/moving-my-blog-to-octopress/#comments">Comments</a>
+           | <a href="/blog/2015/04/05/moving-my-blog-to-octopress/#comments">Comments</a>
         
       </p>
     
@@ -313,7 +412,7 @@ $ rake generate
   
 
 
-<time datetime="2015-03-25T00:00:00-01:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-25T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2015/03/25/Monster-Storm/#comments">Comments</a>
@@ -414,7 +513,7 @@ $ rake generate
   
 
 
-<time datetime="2015-03-23T00:00:00-01:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-23T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2015/03/23/Review_Vcool-Website/#comments">Comments</a>
@@ -524,7 +623,7 @@ $ rake generate
   
 
 
-<time datetime="2015-03-22T00:00:00-01:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-22T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2015/03/22/Morris-Traversal/#comments">Comments</a>
@@ -640,7 +739,7 @@ if __name__ == '__main__':
   
 
 
-<time datetime="2015-03-20T00:00:00-01:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-20T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2015/03/20/douban-paper-test/#comments">Comments</a>
@@ -698,7 +797,7 @@ if __name__ == '__main__':
   
 
 
-<time datetime="2014-12-20T00:00:00-01:00" pubdate data-updated="true"></time>
+<time datetime="2014-12-20T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2014/12/20/Distinct-Subsequences/#comments">Comments</a>
@@ -850,7 +949,7 @@ t 0 0 0 0 0 0 0 3
   
 
 
-<time datetime="2014-11-25T00:00:00-01:00" pubdate data-updated="true"></time>
+<time datetime="2014-11-25T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2014/11/25/Word-Ladder/#comments">Comments</a>
@@ -933,7 +1032,7 @@ t 0 0 0 0 0 0 0 3
   
 
 
-<time datetime="2014-11-14T00:00:00-01:00" pubdate data-updated="true"></time>
+<time datetime="2014-11-14T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
            | <a href="/blog/2014/11/14/Linux-File-System/#comments">Comments</a>
@@ -993,68 +1092,6 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/10/15/First-Blog/">第一篇博客</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-10-15T00:00:00+00:00" pubdate data-updated="true"></time>
-        
-        
-           | <a href="/blog/2014/10/15/First-Blog/#comments">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>我这个人，执行力很差。</h2>
-
-<hr />
-
-<p>很久之前，大约在大一下，我第一次听组长说有个人写了一个可以爬学生周知的东西。就很想写一个爬NBA比赛结果的东西，
-当时只是想一想，因为感觉放在微信上的话会很方便，再加上当时刚刚接触编程，觉得什么都很难，这件事就搁置了。
-后来我学会了一点网络爬虫，PHP，知道了一些简单的爬网页的知识，大二上的时候写了一个爬NBA比分的东西，后来基于
-爬虫又弄了挺多东西。可是当时已经出现了一个叫做虎扑看球的东西。。。我知道了一点正则表达式匹配的东西就觉得自己
-挺了解爬虫了，没有继续学习，直到现在我才发现爬东西不一定要正则表达式，python的一些包也可以爬东西。看到的
-《python基础教程》一书里面就介绍了三种爬虫技巧。</p>
-
-<p>回到博客，也是大一左右，偶然看到一篇东西说程序员写点博客挺好，当时心血来潮直接注册了一个博客园的博客。后来基本
-没怎么动过。再后来看到了一个学长的博客，感觉界面挺好看的，觉得自己也应该弄个博客。网上一搜教程，看上去挺难的，
-又搁置了。直到现在，发现弄一个博客原来很简单。</p>
-
-<p>数不胜数的事情都因为我的放弃变得看上去很难。</p>
-
-<p>开通这个博客，首先应当提醒自己坚持的重要性。</p>
-
-<p>然后这是一个记录心情和经验的地方。偶尔停下来总结一下也挺好。</p>
-
-<p>然后把最近的计划写一写，争取有计划有规律的学习。</p>
-
-<p>希望能踏实学好算法，通过python再把网络编程熟悉一下。英语也不能拉下。毕竟钱都交了。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="2">&larr; Older</a>
@@ -1088,11 +1125,15 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a>
+        <a href="/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/">Half Way Conclusion of 3rd Grade in College</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2015/04/04/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a>
+        <a href="/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/04/05/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a>
       </li>
     
       <li class="post">
@@ -1101,10 +1142,6 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
     
       <li class="post">
         <a href="/blog/2015/03/23/Review_Vcool-Website/">Review VCool Website</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/22/Morris-Traversal/">Morris Traversal</a>
       </li>
     
   </ul>

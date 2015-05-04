@@ -1,0 +1,10 @@
+<span id="btn-list" onclick="turnList()">></span>
+<div id="list" class="off">
+<h2>Posts List</h2>
+{% for post in site.posts %}
+    <h5>
+    <a href="{{ root_url }}{{ post.url }}">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</a>
+    <span>{{ post.date | date: "%B %e, %Y" }}</span>  
+    </h5>
+{% endfor %}
+</div>

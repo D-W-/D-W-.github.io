@@ -1,0 +1,212 @@
+$favRed: #333;
+$darkGray: #81a3bf;
+$avatar-size: 150px;
+$header-bg: url("/images/escheresque.png");
+$fixed-list-top: 66px;
+$list-top: 203px;
+
+// Mobile breakpoints
+@mixin mobile {
+  @media screen and (max-width: 640px) {
+    @content;
+  }
+}
+
+#avatar{
+  float: right;
+  margin-bottom: 1em;
+  margin-right: 1em;
+  margin-top: 1em;
+  img{
+    width: $avatar-size;
+    height: $avatar-size;
+  }
+}
+
+#btn-list{
+  font-family: initial;
+  font-weight: bolder;
+  color: #29B3E0;
+  font-size: 30px;
+  line-height: 60px;
+  width: 60px;
+  text-align: center;
+
+  z-index: 1000;
+  display: inline-block;
+  cursor: pointer;
+
+  position: fixed;
+  top: 20px;
+  left: 20px;
+
+  border-radius: 150px;
+  text-shadow: 0 0 5px #10E3EC;
+  box-shadow: 0 0 10px #2E9BA0;
+  border: 1px solid #4A5759;
+  background: #697477;
+
+  transition: -ms-transform .8s;
+  -moz-transition: -moz-transform .8s; /* Firefox 4 */
+  -webkit-transition: -webkit-transform .8s; /* Safari and Chrome */
+  -o-transition: -o-transform .8s; /* Opera */
+
+  @media only screen and (max-width: 992px){
+    display: none;
+  } 
+}
+#btn-list.tosel{
+	transform:  rotate(-630deg);
+	-ms-transform:  rotate(-630deg);
+  -moz-transform:  rotate(-630deg); /* Firefox 4 */
+  -webkit-transform:  rotate(-630deg); /* Safari and Chrome */
+  -o-transform:  rotate(-630deg);/* Opera */
+}
+#btn-list:hover{
+  animation: btn-flash 1.5s infinite;
+  -moz-animation: btn-flash 1.5s infinite; /* Firefox */
+  -webkit-animation: btn-flash 1.5s infinite;  /* Safari 和 Chrome */
+  -o-animation: btn-flash 1.5s infinite; /* Opera */
+}
+
+@keyframes btn-flash
+{
+  0%  {
+    text-shadow: 0 0 1px #10E3EC;
+    box-shadow: 0 0 5px #2E9BA0;
+  }
+  50% {
+    text-shadow: 0 0 5px #10E3EC;
+    box-shadow: 0 0 20px #2E9BA0;
+  }
+  100%  {
+    text-shadow: 0 0 1px #10E3EC;
+    box-shadow: 0 0 5px #2E9BA0;
+  }
+}
+
+@-moz-keyframes btn-flash /* Firefox */
+{
+  0%  {
+    text-shadow: 0 0 1px #10E3EC;
+    box-shadow: 0 0 5px #2E9BA0;
+  }
+  50% {
+    text-shadow: 0 0 5px #10E3EC;
+    box-shadow: 0 0 20px #2E9BA0;
+  }
+  100%  {
+    text-shadow: 0 0 1px #10E3EC;
+    box-shadow: 0 0 5px #2E9BA0;
+  }
+}
+
+@-webkit-keyframes btn-flash /* Safari 和 Chrome */
+{
+  0%  {
+    text-shadow: 0 0 1px #10E3EC;
+    box-shadow: 0 0 5px #2E9BA0;
+  }
+  50% {
+    text-shadow: 0 0 5px #10E3EC;
+    box-shadow: 0 0 20px #2E9BA0;
+  }
+  100%  {
+    text-shadow: 0 0 1px #10E3EC;
+    box-shadow: 0 0 5px #2E9BA0;
+  }
+}
+
+@-o-keyframes btn-flash /* Opera */
+{
+  0%  {
+    text-shadow: 0 0 1px #10E3EC;
+    box-shadow: 0 0 5px #2E9BA0;
+  }
+  50% {
+    text-shadow: 0 0 5px #10E3EC;
+    box-shadow: 0 0 20px #2E9BA0;
+  }
+  100%  {
+    text-shadow: 0 0 1px #10E3EC;
+    box-shadow: 0 0 5px #2E9BA0;
+  }
+}
+
+#list{
+  border: none;
+  z-index: 100;
+  max-width: 60%;
+  //background: header-bg;
+  background: $favRed;
+  padding: 0 10px;
+  padding-top: 100px;
+  overflow-y: auto;
+  //position: absolute;
+  //top: $list-top;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  //visibility: hidden;
+  transition: all 1s;
+  -moz-transition: all 1s; /* Firefox 4 */
+  -webkit-transition: all 1s; /* Safari and Chrome */
+  -o-transition: all 1s; /* Opera */
+  @include mobile {
+    width: 100%;
+  }
+  h2{
+    margin: 20px;
+    color: $darkGray;
+  }
+  a {
+    margin-left: 20px;
+    color: $darkGray;
+    text-align: right;
+    font-weight: 300;
+    letter-spacing: 1px;
+    //font-family: Microsoft Yahei,Arial;
+    @include mobile {
+      margin: 0 10px;
+    }
+  }
+  span{
+    color: rgb(201, 201, 201);
+    font-style: italic;
+    font-size: xx-small;
+    font-weight: lighter;
+  }
+}
+
+.fixed-nav{
+  position: fixed;
+  top:0px;
+  left:0px;
+  z-index: 1;
+  padding-top: 1em;
+  padding-bottom: 1em; 
+  background: $header-bg;
+  @include mobile {
+    position: inherit;
+  }
+}
+#list.fixed-nav-list{
+  //position: fixed;
+  //left: 0px;
+  //top: $fixed-list-top;
+  @include mobile {
+    position: absolute;
+  }
+}
+#list.on{
+  transform: translateX(0px);
+}
+#list.off{
+  transform: translateX(-100%);
+}
+.fixed-nav-main{
+  //margin-top: 101px;
+  @include mobile {
+    margin-top: 0px;
+  } 
+}

@@ -70,7 +70,17 @@ function turnList(){//释放list
   //     '-o-transform': 'translateY('+h/2+'px) rotate(450deg)'/* Opera */
   // });
 }
-
+$(function () {
+  $('html').niceScroll({cursorcolor: '#a11',
+            cursorborder: 'none',
+            scrollspeed: 60,
+            zindex: 1000});
+  var niceList = $('#list').niceScroll({cursorcolor: '#068',
+            cursorborder: 'none',
+            scrollspeed: 60,
+            zindex: 1000});
+  niceList.hide();
+})
 // $(function () {//转转转变色
 //   $('#btn-list').mouseenter(function(){
 //     $('#btn-img').attr('src','/images/list_red.png');

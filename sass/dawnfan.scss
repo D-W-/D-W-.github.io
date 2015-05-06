@@ -11,7 +11,9 @@ $list-top: 203px;
     @content;
   }
 }
-
+div.nicescroll-rails{
+  background: transparent;
+}
 #avatar{
   float: right;
   margin-bottom: 1em;

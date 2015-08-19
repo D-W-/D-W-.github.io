@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://d-w-.github.io/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1/</loc>
-    <lastmod>2015-08-14T00:00:00+08:00</lastmod>
+    <lastmod>2015-08-14T15:37:43+08:00</lastmod>
   </url>
   <url>
     <loc>http://d-w-.github.io/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/</loc>
@@ -102,5 +102,11 @@
   </url>
   <url>
     <loc>http://d-w-.github.io/blog/categories/life/</loc>
+  </url>
+  <url>
+    <loc>http://d-w-.github.io/blog/categories/du-shu-bi-ji/</loc>
+  </url>
+  <url>
+    <loc>http://d-w-.github.io/blog/categories/shen-ru-li-jie-ji-suan-ji-xi-tong/</loc>
   </url>
 </urlset>

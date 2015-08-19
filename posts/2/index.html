@@ -9,9 +9,7 @@
   <meta name="author" content="Harry">
 
   
-  <meta name="description" content="我这个人，执行力很差。 很久之前，大约在大一下，我第一次听组长说有个人写了一个可以爬学生周知的东西。就很想写一个爬NBA比赛结果的东西，
-当时只是想一想，因为感觉放在微信上的话会很方便，再加上当时刚刚接触编程，觉得什么都很难，这件事就搁置了。
-后来我学会了一点网络爬虫，PHP， &hellip;">
+  <meta name="description" content="鸟哥的Linux私房菜学习笔记(0) 这篇读书笔记本来计划用sublime写的 无奈sublime对中文支持的太不好了,linux下居然不能中文输入,网上查了一下配置太麻烦,为了不浪费时间,只好下次再配吧 文件格式化:确定文件在硬盘中存储的格式,比如 Ext2文件 super block &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +65,11 @@
     <span id="btn-list" onclick="turnList()">></span>
 <div id="list" class="off">
 <h2>Posts List</h2>
+
+    <h5>
+    <a href="/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1/">Reading Computer Systems a Programmers Perspective 1</a>
+    <span>August 14, 2015</span>  
+    </h5>
 
     <h5>
     <a href="/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/">Half Way Conclusion of 3rd Grade in College</a>
@@ -133,6 +136,84 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/14/Linux-File-System/">Linux文件系统基础</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-14T00:00:00+08:00" pubdate data-updated="true"></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>鸟哥的Linux私房菜学习笔记(0)</h2>
+
+<blockquote><p>这篇读书笔记本来计划用sublime写的</p>
+
+<blockquote><p>无奈sublime对中文支持的太不好了,linux下居然不能中文输入,网上查了一下配置太麻烦,为了不浪费时间,只好下次再配吧</p></blockquote></blockquote>
+
+<hr />
+
+<hr />
+
+<p>文件格式化:确定文件在硬盘中存储的格式,比如</p>
+
+<p> Ext2文件</p>
+
+<p>   super block</p>
+
+<p>   记录整体信息,inode,block的总量 使用量</p>
+
+<p>   inode</p>
+
+<p>   一个文件对应一个inode,里面同时记录用于了存储文件内容的block号码</p>
+
+<p>   block</p>
+
+<p>   用于存储文件的内容,一个文件可能对应多个block</p>
+
+<blockquote><p>和FAT文件格式的对比
+FAT文件block的存储是串成一条链的,像链表一样,要找的文件的具体内容必须遍历这个链,存储分散的话复杂度比较高
+Ext2文件的block编号都存在inode里面了,像数组一样,只要有inode的地址就可以轻松找到所有的文件内容</p></blockquote>
+
+<h2>inode容量有限,如何存储较多的block编号</h2>
+
+<p>分层,12个直接指向,1个间接指向(指向一个block,该block里面存的是其他block的编号),1个双间接指向,1个三间接指向</p>
+
+<h2>Ext2用于目录</h2>
+
+<p>inode记录文件夹(目录)的权限属性,以及文件夹(目录)对应的block编号
+block记录<em>该目录下文件名和该文件名占用的inode号码数据</em>
+    类似于这样,<code>map&lt;string,string&gt;</code>,前一个string是文件名,后一个是对应的<em>inode</em>编号</p>
+
+<blockquote><p>可以解释文件夹(目录)的读权限
+有了目录的读权限可以看到他block里面的东西,也就可以看到他里面的文件名,但是只限于文件名
+如果进入文件夹的话还需要执行权限</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -330,6 +411,10 @@ to create linebreak tags</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1/">Reading Computer Systems a Programmers Perspective 1</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/">Half Way Conclusion of 3rd Grade in College</a>
       </li>
     
@@ -343,10 +428,6 @@ to create linebreak tags</p>
     
       <li class="post">
         <a href="/blog/2015/03/25/Monster-Storm/">Monster Storm</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/23/Review_Vcool-Website/">Review VCool Website</a>
       </li>
     
   </ul>

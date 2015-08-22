@@ -9,7 +9,8 @@
   <meta name="author" content="Harry">
 
   
-  <meta name="description" content="鸟哥的Linux私房菜学习笔记(0) 这篇读书笔记本来计划用sublime写的 无奈sublime对中文支持的太不好了,linux下居然不能中文输入,网上查了一下配置太麻烦,为了不浪费时间,只好下次再配吧 文件格式化:确定文件在硬盘中存储的格式,比如 Ext2文件 super block &hellip;">
+  <meta name="description" content="按通过率来说,WordLadder应该是Leetcode上面最难的一道题了
+其中的第二道我提交了8次才成功,多数原因是TLE,这实在令人沮丧 在此应该总结一下,强化自己的答题技巧 题目描述 :通过每次改变单词的一个字母,找到一个单词到另一个单词的最短通路 核心算法BFS 因为题目要求最短的路径, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +66,11 @@
     <span id="btn-list" onclick="turnList()">></span>
 <div id="list" class="off">
 <h2>Posts List</h2>
+
+    <h5>
+    <a href="/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/">乘法逆元 Euclid定理和中国剩余定理</a>
+    <span>August 22, 2015</span>  
+    </h5>
 
     <h5>
     <a href="/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1/">Reading Computer Systems(A Programmer&#8217;s Perspective):1</a>
@@ -136,6 +142,89 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/25/Word-Ladder/">LeetCode上面的WordLadder总结</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-25T00:00:00+08:00" pubdate data-updated="true"></time>
+        
+        
+          | <a href="/blog/2014/11/25/Word-Ladder/#comments">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>按通过率来说,WordLadder应该是Leetcode上面最难的一道题了
+其中的第二道我提交了8次才成功,多数原因是TLE,这实在令人沮丧</p>
+
+<p>在此应该总结一下,强化自己的答题技巧</p>
+
+<p><em>题目描述</em> :通过每次改变单词的一个字母,找到一个单词到另一个单词的最短通路</p>
+
+<ol>
+<li>核心算法BFS
+ 因为题目要求最短的路径,BFS将所有的结点分层,找到结尾单词(end)最先出现的
+ 层就是最短的路径</li>
+<li>BFS分层
+ BFS分层的方法有两种
+
+<ol>
+<li>在队列中插入分隔符, 每当取出一个分隔符的时候就在队列尾插入一个分隔符两个分隔符之间的结点都处于同一层</li>
+<li>记录已经查找过的元素的层号, 找到合适的子结点的时候就把子结点的层号设为父节点的层号加1</li>
+</ol>
+</li>
+<li>记录路径的方向, 防止无限循环
+ 防止 hot找到了dot, dot又找到了hot 这种无限循环问题
+
+<ol>
+<li>找到合适的子结点就把它在集合里面删掉因为当时考虑到如果一个字符串出现了一次,它的下一次出现肯定会比这一次出现造成的wordladder长(因为广度优先遍历,后面出现的元素层数大于等于前面出现的元素的层数)</li>
+<li>找到了合适的子结点就标记一下, 增加一个查找标记数组的步骤
+这两种方法有一个bug,详见第四条</li>
+</ol>
+</li>
+<li>3中解决方法的bug 两个不同的结点有相同的后继(1中第一次出现就会把后继删掉了,2中第一次出现就把后继标记过了)
+
+<ol>
+<li>3.1的补救办法,将删除子结点的过程延迟到每一层结束的时候,每一层结束的时候统一在dict里面删除该层所有的子结点</li>
+<li>将2.2和3.2结合,同时记录查找过的元素的内容和层号,存到一个unordered_map里面,找到合适的元素的时候看一下map里面是否存在了,如果存在了的话再比较层号,层号相同则新找到的路径也是合理的路径,记录下来</li>
+</ol>
+</li>
+<li>WordLadderII要求记录所有最短路径,如何保存最短路径
+
+<ol>
+<li>BFS的时候一边找一边存,具体做法建立一个和BFS队列操作相同的队列,存储myqueue中当前元素所在的vector</li>
+<li>BFS的过程中记录下每一条通路的边,保存起来,BFS结束之后再跑一遍DFS,通过DFS的递归可以轻易得到结果集</li>
+</ol>
+</li>
+<li>5.2的优化,将所有通路的边倒序存储,DFS倒序遍历,可以砍掉很多不必要的结点(比如从start开始结果并不是end的那些边)</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -420,6 +509,10 @@ to create linebreak tags</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/">乘法逆元 Euclid定理和中国剩余定理</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1/">Reading Computer Systems(A Programmer&#8217;s Perspective):1</a>
       </li>
     
@@ -433,10 +526,6 @@ to create linebreak tags</p>
     
       <li class="post">
         <a href="/blog/2015/04/05/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/25/Monster-Storm/">Monster Storm</a>
       </li>
     
   </ul>

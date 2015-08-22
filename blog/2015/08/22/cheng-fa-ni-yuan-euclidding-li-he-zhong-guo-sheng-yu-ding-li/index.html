@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Linux文件系统基础 - D W</title>
+  <title>乘法逆元 Euclid定理和中国剩余定理 - D W</title>
   <meta name="author" content="Harry">
 
   
-  <meta name="description" content="鸟哥的Linux私房菜学习笔记(0) 这篇读书笔记本来计划用sublime写的 无奈sublime对中文支持的太不好了,linux下居然不能中文输入,网上查了一下配置太麻烦,为了不浪费时间,只好下次再配吧 文件格式化:确定文件在硬盘中存储的格式,比如 Ext2文件 super block &hellip;">
+  <meta name="description" content="今天刷题的时候遇到了一道中国剩余定理的题,当年在网络安全这门课上学过这个算法,但是到现在只记得这个名字了,就回去翻课件回顾了一下,结果发现了很多知识点,就在这整理一下. 乘法逆元 乘法逆元这个概念最初是在离散数学中引入的, 而在离散数学中提到的是范围更广泛的逆元. 是在代数系统里面提到的这个概念 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://d-w-.github.io/blog/2014/11/14/Linux-File-System">
+  <link rel="canonical" href="http://d-w-.github.io/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="D W" type="application/atom+xml">
@@ -144,7 +144,7 @@
   
   <header>
     
-      <h1 class="entry-title">Linux文件系统基础</h1>
+      <h1 class="entry-title">乘法逆元 Euclid定理和中国剩余定理</h1>
     
     
       <p class="meta">
@@ -160,7 +160,7 @@
   
 
 
-<time datetime="2014-11-14T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-08-22T13:22:44+08:00" pubdate data-updated="true"></time>
         
         
           | <a href="#comments">Comments</a>
@@ -170,49 +170,61 @@
   </header>
 
 
-<div class="entry-content"><h2>鸟哥的Linux私房菜学习笔记(0)</h2>
-
-<blockquote><p>这篇读书笔记本来计划用sublime写的</p>
-
-<blockquote><p>无奈sublime对中文支持的太不好了,linux下居然不能中文输入,网上查了一下配置太麻烦,为了不浪费时间,只好下次再配吧</p></blockquote></blockquote>
+<div class="entry-content"><p>今天刷题的时候遇到了一道<a href="http://www.51nod.com/onlineJudge/questionCode.html#!problemId=1079">中国剩余定理的题</a>,当年在网络安全这门课上学过这个算法,但是到现在只记得这个名字了,就回去翻课件回顾了一下,结果发现了很多知识点,就在这整理一下.</p>
 
 <hr />
 
-<hr />
+<h2>乘法逆元</h2>
 
-<p>文件格式化:确定文件在硬盘中存储的格式,比如</p>
+<p>乘法逆元这个概念最初是在离散数学中引入的, 而在离散数学中提到的是范围更广泛的逆元. 是在代数系统里面提到的这个概念
+定义如下</p>
 
-<p> Ext2文件</p>
+<blockquote><p>令e为S中关于某二元运算的单位元.对于x∈S,如果存在yl（或yr）∈S使得(yl)x=e（或x(yr)=e）,则称yl(或yr)是x的左逆元(或右逆元)。若y∈S既是x的左逆元又是x的右逆元,则称y为x的逆元。如果x的逆元存在,就称x是可逆的.</p></blockquote>
 
-<p>   super block</p>
+<p>在这里,二元运算就是模p乘法,p就是整个集合的范围.在这里,如果w是Zp中的某个数,我们求w的乘法逆元,这里有一条定理.</p>
 
-<p>   记录整体信息,inode,block的总量 使用量</p>
+<blockquote><p>Zp中的任一整数w有乘法逆元当且仅当w和p互素</p></blockquote>
 
-<p>   inode</p>
+<p>这里可以简单证明一下必要性,w和p互素,我们可以用w乘Zp中的所有元素,得到的剩余类是Zp中所有元素的另一种排列.
+以上这句话可以用反证法来证明
+假设乘完得到的剩余类并不是Zp的另一种排列,说明得到的剩余类中必定有两个相同的数.设为m,则:</p>
 
-<p>   一个文件对应一个inode,里面同时记录用于了存储文件内容的block号码</p>
+<pre><code>k1*w = s1*p + m
+k2*w = s2*p + m
+</code></pre>
 
-<p>   block</p>
+<p>所以</p>
 
-<p>   用于存储文件的内容,一个文件可能对应多个block</p>
+<pre><code>(k1-k2)*w = (s1-s2)*p
+</code></pre>
 
-<blockquote><p>和FAT文件格式的对比
-FAT文件block的存储是串成一条链的,像链表一样,要找的文件的具体内容必须遍历这个链,存储分散的话复杂度比较高
-Ext2文件的block编号都存在inode里面了,像数组一样,只要有inode的地址就可以轻松找到所有的文件内容</p></blockquote>
+<p>因为w和p互素
+(k1-k2)应该等于p,而k1,k2都小于p,得到了矛盾.得证.</p>
 
-<h2>inode容量有限,如何存储较多的block编号</h2>
+<p>现在知道了,如果求乘法逆元,要求这个数应该和基数p互素,下面看怎么求乘法逆元.</p>
 
-<p>分层,12个直接指向,1个间接指向(指向一个block,该block里面存的是其他block的编号),1个双间接指向,1个三间接指向</p>
+<h2>Euclid算法</h2>
 
-<h2>Ext2用于目录</h2>
+<p>Euclid的扩展算法可以用来求乘法逆元.先来看一下基本的Euclid算法.
+整个算法写起来很简单</p>
 
-<p>inode记录文件夹(目录)的权限属性,以及文件夹(目录)对应的block编号
-block记录<em>该目录下文件名和该文件名占用的inode号码数据</em>
-    类似于这样,<code>map&lt;string,string&gt;</code>,前一个string是文件名,后一个是对应的<em>inode</em>编号</p>
+<pre><code>gcd(a,b) = gcd(b,a%b)
+</code></pre>
 
-<blockquote><p>可以解释文件夹(目录)的读权限
-有了目录的读权限可以看到他block里面的东西,也就可以看到他里面的文件名,但是只限于文件名
-如果进入文件夹的话还需要执行权限</p></blockquote>
+<p>证明起来也很简单,具体看&lt;密码编码学与网络安全>P74
+这里说一下扩展的Euclid用于求乘法逆元.
+就是假设 gcd(a,b) = d, d 能写成 a和 b的组合形式
+d = x<em>a + y</em>b
+这样,当x,y互素的时候,明显d == 1,可以得到x是a的乘法逆元,y是b的乘法逆元.
+具体x和y的推导计算可见&lt;密码编码学与网络安全>p81</p>
+
+<h2>中国剩余定理</h2>
+
+<p>这个才是重点,首先中国剩余定理(Chinese Remainder Theorem)的意义是说明某一范围内的整数可通过它对两两互素的整数取模所得的余数来重构.</p>
+
+<p>具体证明如下</p>
+
+<p><img src="/images/2015-08-22.png"></p>
 </div>
 
 
@@ -235,12 +247,12 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   
 
 
-<time datetime="2014-11-14T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-08-22T13:22:44+08:00" pubdate data-updated="true"></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/linux/'>linux</a>
+    <a class='category' href='/blog/categories/chi-san-shu-xue-mi-ma-xue-euclidding-li-zhong-guo-sheng-yu-ding-li/'>离散数学 密码学 euclid定理 中国剩余定理</a>
   
 </span>
 
@@ -249,7 +261,7 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://d-w-.github.io/blog/2014/11/14/Linux-File-System/" data-via="" data-counturl="http://d-w-.github.io/blog/2014/11/14/Linux-File-System/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://d-w-.github.io/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/" data-via="" data-counturl="http://d-w-.github.io/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/" >Tweet</a>
   
   
   
@@ -258,10 +270,8 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/10/15/First-Blog/" title="Previous Post: 第一篇博客">&laquo; 第一篇博客</a>
+        <a class="basic-alignment left" href="/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1/" title="Previous Post: Reading Computer Systems(A Programmer's Perspective):1">&laquo; Reading Computer Systems(A Programmer&#8217;s Perspective):1</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/11/25/Word-Ladder/" title="Next Post: LeetCode上面的WordLadder总结">LeetCode上面的WordLadder总结 &raquo;</a>
       
     </p>
   </footer>
@@ -271,7 +281,7 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   <section>
     <h1>Comments</h1>
     <div id="comments" aria-live="polite"><!-- 多说评论框 start -->
-<div class="ds-thread" data-title="Linux文件系统基础"></div>
+<div class="ds-thread" data-title="乘法逆元 Euclid定理和中国剩余定理"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">

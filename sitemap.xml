@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://d-w-.github.io/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/</loc>
+    <lastmod>2015-08-22T13:22:44+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://d-w-.github.io/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1/</loc>
     <lastmod>2015-08-14T15:37:43+08:00</lastmod>
   </url>
@@ -108,5 +112,8 @@
   </url>
   <url>
     <loc>http://d-w-.github.io/blog/categories/shen-ru-li-jie-ji-suan-ji-xi-tong/</loc>
+  </url>
+  <url>
+    <loc>http://d-w-.github.io/blog/categories/chi-san-shu-xue-mi-ma-xue-euclidding-li-zhong-guo-sheng-yu-ding-li/</loc>
   </url>
 </urlset>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Leetcode | D W]]></title>
   <link href="http://d-w-.github.io/blog/categories/leetcode/atom.xml" rel="self"/>
   <link href="http://d-w-.github.io/"/>
-  <updated>2015-08-27T07:06:24+00:00</updated>
+  <updated>2015-08-27T15:21:12+08:00</updated>
   <id>http://d-w-.github.io/</id>
   <author>
     <name><![CDATA[Harry]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[LeetCode上面的Distinct Subsequences总结]]></title>
     <link href="http://d-w-.github.io/blog/2014/12/20/Distinct-Subsequences/"/>
-    <updated>2014-12-20T00:00:00+00:00</updated>
+    <updated>2014-12-20T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2014/12/20/Distinct-Subsequences</id>
     <content type="html"><![CDATA[<p>最近做了挺多东西,从中也学了不少,觉得总结一下比较好,一直没有时间就一直拖着,现在终于有点空闲的时间,觉得像我这种记性不太好的人还是多做一些code review,否则做一点忘一点,最后反而学不到什么东西.</p>
 
@@ -138,7 +138,7 @@ t 0 0 0 0 0 0 0 3
   <entry>
     <title type="html"><![CDATA[LeetCode上面的WordLadder总结]]></title>
     <link href="http://d-w-.github.io/blog/2014/11/25/Word-Ladder/"/>
-    <updated>2014-11-25T00:00:00+00:00</updated>
+    <updated>2014-11-25T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2014/11/25/Word-Ladder</id>
     <content type="html"><![CDATA[<p>按通过率来说,WordLadder应该是Leetcode上面最难的一道题了
 其中的第二道我提交了8次才成功,多数原因是TLE,这实在令人沮丧</p>

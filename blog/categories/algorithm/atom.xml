@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Algorithm | D W]]></title>
   <link href="http://d-w-.github.io/blog/categories/algorithm/atom.xml" rel="self"/>
   <link href="http://d-w-.github.io/"/>
-  <updated>2015-08-27T07:06:24+00:00</updated>
+  <updated>2015-08-27T15:21:12+08:00</updated>
   <id>http://d-w-.github.io/</id>
   <author>
     <name><![CDATA[Harry]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Morris Traversal]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/22/Morris-Traversal/"/>
-    <updated>2015-03-22T00:00:00+00:00</updated>
+    <updated>2015-03-22T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/22/Morris-Traversal</id>
     <content type="html"><![CDATA[<p>Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度只要O(1),时间复杂度也只有O(n)
 这里根据<a href="http://www.cnblogs.com/AnnieKim/archive/2013/06/15/MorrisTraversal.html">博客园上的文章</a>进行了学习.整个算法我感觉主要有两部分不太容易懂 ,一是具体的算法部分,也就是如何利用线索二叉树找前驱节点的方法的;另一个就是如何证明这个算法是O(n)的.对于第一部分可以在代码里面说明,这里先说一下第二部分,借用原文中的话:</p>
@@ -102,7 +102,7 @@ if __name__ == '__main__':
   <entry>
     <title type="html"><![CDATA[LeetCode上面的Distinct Subsequences总结]]></title>
     <link href="http://d-w-.github.io/blog/2014/12/20/Distinct-Subsequences/"/>
-    <updated>2014-12-20T00:00:00+00:00</updated>
+    <updated>2014-12-20T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2014/12/20/Distinct-Subsequences</id>
     <content type="html"><![CDATA[<p>最近做了挺多东西,从中也学了不少,觉得总结一下比较好,一直没有时间就一直拖着,现在终于有点空闲的时间,觉得像我这种记性不太好的人还是多做一些code review,否则做一点忘一点,最后反而学不到什么东西.</p>
 
@@ -224,7 +224,7 @@ t 0 0 0 0 0 0 0 3
   <entry>
     <title type="html"><![CDATA[LeetCode上面的WordLadder总结]]></title>
     <link href="http://d-w-.github.io/blog/2014/11/25/Word-Ladder/"/>
-    <updated>2014-11-25T00:00:00+00:00</updated>
+    <updated>2014-11-25T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2014/11/25/Word-Ladder</id>
     <content type="html"><![CDATA[<p>按通过率来说,WordLadder应该是Leetcode上面最难的一道题了
 其中的第二道我提交了8次才成功,多数原因是TLE,这实在令人沮丧</p>

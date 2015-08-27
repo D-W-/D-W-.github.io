@@ -4,7 +4,7 @@
   <title><![CDATA[D W]]></title>
   <link href="http://d-w-.github.io/atom.xml" rel="self"/>
   <link href="http://d-w-.github.io/"/>
-  <updated>2015-08-22T15:02:42+08:00</updated>
+  <updated>2015-08-27T07:06:24+00:00</updated>
   <id>http://d-w-.github.io/</id>
   <author>
     <name><![CDATA[Harry]]></name>
@@ -14,9 +14,125 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Reading Computer Systems(A Programmer’s Perspective):2]]></title>
+    <link href="http://d-w-.github.io/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/"/>
+    <updated>2015-08-27T05:07:02+00:00</updated>
+    <id>http://d-w-.github.io/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2</id>
+    <content type="html"><![CDATA[<h2>第五章 优化程序性能</h2>
+
+<p>这一章主要讲的是编译器对代码的一些优化策略,包括在代码效率和代码在一些极端状况下的准确性的权衡.以及用具体的汇编代码及在机器中的实现来说明一些代码习惯的对程序效率的影响,最后介绍了一种unix环境下的程序剖析(profiling)工具GPROF.</p>
+
+<p>优化程序的效率时,除了优化整个算法的时间复杂度,其中编译器对代码的编译也起到了至关重要的作用,而编译器除了要将代码变得更快,还需要考虑程序的正确性,开头的例子给出了一个对源代码非常明显的优化,但是编译器却不敢执行这个优化,主要原因就是他不能保证这个优化过的结果和没优化的结果是一样的,事实上,在极端情况下,优化后的代码可能会产生和原来的代码不同的结果.</p>
+
+<p>所以,编译器的一些优化级别,需要保证对程序只使用<strong>安全</strong>的优化,也就是保证优化后的代码和之前的代码完全相同,这种保证就会使得一些明显的优化无法执行(因为无法保证极端情况下的正确性).</p>
+
+<p>接下来以一个程序(P330)为示例,讲了几种写代码时的优化策略</p>
+
+<h3>消除循环的低效率</h3>
+
+<p>这个说的是可能编程中经常会遇到的问题,循环
+<code>for(int i = 0;i&lt;vec_length(v),++i)</code>
+如果这么写的话,每次循环结束都会调用 <code>vec_length()</code> 这个函数来确定是否到达循环结束,对于长度不变的数据结构的遍历,每次循环结束调用的这个函数的开销是不必要的,应将其避免</p>
+
+<h3>减少过程调用</h3>
+
+<p>这个部分说的是尽量不要在循环中循环调用一些函数,在循环外拿到需要循环遍历的数据结构,然后再循环中直接去调用数据结构.</p>
+
+<p>书中也提到了这种做法不太符合程序模块化的要求,只有在追求效率的代码中会用到,这种情况也应该写几行注释注明.</p>
+
+<h3>消除不必要的存储器引用</h3>
+
+<p>讲的是,这么写</p>
+
+<pre><code>for(int i = 0;i&lt;length;++i)
+    acc = acc OP data[i];
+</code></pre>
+
+<p>和这么写</p>
+
+<pre><code>for(int i = 0;i&lt;length;++i)
+    *dest = *dest OP data[i];
+</code></pre>
+
+<p>前者更好,因为,前者在汇编中实现可以用寄存器存储 acc ,而后者是个指针,汇编中只能用存储器实现,每次去地址再取指会浪费大量时间.</p>
+
+<p>优化程序的两个限制:</p>
+
+<ol>
+<li>延迟界限: 从开始到结束完全完成一条指令所需要的时间决定,达到这个界限的原因是下一条指令需要上一条指令执行完毕才能执行,指令间有严格的操作顺序.</li>
+<li>吞吐量界限: 指令之间可以<strong>完全流水线化(fully pipelined)</strong>,这样使得硬件的功能达到了最大的利用率,在这种情况下优化只能优化处理器功能单元的<strong>原始计算能力了</strong>.</li>
+</ol>
+
+
+<p>一些编译器可能做的优化</p>
+
+<h3>循环展开</h3>
+
+<p>就是循环每次原来读一个数,优化后每次读 k 个数,这样循环的次数就变成了 [n/k] 次,这样优化结果性能的提升得益于 <strong>减少了循环的开销工作</strong> ,比如原来累加器 iter 原来要累加 n 次,现在只要累加 [n/k] 次了, 降低了开销操作的数量.</p>
+
+<h3>提高并行性</h3>
+
+<p>这个比较容易理解,比如一个累加的程序,原来只有一个累加器,每次加一个数,改成并行的可以有 k 个累加器, k 个累加器同时工作肯定要比原来效率高</p>
+
+<p>不过这里硬件会成为限制条件,后面就提到了<strong>寄存器溢出</strong>这种情况,就是累加器多得在寄存器里面存不下了,只能到栈里面存,这样又增加了存储器开销,反而会使效率下降.</p>
+
+<h3>重新结合变换</h3>
+
+<p>就是利用有结合律的变换,运用一下结合律,比如把下面这个</p>
+
+<pre><code>acc = acc OP data[i] OP data[i+1]
+</code></pre>
+
+<p>变成下面这个</p>
+
+<pre><code>acc = add OP (data[i] OP data[i+1])
+</code></pre>
+
+<p>代码层面没有改进,但是从汇编层面分析,原来每次循环在 acc 上的运算 由原来的两次变成了一次,这样就缩短了关键路径,从而提高了效率.</p>
+
+<hr />
+
+<p>上一章可以看到分支预测会对程序效率有很大影响,因为是一个完全投机的预测,预测错了下面所有取到的指令都应该放弃,这会造成比较大的损失.但是这也是不可避免的,文中提到了
+1. 不要过分关心可预测的分支,我们预测分支往往会执行是因为,再循环中,这样的预测策略只有最后一次会失败,所以几率还是比较大的
+2. 在程序猿的角度,将<strong>分支跳转指令</strong>改为<strong>条件传送指令( <code>val = exp?a:b;</code> )</strong>往往能取得比较好的效果,因为条件传送指令不会有错误的开销: <strong>在流水线中,下一条指令译码钱,上一条指令已经完成了执行操作,因此下一条如果是条件传送指令的话,刚好可以通过转发机制得到状态码.</strong></p>
+
+<h2>加载和存储</h2>
+
+<p>读和写都制约程序的运行效率 如下:</p>
+
+<ol>
+<li>加载相关, 循环两次之间的读有相关性,下一次的读需要上一次读出来的结果,所以下一条读的指令必须等上一次循环完全结束</li>
+<li>读写相关(write/read dependency), 一个存储器读的结果依赖于一个最近的存储器写.这个是经常会遇到的问题.</li>
+</ol>
+
+
+<p>读写相关的解决方案 (<strong>P366</strong>):</p>
+
+<p>在存储单元中有个<strong>存储缓冲区</strong>,包含将会写到存储单元的,但是还没完成的操作(地址,值).
+每次读的时候 (<strong>load 指令</strong>)会先检查一下存储缓冲区,如果发现读的地址在存储缓冲区里面(说明呆会会被写进新值),就直接在存储缓冲区里面拿新值了.</p>
+
+<p><em>&hellip;其实上面的操作就是转发</em></p>
+
+<h2>最后 程序剖析(profiling)</h2>
+
+<p>这里介绍了一种分析程序效率的工具,GPROF</p>
+
+<ol>
+<li>在编译和链接过程中加上剖析的指令
+ <code>gcc -o1 -pg prog.c prog</code></li>
+<li>执行程序,会生成一个多余的 gmon.out 的文件
+ <code>./prog arguments...</code></li>
+<li>使用GPROF来解析这个out文件(必须有out文件才能解析)
+ <code>gprof prog</code></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[乘法逆元 Euclid定理和中国剩余定理]]></title>
     <link href="http://d-w-.github.io/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/"/>
-    <updated>2015-08-22T13:22:44+08:00</updated>
+    <updated>2015-08-22T05:22:44+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li</id>
     <content type="html"><![CDATA[<p>今天刷题的时候遇到了一道<a href="http://www.51nod.com/onlineJudge/questionCode.html#!problemId=1079">中国剩余定理的题</a>,当年在网络安全这门课上学过这个算法,但是到现在只记得这个名字了,就回去翻课件回顾了一下,结果发现了很多知识点,就在这整理一下.</p>
 
@@ -79,7 +195,7 @@ d = x<em>a + y</em>b
   <entry>
     <title type="html"><![CDATA[Reading Computer Systems(A Programmer's Perspective):1]]></title>
     <link href="http://d-w-.github.io/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1/"/>
-    <updated>2015-08-14T15:37:43+08:00</updated>
+    <updated>2015-08-14T07:37:43+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1</id>
     <content type="html"><![CDATA[<p>深入理解计算机系统这本书大二的时候就买了,因为有很多学长推荐,而且很多计算机名校也用它当&lt;计算机组成原理>的教材.但是由于各种原因一直拖着没读,大三利用寒假读了一下,感觉受益匪浅,但是没有读完,大三下学期断断续续不仅没有继续读,还把前面读了的忘了个差不多,现在准备利用暑假读完,并记一下笔记,以防忘记.</p>
 
@@ -214,7 +330,7 @@ d = x<em>a + y</em>b
   <entry>
     <title type="html"><![CDATA[Half Way Conclusion of 3rd Grade in College]]></title>
     <link href="http://d-w-.github.io/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/"/>
-    <updated>2015-04-23T21:11:15+08:00</updated>
+    <updated>2015-04-23T13:11:15+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college</id>
     <content type="html"><![CDATA[<p>距离上次写博客已经过去了半个多月,我兴致勃勃迁移博客的热情也减少了很多,从开学充满激情海投简历到现在也认清了自己的水平,昨天受到腾讯大连HR的启发,准备对自己的人生进行思考,规划自己的生涯.</p>
 
@@ -283,9 +399,9 @@ d = x<em>a + y</em>b
   
   <entry>
     <title type="html"><![CDATA[git远程代码管理，SSH还是HTTPS]]></title>
-    <link href="http://d-w-.github.io/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/"/>
-    <updated>2015-04-05T07:38:50+08:00</updated>
-    <id>http://d-w-.github.io/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https</id>
+    <link href="http://d-w-.github.io/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/"/>
+    <updated>2015-04-04T23:38:50+00:00</updated>
+    <id>http://d-w-.github.io/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https</id>
     <content type="html"><![CDATA[<p>之前学习git的过程中就遇到了这个问题，电脑并不能使用ssh连接远程仓库，例如<code>clone git@github.com/xx.git</code> 这样的工程会失败。我就必须改成使用HTTPS协议，把连接改成 https 的，或者直接配置一个环境变量</p>
 
 <pre><code>git config --global url."https://".insteadOf git://
@@ -363,9 +479,9 @@ schemes.</p></blockquote>
   
   <entry>
     <title type="html"><![CDATA[Moving My Blog to Octopress]]></title>
-    <link href="http://d-w-.github.io/blog/2015/04/05/moving-my-blog-to-octopress/"/>
-    <updated>2015-04-05T05:34:53+08:00</updated>
-    <id>http://d-w-.github.io/blog/2015/04/05/moving-my-blog-to-octopress</id>
+    <link href="http://d-w-.github.io/blog/2015/04/04/moving-my-blog-to-octopress/"/>
+    <updated>2015-04-04T21:34:53+00:00</updated>
+    <id>http://d-w-.github.io/blog/2015/04/04/moving-my-blog-to-octopress</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>最近在读侯捷老师的《STL源码剖析》一书，收获简直太大。一激动就想把学的东西赶紧记下来写篇博客，然后想到我以前的博客系统，bug无穷，于是决定亲自配一个Octopress的博客，因为之前的博客是Jekyll的，博文都用的markdown写的，Octopress也是markdown语法，这样可以直接连文字带样式轻松移植过来，想的挺轻松，但是实际操纵起来简直折腾了我好几天。。</p>
@@ -449,7 +565,7 @@ $ rake generate
   <entry>
     <title type="html"><![CDATA[Monster Storm]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/25/Monster-Storm/"/>
-    <updated>2015-03-25T00:00:00+08:00</updated>
+    <updated>2015-03-25T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/25/Monster-Storm</id>
     <content type="html"><![CDATA[<p>Monster Storm</p>
 
@@ -520,7 +636,7 @@ $ rake generate
   <entry>
     <title type="html"><![CDATA[Review VCool Website]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/23/Review_Vcool-Website/"/>
-    <updated>2015-03-23T00:00:00+08:00</updated>
+    <updated>2015-03-23T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/23/Review_Vcool-Website</id>
     <content type="html"><![CDATA[<p>以前做过的一些东西的简单回顾，避免面试官问起来都忘了，也能在简历上面写得更加得心应手</p>
 
@@ -600,7 +716,7 @@ $ rake generate
   <entry>
     <title type="html"><![CDATA[Morris Traversal]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/22/Morris-Traversal/"/>
-    <updated>2015-03-22T00:00:00+08:00</updated>
+    <updated>2015-03-22T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/22/Morris-Traversal</id>
     <content type="html"><![CDATA[<p>Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度只要O(1),时间复杂度也只有O(n)
 这里根据<a href="http://www.cnblogs.com/AnnieKim/archive/2013/06/15/MorrisTraversal.html">博客园上的文章</a>进行了学习.整个算法我感觉主要有两部分不太容易懂 ,一是具体的算法部分,也就是如何利用线索二叉树找前驱节点的方法的;另一个就是如何证明这个算法是O(n)的.对于第一部分可以在代码里面说明,这里先说一下第二部分,借用原文中的话:</p>
@@ -686,7 +802,7 @@ if __name__ == '__main__':
   <entry>
     <title type="html"><![CDATA[豆瓣笔试]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/20/douban-paper-test/"/>
-    <updated>2015-03-20T00:00:00+08:00</updated>
+    <updated>2015-03-20T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/20/douban-paper-test</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
@@ -714,7 +830,7 @@ if __name__ == '__main__':
   <entry>
     <title type="html"><![CDATA[LeetCode上面的Distinct Subsequences总结]]></title>
     <link href="http://d-w-.github.io/blog/2014/12/20/Distinct-Subsequences/"/>
-    <updated>2014-12-20T00:00:00+08:00</updated>
+    <updated>2014-12-20T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2014/12/20/Distinct-Subsequences</id>
     <content type="html"><![CDATA[<p>最近做了挺多东西,从中也学了不少,觉得总结一下比较好,一直没有时间就一直拖着,现在终于有点空闲的时间,觉得像我这种记性不太好的人还是多做一些code review,否则做一点忘一点,最后反而学不到什么东西.</p>
 
@@ -836,7 +952,7 @@ t 0 0 0 0 0 0 0 3
   <entry>
     <title type="html"><![CDATA[LeetCode上面的WordLadder总结]]></title>
     <link href="http://d-w-.github.io/blog/2014/11/25/Word-Ladder/"/>
-    <updated>2014-11-25T00:00:00+08:00</updated>
+    <updated>2014-11-25T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2014/11/25/Word-Ladder</id>
     <content type="html"><![CDATA[<p>按通过率来说,WordLadder应该是Leetcode上面最难的一道题了
 其中的第二道我提交了8次才成功,多数原因是TLE,这实在令人沮丧</p>
@@ -889,7 +1005,7 @@ t 0 0 0 0 0 0 0 3
   <entry>
     <title type="html"><![CDATA[Linux文件系统基础]]></title>
     <link href="http://d-w-.github.io/blog/2014/11/14/Linux-File-System/"/>
-    <updated>2014-11-14T00:00:00+08:00</updated>
+    <updated>2014-11-14T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2014/11/14/Linux-File-System</id>
     <content type="html"><![CDATA[<h2>鸟哥的Linux私房菜学习笔记(0)</h2>
 
@@ -940,7 +1056,7 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   <entry>
     <title type="html"><![CDATA[第一篇博客]]></title>
     <link href="http://d-w-.github.io/blog/2014/10/15/First-Blog/"/>
-    <updated>2014-10-15T00:00:00+08:00</updated>
+    <updated>2014-10-15T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2014/10/15/First-Blog</id>
     <content type="html"><![CDATA[<h2>我这个人，执行力很差。</h2>
 
@@ -972,7 +1088,7 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   <entry>
     <title type="html"><![CDATA[Markdown Style Guide]]></title>
     <link href="http://d-w-.github.io/blog/2014/03/03/Hello-World/"/>
-    <updated>2014-03-03T00:00:00+08:00</updated>
+    <updated>2014-03-03T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2014/03/03/Hello-World</id>
     <content type="html"><![CDATA[<p>This is a demo of all styled elements in Jekyll Now.</p>
 

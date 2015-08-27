@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 配置 | D W]]></title>
   <link href="http://d-w-.github.io/blog/categories/pei-zhi/atom.xml" rel="self"/>
   <link href="http://d-w-.github.io/"/>
-  <updated>2015-08-22T15:02:42+08:00</updated>
+  <updated>2015-08-27T07:06:24+00:00</updated>
   <id>http://d-w-.github.io/</id>
   <author>
     <name><![CDATA[Harry]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[git远程代码管理，SSH还是HTTPS]]></title>
-    <link href="http://d-w-.github.io/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/"/>
-    <updated>2015-04-05T07:38:50+08:00</updated>
-    <id>http://d-w-.github.io/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https</id>
+    <link href="http://d-w-.github.io/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/"/>
+    <updated>2015-04-04T23:38:50+00:00</updated>
+    <id>http://d-w-.github.io/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https</id>
     <content type="html"><![CDATA[<p>之前学习git的过程中就遇到了这个问题，电脑并不能使用ssh连接远程仓库，例如<code>clone git@github.com/xx.git</code> 这样的工程会失败。我就必须改成使用HTTPS协议，把连接改成 https 的，或者直接配置一个环境变量</p>
 
 <pre><code>git config --global url."https://".insteadOf git://
@@ -95,9 +95,9 @@ schemes.</p></blockquote>
   
   <entry>
     <title type="html"><![CDATA[Moving My Blog to Octopress]]></title>
-    <link href="http://d-w-.github.io/blog/2015/04/05/moving-my-blog-to-octopress/"/>
-    <updated>2015-04-05T05:34:53+08:00</updated>
-    <id>http://d-w-.github.io/blog/2015/04/05/moving-my-blog-to-octopress</id>
+    <link href="http://d-w-.github.io/blog/2015/04/04/moving-my-blog-to-octopress/"/>
+    <updated>2015-04-04T21:34:53+00:00</updated>
+    <id>http://d-w-.github.io/blog/2015/04/04/moving-my-blog-to-octopress</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>最近在读侯捷老师的《STL源码剖析》一书，收获简直太大。一激动就想把学的东西赶紧记下来写篇博客，然后想到我以前的博客系统，bug无穷，于是决定亲自配一个Octopress的博客，因为之前的博客是Jekyll的，博文都用的markdown写的，Octopress也是markdown语法，这样可以直接连文字带样式轻松移植过来，想的挺轻松，但是实际操纵起来简直折腾了我好几天。。</p>

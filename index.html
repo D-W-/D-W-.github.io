@@ -9,7 +9,7 @@
   <meta name="author" content="Harry">
 
   
-  <meta name="description" content="今天刷题的时候遇到了一道中国剩余定理的题,当年在网络安全这门课上学过这个算法,但是到现在只记得这个名字了,就回去翻课件回顾了一下,结果发现了很多知识点,就在这整理一下. 乘法逆元 乘法逆元这个概念最初是在离散数学中引入的, 而在离散数学中提到的是范围更广泛的逆元. 是在代数系统里面提到的这个概念 &hellip;">
+  <meta name="description" content="第五章 优化程序性能 这一章主要讲的是编译器对代码的一些优化策略,包括在代码效率和代码在一些极端状况下的准确性的权衡.以及用具体的汇编代码及在机器中的实现来说明一些代码习惯的对程序效率的影响,最后介绍了一种unix环境下的程序剖析(profiling)工具GPROF. 优化程序的效率时, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +67,11 @@
 <h2>Posts List</h2>
 
     <h5>
+    <a href="/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/">Reading Computer Systems(A Programmer’s Perspective):2</a>
+    <span>August 27, 2015</span>  
+    </h5>
+
+    <h5>
     <a href="/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/">乘法逆元 Euclid定理和中国剩余定理</a>
     <span>August 22, 2015</span>  
     </h5>
@@ -82,13 +87,13 @@
     </h5>
 
     <h5>
-    <a href="/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a>
-    <span>April  5, 2015</span>  
+    <a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a>
+    <span>April  4, 2015</span>  
     </h5>
 
     <h5>
-    <a href="/blog/2015/04/05/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a>
-    <span>April  5, 2015</span>  
+    <a href="/blog/2015/04/04/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a>
+    <span>April  4, 2015</span>  
     </h5>
 
     <h5>
@@ -147,6 +152,152 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/">Reading Computer Systems(A Programmer’s Perspective):2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-27T05:07:02+00:00" pubdate data-updated="true"></time>
+        
+        
+          | <a href="/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/#comments">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>第五章 优化程序性能</h2>
+
+<p>这一章主要讲的是编译器对代码的一些优化策略,包括在代码效率和代码在一些极端状况下的准确性的权衡.以及用具体的汇编代码及在机器中的实现来说明一些代码习惯的对程序效率的影响,最后介绍了一种unix环境下的程序剖析(profiling)工具GPROF.</p>
+
+<p>优化程序的效率时,除了优化整个算法的时间复杂度,其中编译器对代码的编译也起到了至关重要的作用,而编译器除了要将代码变得更快,还需要考虑程序的正确性,开头的例子给出了一个对源代码非常明显的优化,但是编译器却不敢执行这个优化,主要原因就是他不能保证这个优化过的结果和没优化的结果是一样的,事实上,在极端情况下,优化后的代码可能会产生和原来的代码不同的结果.</p>
+
+<p>所以,编译器的一些优化级别,需要保证对程序只使用<strong>安全</strong>的优化,也就是保证优化后的代码和之前的代码完全相同,这种保证就会使得一些明显的优化无法执行(因为无法保证极端情况下的正确性).</p>
+
+<p>接下来以一个程序(P330)为示例,讲了几种写代码时的优化策略</p>
+
+<h3>消除循环的低效率</h3>
+
+<p>这个说的是可能编程中经常会遇到的问题,循环
+<code>for(int i = 0;i&lt;vec_length(v),++i)</code>
+如果这么写的话,每次循环结束都会调用 <code>vec_length()</code> 这个函数来确定是否到达循环结束,对于长度不变的数据结构的遍历,每次循环结束调用的这个函数的开销是不必要的,应将其避免</p>
+
+<h3>减少过程调用</h3>
+
+<p>这个部分说的是尽量不要在循环中循环调用一些函数,在循环外拿到需要循环遍历的数据结构,然后再循环中直接去调用数据结构.</p>
+
+<p>书中也提到了这种做法不太符合程序模块化的要求,只有在追求效率的代码中会用到,这种情况也应该写几行注释注明.</p>
+
+<h3>消除不必要的存储器引用</h3>
+
+<p>讲的是,这么写</p>
+
+<pre><code>for(int i = 0;i&lt;length;++i)
+    acc = acc OP data[i];
+</code></pre>
+
+<p>和这么写</p>
+
+<pre><code>for(int i = 0;i&lt;length;++i)
+    *dest = *dest OP data[i];
+</code></pre>
+
+<p>前者更好,因为,前者在汇编中实现可以用寄存器存储 acc ,而后者是个指针,汇编中只能用存储器实现,每次去地址再取指会浪费大量时间.</p>
+
+<p>优化程序的两个限制:</p>
+
+<ol>
+<li>延迟界限: 从开始到结束完全完成一条指令所需要的时间决定,达到这个界限的原因是下一条指令需要上一条指令执行完毕才能执行,指令间有严格的操作顺序.</li>
+<li>吞吐量界限: 指令之间可以<strong>完全流水线化(fully pipelined)</strong>,这样使得硬件的功能达到了最大的利用率,在这种情况下优化只能优化处理器功能单元的<strong>原始计算能力了</strong>.</li>
+</ol>
+
+
+<p>一些编译器可能做的优化</p>
+
+<h3>循环展开</h3>
+
+<p>就是循环每次原来读一个数,优化后每次读 k 个数,这样循环的次数就变成了 [n/k] 次,这样优化结果性能的提升得益于 <strong>减少了循环的开销工作</strong> ,比如原来累加器 iter 原来要累加 n 次,现在只要累加 [n/k] 次了, 降低了开销操作的数量.</p>
+
+<h3>提高并行性</h3>
+
+<p>这个比较容易理解,比如一个累加的程序,原来只有一个累加器,每次加一个数,改成并行的可以有 k 个累加器, k 个累加器同时工作肯定要比原来效率高</p>
+
+<p>不过这里硬件会成为限制条件,后面就提到了<strong>寄存器溢出</strong>这种情况,就是累加器多得在寄存器里面存不下了,只能到栈里面存,这样又增加了存储器开销,反而会使效率下降.</p>
+
+<h3>重新结合变换</h3>
+
+<p>就是利用有结合律的变换,运用一下结合律,比如把下面这个</p>
+
+<pre><code>acc = acc OP data[i] OP data[i+1]
+</code></pre>
+
+<p>变成下面这个</p>
+
+<pre><code>acc = add OP (data[i] OP data[i+1])
+</code></pre>
+
+<p>代码层面没有改进,但是从汇编层面分析,原来每次循环在 acc 上的运算 由原来的两次变成了一次,这样就缩短了关键路径,从而提高了效率.</p>
+
+<hr />
+
+<p>上一章可以看到分支预测会对程序效率有很大影响,因为是一个完全投机的预测,预测错了下面所有取到的指令都应该放弃,这会造成比较大的损失.但是这也是不可避免的,文中提到了
+1. 不要过分关心可预测的分支,我们预测分支往往会执行是因为,再循环中,这样的预测策略只有最后一次会失败,所以几率还是比较大的
+2. 在程序猿的角度,将<strong>分支跳转指令</strong>改为<strong>条件传送指令( <code>val = exp?a:b;</code> )</strong>往往能取得比较好的效果,因为条件传送指令不会有错误的开销: <strong>在流水线中,下一条指令译码钱,上一条指令已经完成了执行操作,因此下一条如果是条件传送指令的话,刚好可以通过转发机制得到状态码.</strong></p>
+
+<h2>加载和存储</h2>
+
+<p>读和写都制约程序的运行效率 如下:</p>
+
+<ol>
+<li>加载相关, 循环两次之间的读有相关性,下一次的读需要上一次读出来的结果,所以下一条读的指令必须等上一次循环完全结束</li>
+<li>读写相关(write/read dependency), 一个存储器读的结果依赖于一个最近的存储器写.这个是经常会遇到的问题.</li>
+</ol>
+
+
+<p>读写相关的解决方案 (<strong>P366</strong>):</p>
+
+<p>在存储单元中有个<strong>存储缓冲区</strong>,包含将会写到存储单元的,但是还没完成的操作(地址,值).
+每次读的时候 (<strong>load 指令</strong>)会先检查一下存储缓冲区,如果发现读的地址在存储缓冲区里面(说明呆会会被写进新值),就直接在存储缓冲区里面拿新值了.</p>
+
+<p><em>&hellip;其实上面的操作就是转发</em></p>
+
+<h2>最后 程序剖析(profiling)</h2>
+
+<p>这里介绍了一种分析程序效率的工具,GPROF</p>
+
+<ol>
+<li>在编译和链接过程中加上剖析的指令
+ <code>gcc -o1 -pg prog.c prog</code></li>
+<li>执行程序,会生成一个多余的 gmon.out 的文件
+ <code>./prog arguments...</code></li>
+<li>使用GPROF来解析这个out文件(必须有out文件才能解析)
+ <code>gprof prog</code></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/">乘法逆元 Euclid定理和中国剩余定理</a></h1>
     
     
@@ -163,7 +314,7 @@
   
 
 
-<time datetime="2015-08-22T13:22:44+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-08-22T05:22:44+00:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/#comments">Comments</a>
@@ -256,7 +407,7 @@ d = x<em>a + y</em>b
   
 
 
-<time datetime="2015-08-14T15:37:43+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-08-14T07:37:43+00:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1/#comments">Comments</a>
@@ -421,7 +572,7 @@ d = x<em>a + y</em>b
   
 
 
-<time datetime="2015-04-23T21:11:15+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-04-23T13:11:15+00:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/#comments">Comments</a>
@@ -505,7 +656,7 @@ d = x<em>a + y</em>b
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a></h1>
     
     
       <p class="meta">
@@ -521,10 +672,10 @@ d = x<em>a + y</em>b
   
 
 
-<time datetime="2015-04-05T07:38:50+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-04-04T23:38:50+00:00" pubdate data-updated="true"></time>
         
         
-          | <a href="/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/#comments">Comments</a>
+          | <a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/#comments">Comments</a>
         
       </p>
     
@@ -615,7 +766,7 @@ schemes.</p></blockquote>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/04/05/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/04/04/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a></h1>
     
     
       <p class="meta">
@@ -631,10 +782,10 @@ schemes.</p></blockquote>
   
 
 
-<time datetime="2015-04-05T05:34:53+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-04-04T21:34:53+00:00" pubdate data-updated="true"></time>
         
         
-          | <a href="/blog/2015/04/05/moving-my-blog-to-octopress/#comments">Comments</a>
+          | <a href="/blog/2015/04/04/moving-my-blog-to-octopress/#comments">Comments</a>
         
       </p>
     
@@ -746,7 +897,7 @@ $ rake generate
   
 
 
-<time datetime="2015-03-25T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-25T00:00:00+00:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2015/03/25/Monster-Storm/#comments">Comments</a>
@@ -847,7 +998,7 @@ $ rake generate
   
 
 
-<time datetime="2015-03-23T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-23T00:00:00+00:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2015/03/23/Review_Vcool-Website/#comments">Comments</a>
@@ -957,7 +1108,7 @@ $ rake generate
   
 
 
-<time datetime="2015-03-22T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-22T00:00:00+00:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2015/03/22/Morris-Traversal/#comments">Comments</a>
@@ -1073,7 +1224,7 @@ if __name__ == '__main__':
   
 
 
-<time datetime="2015-03-20T00:00:00+08:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-20T00:00:00+00:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2015/03/20/douban-paper-test/#comments">Comments</a>
@@ -1103,158 +1254,6 @@ if __name__ == '__main__':
  6. 第六个是大数据,1000万数据中找出出现次数前十,我基本不会,就写了下数据量小的时候的思路(hash加最大堆)</p>
 
 <p>做到最后感觉自己真的很弱,做过的项目都是小项目,写的代码可读性并不好,忘性大还不复习,槽点太多..还是应该把现在最弱的自己记录下来,引以为戒,多加学习~</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/12/20/Distinct-Subsequences/">LeetCode上面的Distinct Subsequences总结</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-12-20T00:00:00+08:00" pubdate data-updated="true"></time>
-        
-        
-          | <a href="/blog/2014/12/20/Distinct-Subsequences/#comments">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近做了挺多东西,从中也学了不少,觉得总结一下比较好,一直没有时间就一直拖着,现在终于有点空闲的时间,觉得像我这种记性不太好的人还是多做一些code review,否则做一点忘一点,最后反而学不到什么东西.</p>
-
-<h2>0.先在这里记录一下要整理的东西</h2>
-
-<p>1.模拟登陆与抓包(以模拟登陆新浪微博为主,还包括一些编码加密方式)
-2.简易python框架的使用和编写(参照<a href="http://www.liaoxuefeng.com/">廖雪峰的博客</a>)
-3.cookie和session的区别
-4.支持向量机学习笔记
-5.图片分类算法(图像处理课堂作业总结)
-6.一些在LeetCode上面做过的题目的总结</p>
-
-<p>还是先回归正题,以后有空了再把那几个坑填上..
-先总结一下今天做的这道题,LeetCode上面的<a href="https://oj.leetcode.com/problems/distinct-subsequences/">Distinct Subsequences</a></p>
-
-<h2>1.题目描述</h2>
-
-<p>首先这道题题目描述不是很容易理解,我看了半天还是没明白题意,可能是英语水平有限.这里重新描述一下这道题</p>
-
-<p>给两个字符串S,T 要求在S中找子串(subsequence),使S的子串等于T,在S中找到最多的这样的子串个数</p>
-
-<h2>2.解题思路</h2>
-
-<p>这道题很明显是一道DP,作为一个初学者,我首先想到了最长公共子串</p>
-
-<pre><code>    if(s1[i] == s2[i])
-        dp[i][j] = dp[i-1][j-1]+1;
-    else
-        dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
-</code></pre>
-
-<p>可惜和这题没什么关系
-DP很重要的是观察前后元素的关系,在这道题目中,如果用M*N的space来存储计算结果,其中<strong>dp[i][j]</strong>代表了<strong>T[0,i]</strong>中包含的等于<strong>T[0,j]</strong>的子串的数目.
-重点就是得到<strong>dp[i][j]</strong>和前面的值之间的关系,我就先画了一张二维数组的表
-r a b b b i t
-0 0 0 0 0 0 0 0
-r 0 1 1 1 1 1 1 1
-a 0 0 1 1 1 1 1 1
-b 0 0 0 1 2 3 3 3
-b 0 0 0 0 1 3 3 3
-i 0 0 0 0 0 0 3 1
-t 0 0 0 0 0 0 0 3
-表中的数值都是人工计算出来的,这里的重点是<strong>b重复了3次的那个地方</strong>,再找个重复多次的例子看了一下,发现了规律,(对于一个初学者直接写出递推式实在太困难,这样找规律的方法更容易理解一些)</p>
-
-<pre><code>    if(s[i] == t[j])
-        dp[i][j] = dp[i][j-1]+dp[i-1][j-1];
-    else
-        dp[i][j] = dp[i][j-1];
-</code></pre>
-
-<p>这些代码的<strong>数学解释</strong>就是:
-当s[i]和t[j]匹配的时候
-对应的值就是以s[i]结尾的子串的个数和不以s[i]结尾的子串的个数的和
-例如rabb<strong>b</strong> 和 rab<strong>b</strong>匹配到最后一个b的时候,对应的值就是rabbb中以最后一个b结尾的还要和<strong>rab</strong>相等的子串的个数为2(123,124),不以最后一个b结尾的还要和<strong>rabb</strong>相等的子串的个数为1(1234),总和就是3,具体可以再用rabbbbbb和rabb匹配实验一下&hellip;
-当不匹配的时候
-直接等于上一个就好了..</p>
-
-<h2>3.代码实现</h2>
-
-<pre><code>    class Solution {
-    public:
-        int numDistinct(string S, string T) {
-            //DP
-            /*dp[i][j] stores  number of S[0,i]'s substr which equals T[0,j]*/
-            int **dp = new int*[T.length()+1];
-            for (int i = 0; i &lt;= T.length(); ++i){
-                dp[i] = new int[S.length()+1];
-                memset(dp[i], 0, sizeof(int)*S.length());
-            }
-            for (int i = 0; i &lt;= S.length(); ++i)
-                dp[0][i] = 1;
-            bool flag = false;
-            int next = 0;
-            for (int i = 0; i &lt; T.length(); ++i){
-                for (int j = next; j &lt; S.length(); ++j){
-                    if (S[j] == T[i]){
-                        dp[i + 1][j + 1] = dp[i][j] + dp[i + 1][j];
-                        if (!flag){
-                            flag = true;
-                            next = j + 1;
-                        }
-                    }
-                    else
-                        dp[i + 1][j + 1] = dp[i + 1][j];
-                }
-                flag = false;
-            }
-            return dp[T.length()][S.length()];
-        }
-    };
-</code></pre>
-
-<h2>3.代码优化</h2>
-
-<p>0.我的代码一开始有一个比较大的问题,就是没对数组初始化..后来进行了修改</p>
-
-<ol>
-<li><p>内层循环的开始不必是0,这点我已经在实现的时候优化,
-比如rabbbit和rabbit匹配的时候匹配到了t的时候,只要从(rabbit中的)i的下一个开始匹配就可以了,因为要匹配t,必须在前面所有字符已经匹配结束的基础上匹配t</p></li>
-<li><p>比较重要的一个优化,leetcode论坛上面一个大牛的优化,将空间复杂度降到了O(n)</p></li>
-</ol>
-
-
-<p>具体是这样的</p>
-
-<pre><code>    vector&lt;int&gt; path(m+1, 0);
-    path[0] = 1;            // initial condition
-
-    for (int j = 1; j &lt;= n; j++) {
-        // traversing backwards so we are using path[i-1] from last time step
-        for (int i = m; i &gt;= 1; i--) {
-            path[i] = path[i] + (T[i-1] == S[j-1] ? path[i-1] : 0);
-        }
-    }
-</code></pre>
 </div>
   
   
@@ -1296,6 +1295,10 @@ t 0 0 0 0 0 0 0 3
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/">Reading Computer Systems(A Programmer’s Perspective):2</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/">乘法逆元 Euclid定理和中国剩余定理</a>
       </li>
     
@@ -1308,11 +1311,7 @@ t 0 0 0 0 0 0 0 3
       </li>
     
       <li class="post">
-        <a href="/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/05/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a>
+        <a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a>
       </li>
     
   </ul>

@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Reading Computer Systems(A Programmer’s Perspective):2 - D W</title>
+  <meta name="author" content="Harry">
+
+  
+  <meta name="description" content="第五章 优化程序性能 这一章主要讲的是编译器对代码的一些优化策略,包括在代码效率和代码在一些极端状况下的准确性的权衡.以及用具体的汇编代码及在机器中的实现来说明一些代码习惯的对程序效率的影响,最后介绍了一种unix环境下的程序剖析(profiling)工具GPROF. 优化程序的效率时, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://d-w-.github.io/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="D W" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="/javascripts/dawnfan.js" type="text/javascript"></script>
+  <script src="/javascripts/jquery.nicescroll.min.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><a id="avatar" href="/about"><img src="/images/icon.jpg" alt="avatar"></a>
+<div class="header-left">
+  <hgroup>
+  <h1><a href="/">D W</a></h1>
+  
+  <div class="subtitle">
+    <h2>Brick walls are there for a reason, they let us prove how badly we want things.</h2>
+  </div>
+  
+  </hgroup>
+  
+</div>
+
+<div class="header-right">
+  <ul class="main-navigation">
+ <div> 
+  <li><a href="/">blog</a></li></div>
+         <div> 
+  <li><a href="/blog/archives">archives</a></li></div>    
+         <div> 
+  <li><a href="/about">about</a></li></div>
+</ul>
+  
+
+</div></header>
+    <span id="btn-list" onclick="turnList()">></span>
+<div id="list" class="off">
+<h2>Posts List</h2>
+
+    <h5>
+    <a href="/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/">Reading Computer Systems(A Programmer’s Perspective):2</a>
+    <span>August 27, 2015</span>  
+    </h5>
+
+    <h5>
+    <a href="/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/">乘法逆元 Euclid定理和中国剩余定理</a>
+    <span>August 22, 2015</span>  
+    </h5>
+
+    <h5>
+    <a href="/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1/">Reading Computer Systems(A Programmer&#8217;s Perspective):1</a>
+    <span>August 14, 2015</span>  
+    </h5>
+
+    <h5>
+    <a href="/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/">Half Way Conclusion of 3rd Grade in College</a>
+    <span>April 23, 2015</span>  
+    </h5>
+
+    <h5>
+    <a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a>
+    <span>April  4, 2015</span>  
+    </h5>
+
+    <h5>
+    <a href="/blog/2015/04/04/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a>
+    <span>April  4, 2015</span>  
+    </h5>
+
+    <h5>
+    <a href="/blog/2015/03/25/Monster-Storm/">Monster Storm</a>
+    <span>March 25, 2015</span>  
+    </h5>
+
+    <h5>
+    <a href="/blog/2015/03/23/Review_Vcool-Website/">Review VCool Website</a>
+    <span>March 23, 2015</span>  
+    </h5>
+
+    <h5>
+    <a href="/blog/2015/03/22/Morris-Traversal/">Morris Traversal</a>
+    <span>March 22, 2015</span>  
+    </h5>
+
+    <h5>
+    <a href="/blog/2015/03/20/douban-paper-test/">豆瓣笔试</a>
+    <span>March 20, 2015</span>  
+    </h5>
+
+    <h5>
+    <a href="/blog/2014/12/20/Distinct-Subsequences/">LeetCode上面的Distinct Subsequences总结</a>
+    <span>December 20, 2014</span>  
+    </h5>
+
+    <h5>
+    <a href="/blog/2014/11/25/Word-Ladder/">LeetCode上面的WordLadder总结</a>
+    <span>November 25, 2014</span>  
+    </h5>
+
+    <h5>
+    <a href="/blog/2014/11/14/Linux-File-System/">Linux文件系统基础</a>
+    <span>November 14, 2014</span>  
+    </h5>
+
+    <h5>
+    <a href="/blog/2014/10/15/First-Blog/">第一篇博客</a>
+    <span>October 15, 2014</span>  
+    </h5>
+
+    <h5>
+    <a href="/blog/2014/03/03/Hello-World/">Markdown Style Guide</a>
+    <span>March  3, 2014</span>  
+    </h5>
+
+</div>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Reading Computer Systems(A Programmer’s Perspective):2</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-27T05:07:02+00:00" pubdate data-updated="true"></time>
+        
+        
+          | <a href="#comments">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>第五章 优化程序性能</h2>
+
+<p>这一章主要讲的是编译器对代码的一些优化策略,包括在代码效率和代码在一些极端状况下的准确性的权衡.以及用具体的汇编代码及在机器中的实现来说明一些代码习惯的对程序效率的影响,最后介绍了一种unix环境下的程序剖析(profiling)工具GPROF.</p>
+
+<p>优化程序的效率时,除了优化整个算法的时间复杂度,其中编译器对代码的编译也起到了至关重要的作用,而编译器除了要将代码变得更快,还需要考虑程序的正确性,开头的例子给出了一个对源代码非常明显的优化,但是编译器却不敢执行这个优化,主要原因就是他不能保证这个优化过的结果和没优化的结果是一样的,事实上,在极端情况下,优化后的代码可能会产生和原来的代码不同的结果.</p>
+
+<p>所以,编译器的一些优化级别,需要保证对程序只使用<strong>安全</strong>的优化,也就是保证优化后的代码和之前的代码完全相同,这种保证就会使得一些明显的优化无法执行(因为无法保证极端情况下的正确性).</p>
+
+<p>接下来以一个程序(P330)为示例,讲了几种写代码时的优化策略</p>
+
+<h3>消除循环的低效率</h3>
+
+<p>这个说的是可能编程中经常会遇到的问题,循环
+<code>for(int i = 0;i&lt;vec_length(v),++i)</code>
+如果这么写的话,每次循环结束都会调用 <code>vec_length()</code> 这个函数来确定是否到达循环结束,对于长度不变的数据结构的遍历,每次循环结束调用的这个函数的开销是不必要的,应将其避免</p>
+
+<h3>减少过程调用</h3>
+
+<p>这个部分说的是尽量不要在循环中循环调用一些函数,在循环外拿到需要循环遍历的数据结构,然后再循环中直接去调用数据结构.</p>
+
+<p>书中也提到了这种做法不太符合程序模块化的要求,只有在追求效率的代码中会用到,这种情况也应该写几行注释注明.</p>
+
+<h3>消除不必要的存储器引用</h3>
+
+<p>讲的是,这么写</p>
+
+<pre><code>for(int i = 0;i&lt;length;++i)
+    acc = acc OP data[i];
+</code></pre>
+
+<p>和这么写</p>
+
+<pre><code>for(int i = 0;i&lt;length;++i)
+    *dest = *dest OP data[i];
+</code></pre>
+
+<p>前者更好,因为,前者在汇编中实现可以用寄存器存储 acc ,而后者是个指针,汇编中只能用存储器实现,每次去地址再取指会浪费大量时间.</p>
+
+<p>优化程序的两个限制:</p>
+
+<ol>
+<li>延迟界限: 从开始到结束完全完成一条指令所需要的时间决定,达到这个界限的原因是下一条指令需要上一条指令执行完毕才能执行,指令间有严格的操作顺序.</li>
+<li>吞吐量界限: 指令之间可以<strong>完全流水线化(fully pipelined)</strong>,这样使得硬件的功能达到了最大的利用率,在这种情况下优化只能优化处理器功能单元的<strong>原始计算能力了</strong>.</li>
+</ol>
+
+
+<p>一些编译器可能做的优化</p>
+
+<h3>循环展开</h3>
+
+<p>就是循环每次原来读一个数,优化后每次读 k 个数,这样循环的次数就变成了 [n/k] 次,这样优化结果性能的提升得益于 <strong>减少了循环的开销工作</strong> ,比如原来累加器 iter 原来要累加 n 次,现在只要累加 [n/k] 次了, 降低了开销操作的数量.</p>
+
+<h3>提高并行性</h3>
+
+<p>这个比较容易理解,比如一个累加的程序,原来只有一个累加器,每次加一个数,改成并行的可以有 k 个累加器, k 个累加器同时工作肯定要比原来效率高</p>
+
+<p>不过这里硬件会成为限制条件,后面就提到了<strong>寄存器溢出</strong>这种情况,就是累加器多得在寄存器里面存不下了,只能到栈里面存,这样又增加了存储器开销,反而会使效率下降.</p>
+
+<h3>重新结合变换</h3>
+
+<p>就是利用有结合律的变换,运用一下结合律,比如把下面这个</p>
+
+<pre><code>acc = acc OP data[i] OP data[i+1]
+</code></pre>
+
+<p>变成下面这个</p>
+
+<pre><code>acc = add OP (data[i] OP data[i+1])
+</code></pre>
+
+<p>代码层面没有改进,但是从汇编层面分析,原来每次循环在 acc 上的运算 由原来的两次变成了一次,这样就缩短了关键路径,从而提高了效率.</p>
+
+<hr />
+
+<p>上一章可以看到分支预测会对程序效率有很大影响,因为是一个完全投机的预测,预测错了下面所有取到的指令都应该放弃,这会造成比较大的损失.但是这也是不可避免的,文中提到了
+1. 不要过分关心可预测的分支,我们预测分支往往会执行是因为,再循环中,这样的预测策略只有最后一次会失败,所以几率还是比较大的
+2. 在程序猿的角度,将<strong>分支跳转指令</strong>改为<strong>条件传送指令( <code>val = exp?a:b;</code> )</strong>往往能取得比较好的效果,因为条件传送指令不会有错误的开销: <strong>在流水线中,下一条指令译码钱,上一条指令已经完成了执行操作,因此下一条如果是条件传送指令的话,刚好可以通过转发机制得到状态码.</strong></p>
+
+<h2>加载和存储</h2>
+
+<p>读和写都制约程序的运行效率 如下:</p>
+
+<ol>
+<li>加载相关, 循环两次之间的读有相关性,下一次的读需要上一次读出来的结果,所以下一条读的指令必须等上一次循环完全结束</li>
+<li>读写相关(write/read dependency), 一个存储器读的结果依赖于一个最近的存储器写.这个是经常会遇到的问题.</li>
+</ol>
+
+
+<p>读写相关的解决方案 (<strong>P366</strong>):</p>
+
+<p>在存储单元中有个<strong>存储缓冲区</strong>,包含将会写到存储单元的,但是还没完成的操作(地址,值).
+每次读的时候 (<strong>load 指令</strong>)会先检查一下存储缓冲区,如果发现读的地址在存储缓冲区里面(说明呆会会被写进新值),就直接在存储缓冲区里面拿新值了.</p>
+
+<p><em>&hellip;其实上面的操作就是转发</em></p>
+
+<h2>最后 程序剖析(profiling)</h2>
+
+<p>这里介绍了一种分析程序效率的工具,GPROF</p>
+
+<ol>
+<li>在编译和链接过程中加上剖析的指令
+ <code>gcc -o1 -pg prog.c prog</code></li>
+<li>执行程序,会生成一个多余的 gmon.out 的文件
+ <code>./prog arguments...</code></li>
+<li>使用GPROF来解析这个out文件(必须有out文件才能解析)
+ <code>gprof prog</code></li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Harry</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-27T05:07:02+00:00" pubdate data-updated="true"></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/shen-ru-li-jie-ji-suan-ji-xi-tong-du-shu-bi-ji/'>深入理解计算机系统 读书笔记</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://d-w-.github.io/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/" data-via="" data-counturl="http://d-w-.github.io/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/" title="Previous Post: 乘法逆元 Euclid定理和中国剩余定理">&laquo; 乘法逆元 Euclid定理和中国剩余定理</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite"><!-- 多说评论框 start -->
+<div class="ds-thread" data-title="Reading Computer Systems(A Programmer’s Perspective):2"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"d-w"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+</div>
+  </section>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Harry -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+<p>
+<span class="credit">Powered by <a href="http://octopress.org">Octopress</a> using the <a href="https://github.com/fapper/classic-martinb">classic-martinb</a> theme</span>
+</p>
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

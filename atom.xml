@@ -4,7 +4,7 @@
   <title><![CDATA[D W]]></title>
   <link href="http://d-w-.github.io/atom.xml" rel="self"/>
   <link href="http://d-w-.github.io/"/>
-  <updated>2015-08-27T15:21:12+08:00</updated>
+  <updated>2015-08-27T10:42:35+00:00</updated>
   <id>http://d-w-.github.io/</id>
   <author>
     <name><![CDATA[Harry]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Reading Computer Systems(A Programmer’s Perspective):2]]></title>
     <link href="http://d-w-.github.io/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/"/>
-    <updated>2015-08-27T13:07:02+08:00</updated>
+    <updated>2015-08-27T05:07:02+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2</id>
     <content type="html"><![CDATA[<h2>第五章 优化程序性能</h2>
 
@@ -132,7 +132,7 @@
   <entry>
     <title type="html"><![CDATA[乘法逆元 Euclid定理和中国剩余定理]]></title>
     <link href="http://d-w-.github.io/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/"/>
-    <updated>2015-08-22T13:22:44+08:00</updated>
+    <updated>2015-08-22T05:22:44+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li</id>
     <content type="html"><![CDATA[<p>今天刷题的时候遇到了一道<a href="http://www.51nod.com/onlineJudge/questionCode.html#!problemId=1079">中国剩余定理的题</a>,当年在网络安全这门课上学过这个算法,但是到现在只记得这个名字了,就回去翻课件回顾了一下,结果发现了很多知识点,就在这整理一下.</p>
 
@@ -195,7 +195,7 @@ d = x<em>a + y</em>b
   <entry>
     <title type="html"><![CDATA[Reading Computer Systems(A Programmer's Perspective):1]]></title>
     <link href="http://d-w-.github.io/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1/"/>
-    <updated>2015-08-14T15:37:43+08:00</updated>
+    <updated>2015-08-14T07:37:43+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1</id>
     <content type="html"><![CDATA[<p>深入理解计算机系统这本书大二的时候就买了,因为有很多学长推荐,而且很多计算机名校也用它当&lt;计算机组成原理>的教材.但是由于各种原因一直拖着没读,大三利用寒假读了一下,感觉受益匪浅,但是没有读完,大三下学期断断续续不仅没有继续读,还把前面读了的忘了个差不多,现在准备利用暑假读完,并记一下笔记,以防忘记.</p>
 
@@ -330,7 +330,7 @@ d = x<em>a + y</em>b
   <entry>
     <title type="html"><![CDATA[Half Way Conclusion of 3rd Grade in College]]></title>
     <link href="http://d-w-.github.io/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/"/>
-    <updated>2015-04-23T21:11:15+08:00</updated>
+    <updated>2015-04-23T13:11:15+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college</id>
     <content type="html"><![CDATA[<p>距离上次写博客已经过去了半个多月,我兴致勃勃迁移博客的热情也减少了很多,从开学充满激情海投简历到现在也认清了自己的水平,昨天受到腾讯大连HR的启发,准备对自己的人生进行思考,规划自己的生涯.</p>
 
@@ -399,9 +399,9 @@ d = x<em>a + y</em>b
   
   <entry>
     <title type="html"><![CDATA[git远程代码管理，SSH还是HTTPS]]></title>
-    <link href="http://d-w-.github.io/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/"/>
-    <updated>2015-04-05T07:38:50+08:00</updated>
-    <id>http://d-w-.github.io/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https</id>
+    <link href="http://d-w-.github.io/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/"/>
+    <updated>2015-04-04T23:38:50+00:00</updated>
+    <id>http://d-w-.github.io/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https</id>
     <content type="html"><![CDATA[<p>之前学习git的过程中就遇到了这个问题，电脑并不能使用ssh连接远程仓库，例如<code>clone git@github.com/xx.git</code> 这样的工程会失败。我就必须改成使用HTTPS协议，把连接改成 https 的，或者直接配置一个环境变量</p>
 
 <pre><code>git config --global url."https://".insteadOf git://
@@ -479,9 +479,9 @@ schemes.</p></blockquote>
   
   <entry>
     <title type="html"><![CDATA[Moving My Blog to Octopress]]></title>
-    <link href="http://d-w-.github.io/blog/2015/04/05/moving-my-blog-to-octopress/"/>
-    <updated>2015-04-05T05:34:53+08:00</updated>
-    <id>http://d-w-.github.io/blog/2015/04/05/moving-my-blog-to-octopress</id>
+    <link href="http://d-w-.github.io/blog/2015/04/04/moving-my-blog-to-octopress/"/>
+    <updated>2015-04-04T21:34:53+00:00</updated>
+    <id>http://d-w-.github.io/blog/2015/04/04/moving-my-blog-to-octopress</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>最近在读侯捷老师的《STL源码剖析》一书，收获简直太大。一激动就想把学的东西赶紧记下来写篇博客，然后想到我以前的博客系统，bug无穷，于是决定亲自配一个Octopress的博客，因为之前的博客是Jekyll的，博文都用的markdown写的，Octopress也是markdown语法，这样可以直接连文字带样式轻松移植过来，想的挺轻松，但是实际操纵起来简直折腾了我好几天。。</p>
@@ -565,7 +565,7 @@ $ rake generate
   <entry>
     <title type="html"><![CDATA[Monster Storm]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/25/Monster-Storm/"/>
-    <updated>2015-03-25T00:00:00+08:00</updated>
+    <updated>2015-03-25T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/25/Monster-Storm</id>
     <content type="html"><![CDATA[<p>Monster Storm</p>
 
@@ -636,7 +636,7 @@ $ rake generate
   <entry>
     <title type="html"><![CDATA[Review VCool Website]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/23/Review_Vcool-Website/"/>
-    <updated>2015-03-23T00:00:00+08:00</updated>
+    <updated>2015-03-23T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/23/Review_Vcool-Website</id>
     <content type="html"><![CDATA[<p>以前做过的一些东西的简单回顾，避免面试官问起来都忘了，也能在简历上面写得更加得心应手</p>
 
@@ -716,7 +716,7 @@ $ rake generate
   <entry>
     <title type="html"><![CDATA[Morris Traversal]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/22/Morris-Traversal/"/>
-    <updated>2015-03-22T00:00:00+08:00</updated>
+    <updated>2015-03-22T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/22/Morris-Traversal</id>
     <content type="html"><![CDATA[<p>Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度只要O(1),时间复杂度也只有O(n)
 这里根据<a href="http://www.cnblogs.com/AnnieKim/archive/2013/06/15/MorrisTraversal.html">博客园上的文章</a>进行了学习.整个算法我感觉主要有两部分不太容易懂 ,一是具体的算法部分,也就是如何利用线索二叉树找前驱节点的方法的;另一个就是如何证明这个算法是O(n)的.对于第一部分可以在代码里面说明,这里先说一下第二部分,借用原文中的话:</p>
@@ -802,7 +802,7 @@ if __name__ == '__main__':
   <entry>
     <title type="html"><![CDATA[豆瓣笔试]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/20/douban-paper-test/"/>
-    <updated>2015-03-20T00:00:00+08:00</updated>
+    <updated>2015-03-20T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/20/douban-paper-test</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
@@ -830,7 +830,7 @@ if __name__ == '__main__':
   <entry>
     <title type="html"><![CDATA[LeetCode上面的Distinct Subsequences总结]]></title>
     <link href="http://d-w-.github.io/blog/2014/12/20/Distinct-Subsequences/"/>
-    <updated>2014-12-20T00:00:00+08:00</updated>
+    <updated>2014-12-20T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2014/12/20/Distinct-Subsequences</id>
     <content type="html"><![CDATA[<p>最近做了挺多东西,从中也学了不少,觉得总结一下比较好,一直没有时间就一直拖着,现在终于有点空闲的时间,觉得像我这种记性不太好的人还是多做一些code review,否则做一点忘一点,最后反而学不到什么东西.</p>
 
@@ -952,7 +952,7 @@ t 0 0 0 0 0 0 0 3
   <entry>
     <title type="html"><![CDATA[LeetCode上面的WordLadder总结]]></title>
     <link href="http://d-w-.github.io/blog/2014/11/25/Word-Ladder/"/>
-    <updated>2014-11-25T00:00:00+08:00</updated>
+    <updated>2014-11-25T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2014/11/25/Word-Ladder</id>
     <content type="html"><![CDATA[<p>按通过率来说,WordLadder应该是Leetcode上面最难的一道题了
 其中的第二道我提交了8次才成功,多数原因是TLE,这实在令人沮丧</p>
@@ -1005,7 +1005,7 @@ t 0 0 0 0 0 0 0 3
   <entry>
     <title type="html"><![CDATA[Linux文件系统基础]]></title>
     <link href="http://d-w-.github.io/blog/2014/11/14/Linux-File-System/"/>
-    <updated>2014-11-14T00:00:00+08:00</updated>
+    <updated>2014-11-14T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2014/11/14/Linux-File-System</id>
     <content type="html"><![CDATA[<h2>鸟哥的Linux私房菜学习笔记(0)</h2>
 
@@ -1056,7 +1056,7 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   <entry>
     <title type="html"><![CDATA[第一篇博客]]></title>
     <link href="http://d-w-.github.io/blog/2014/10/15/First-Blog/"/>
-    <updated>2014-10-15T00:00:00+08:00</updated>
+    <updated>2014-10-15T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2014/10/15/First-Blog</id>
     <content type="html"><![CDATA[<h2>我这个人，执行力很差。</h2>
 
@@ -1088,7 +1088,7 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   <entry>
     <title type="html"><![CDATA[Markdown Style Guide]]></title>
     <link href="http://d-w-.github.io/blog/2014/03/03/Hello-World/"/>
-    <updated>2014-03-03T00:00:00+08:00</updated>
+    <updated>2014-03-03T00:00:00+00:00</updated>
     <id>http://d-w-.github.io/blog/2014/03/03/Hello-World</id>
     <content type="html"><![CDATA[<p>This is a demo of all styled elements in Jekyll Now.</p>
 

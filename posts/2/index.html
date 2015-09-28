@@ -9,7 +9,8 @@
   <meta name="author" content="Harry">
 
   
-  <meta name="description" content="最近做了挺多东西,从中也学了不少,觉得总结一下比较好,一直没有时间就一直拖着,现在终于有点空闲的时间,觉得像我这种记性不太好的人还是多做一些code review,否则做一点忘一点,最后反而学不到什么东西. 0.先在这里记录一下要整理的东西 1.模拟登陆与抓包(以模拟登陆新浪微博为主, &hellip;">
+  <meta name="description" content="背景 大三上是软院的找实习季,最近跟风投了几家公司,主要还是想看看自己实力如何,毕竟如果只呆在某个地方会使自我感觉良好.
+前面已经被阿里面过,一面就跪了..面试官只问了两个问题,是两个项目的问题,一个是大二写的微信平台,我讲到一半就不让讲了,确切的说是当我讲到用PHP写的之后, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +68,11 @@
 <h2>Posts List</h2>
 
     <h5>
+    <a href="/blog/2015/09/28/story-continued-bao-yan-zhi-lu/">Story Continued &#8211; 保研之路</a>
+    <span>September 28, 2015</span>  
+    </h5>
+
+    <h5>
     <a href="/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/">Reading Computer Systems(A Programmer’s Perspective):2</a>
     <span>August 27, 2015</span>  
     </h5>
@@ -87,13 +93,13 @@
     </h5>
 
     <h5>
-    <a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a>
-    <span>April  4, 2015</span>  
+    <a href="/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a>
+    <span>April  5, 2015</span>  
     </h5>
 
     <h5>
-    <a href="/blog/2015/04/04/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a>
-    <span>April  4, 2015</span>  
+    <a href="/blog/2015/04/05/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a>
+    <span>April  5, 2015</span>  
     </h5>
 
     <h5>
@@ -152,6 +158,64 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2015/03/20/douban-paper-test/">豆瓣笔试</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-20T00:00:00+08:00" pubdate data-updated="true"></time>
+        
+        
+          | <a href="/blog/2015/03/20/douban-paper-test/#comments">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>背景</h2>
+
+<p>大三上是软院的找实习季,最近跟风投了几家公司,主要还是想看看自己实力如何,毕竟如果只呆在某个地方会使自我感觉良好.
+前面已经被阿里面过,一面就跪了..面试官只问了两个问题,是两个项目的问题,一个是大二写的微信平台,我讲到一半就不让讲了,确切的说是当我讲到用PHP写的之后,后来开始问我会不会IOS,原来他把cocos2d-x引擎当成IOS开发了,之后大概他就感觉没什么可以和我聊的了直接结束了.一开始以为是问算法和基础知识,准备了挺长时间,也紧张了挺长时间..但是没被问到,算是一点遗憾吧,毕竟一些基础我自我感觉还是不错的</p>
+
+<p>之后觉得项目实在是我的弱点,一是跟面试官聊天太紧张,二是老是不能get到面试官想问的点,比如如果和阿里的面试官聊微信平台的时候如果直接说到正则表达式的话估计也不会这么快就没得聊..当然最重要的是以前做的东西我都忘得差不多了,边想边说肯定不行,所以最近计划把之前做的东西再看一遍,借此复习,并完善一下简历.</p>
+
+<h2>豆瓣笔试</h2>
+
+<p>笔试在下午两点半,在线笔试,这也是我人生第一场笔试,不过估计不久就会有一大波(明天就有去哪儿网的笔试..).笔试之前得到了一个不幸的消息,我们微软创新杯的作品没有通过校赛的选拔,这个东西我们工作量虽然不大,但是也是忙里忙外做了两周,心有不甘.我去问负责人,他说一共要6个我们排在第7,具体评分也没有,再加上负责人自己也参赛了,并且是拿着去年获过奖的作品二次开发,由于他就在我隔壁,我也得知他在提交的前一天才开始二次开发..所以一直比较郁闷</p>
+
+<p>然后就直接去笔试了,前两道题挺简单
+ 1. 第一个是写一个正则表达式匹配出来@链接,题目要求比较低,匹配字母数字下划线就行,我个人觉得应该是<code>'@[^:]+'</code>这样最好,就是匹配非空格,非冒号
+ 2. 第二个是简答题,设计模式.
+ 3. 第三题也比较简单,但是有个坑,由于前面两个我浪费太多时间了,做这题的时候有点着急,并没对输入进行异常处理..
+ 4. 第四个就有点难度了,找出一个矩阵中不同行不同列的元素和的最大值,我想了一会感觉和N皇后类似,而且前两天刚做过,就准备打开前两天的代码改一下就行..当我打开自己之前写代码的时候感觉坑了..自己写的这代码可读性太差了,还没有注释,虽然当时通过了OJ,但是急忙修改了一下填上了
+ 5. 第五个是数据库设计,我把数据库建表的语句忘得差不多了,就简单写了下思路,估计跪了
+ 6. 第六个是大数据,1000万数据中找出出现次数前十,我基本不会,就写了下数据量小的时候的思路(hash加最大堆)</p>
+
+<p>做到最后感觉自己真的很弱,做过的项目都是小项目,写的代码可读性并不好,忘性大还不复习,槽点太多..还是应该把现在最弱的自己记录下来,引以为戒,多加学习~</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/12/20/Distinct-Subsequences/">LeetCode上面的Distinct Subsequences总结</a></h1>
     
     
@@ -168,7 +232,7 @@
   
 
 
-<time datetime="2014-12-20T00:00:00+00:00" pubdate data-updated="true"></time>
+<time datetime="2014-12-20T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2014/12/20/Distinct-Subsequences/#comments">Comments</a>
@@ -320,7 +384,7 @@ t 0 0 0 0 0 0 0 3
   
 
 
-<time datetime="2014-11-25T00:00:00+00:00" pubdate data-updated="true"></time>
+<time datetime="2014-11-25T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2014/11/25/Word-Ladder/#comments">Comments</a>
@@ -403,7 +467,7 @@ t 0 0 0 0 0 0 0 3
   
 
 
-<time datetime="2014-11-14T00:00:00+00:00" pubdate data-updated="true"></time>
+<time datetime="2014-11-14T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2014/11/14/Linux-File-System/#comments">Comments</a>
@@ -484,7 +548,7 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   
 
 
-<time datetime="2014-10-15T00:00:00+00:00" pubdate data-updated="true"></time>
+<time datetime="2014-10-15T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2014/10/15/First-Blog/#comments">Comments</a>
@@ -546,7 +610,7 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   
 
 
-<time datetime="2014-03-03T00:00:00+00:00" pubdate data-updated="true"></time>
+<time datetime="2014-03-03T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2014/03/03/Hello-World/#comments">Comments</a>
@@ -665,6 +729,10 @@ to create linebreak tags</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/09/28/story-continued-bao-yan-zhi-lu/">Story Continued &#8211; 保研之路</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/">Reading Computer Systems(A Programmer’s Perspective):2</a>
       </li>
     
@@ -678,10 +746,6 @@ to create linebreak tags</p>
     
       <li class="post">
         <a href="/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/">Half Way Conclusion of 3rd Grade in College</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a>
       </li>
     
   </ul>

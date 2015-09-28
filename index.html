@@ -9,7 +9,9 @@
   <meta name="author" content="Harry">
 
   
-  <meta name="description" content="第五章 优化程序性能 这一章主要讲的是编译器对代码的一些优化策略,包括在代码效率和代码在一些极端状况下的准确性的权衡.以及用具体的汇编代码及在机器中的实现来说明一些代码习惯的对程序效率的影响,最后介绍了一种unix环境下的程序剖析(profiling)工具GPROF. 优化程序的效率时, &hellip;">
+  <meta name="description" content="这是一篇关于保研的总结,记录我可能持续了整个大三的保研之路.. 但是在此之前,先说个技术问题.
+关于powershell的.
+一开始在windows上面用git是直接下了个windows版的github,桌面版还挺好用的.随之而来的还有一个叫gitshell的东西, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +69,11 @@
 <h2>Posts List</h2>
 
     <h5>
+    <a href="/blog/2015/09/28/story-continued-bao-yan-zhi-lu/">Story Continued &#8211; 保研之路</a>
+    <span>September 28, 2015</span>  
+    </h5>
+
+    <h5>
     <a href="/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/">Reading Computer Systems(A Programmer’s Perspective):2</a>
     <span>August 27, 2015</span>  
     </h5>
@@ -87,13 +94,13 @@
     </h5>
 
     <h5>
-    <a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a>
-    <span>April  4, 2015</span>  
+    <a href="/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a>
+    <span>April  5, 2015</span>  
     </h5>
 
     <h5>
-    <a href="/blog/2015/04/04/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a>
-    <span>April  4, 2015</span>  
+    <a href="/blog/2015/04/05/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a>
+    <span>April  5, 2015</span>  
     </h5>
 
     <h5>
@@ -152,6 +159,151 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2015/09/28/story-continued-bao-yan-zhi-lu/">Story Continued &#8211; 保研之路</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-09-28T15:16:58+08:00" pubdate data-updated="true"></time>
+        
+        
+          | <a href="/blog/2015/09/28/story-continued-bao-yan-zhi-lu/#comments">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这是一篇关于保研的总结,记录我可能持续了整个大三的保研之路..</p>
+
+<p>但是在此之前,先说个技术问题.
+关于powershell的.
+一开始在windows上面用git是直接下了个windows版的github,桌面版还挺好用的.随之而来的还有一个叫gitshell的东西,就是一个windows上用的shell,里面预装了git,能直接用git的各种指令,感觉还挺好.
+后来我的windows升级到win10之后这个就出了问题,中文输入输不进去后来查了一下是页面编码的问题.
+原因是这个shell编码由原来的GBK变成了UTF8,识别不了中文了,只要用</p>
+
+<pre><code>&gt;&gt;&gt;chcp 936
+</code></pre>
+
+<p>就可以了,这个是将当前页的编码改成936(GBK),change current code page
+但是用 <code>rake new_post</code> 发博客的时候还是会遇到错误</p>
+
+<blockquote><p> (UTF-8 regexp with GBK string)</p></blockquote>
+
+<p>这个只要把字体改一下就可以,改一个可以支持中文的字体</p>
+
+<hr />
+
+<p>下面进入正文</p>
+
+<h2>准备</h2>
+
+<p>之前不确定要读研,说实话直到<a href="http://d-w-.github.io/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/">找实习不顺利</a>我才确定我这水平还是先读个研来的比较妥当.
+但是我从大三一开始就做了一些相关的准备,这些准备到了最后也是确实起到了很大的帮助.
+其实全部的准备工作就是刷OJ,一开始想法很简单,找工作算法能力也很重要,保研的话也会有机试,直接刷一下OJ锻炼一下算法能力也是很好的.</p>
+
+<p>没想到我还挺喜欢刷题的,有空了就去leetcode上面做题,遇到难题可能好几天也想不出来,最后忍不住了去看别人分享的答案,毕竟这是少数,大多数题目思考一下还是能想出来的.
+到最后,我在某一个时间点把leetcode上的题做完了(后来没怎么做过leetcode,新题都没做),通过代码的积累,算法也提升了一些.</p>
+
+<p>做完了leetcode又去poj上面做题,但是上面题太多,就找了个经验贴,按上面的顺序做题,做了几天又发现了一个保研机试的oj,九度oj,上面的题都比较简单.用来练手热身都很合适,但是后来也放弃了.</p>
+
+<p>直到我遇到了51nod这个oj,这个oj真的非常棒,中国社区,有很多活跃的大神在上面,而且题目有难度分级,还有一些教程,尤其是动态规划的,对于我这种从来没接受过专业ACM训练的人来说真是再好不过了.事实上,这个动态规划的训练到后来真的帮了我很多.</p>
+
+<p>中间还兴致勃勃地报名了微软的编程之美,水了件T恤回来.</p>
+
+<p>粗略算下来,oj上面的题我也刷了三四百道,逐渐对算法理解也更多,更深刻了.这些东西想想也真的是教不来,只能自己慢慢做,慢慢体会.</p>
+
+<p>除了刷OJ之外,我也没进行其他的复习,也就是数据结构与算法,我找了好几本书,看了很多,也对以前学过的算法有了更多的理解.
+复习的时候看的书很多,一个算法一本书上说的不明白我就去看另一本.不过主要看的就是 英文的&lt;数据结构与算法分析:C语言描述>,看算法还能练练英语,还有就是学校图书馆借的Sedgewick的&lt;算法>,里面对于图那一块讲的挺好的.</p>
+
+<p>到现在记忆比较深的就是最短路径算法,记得当时上机给学长检查,学长为了检查代码是不是自己写的都要问几个问题,这个我大学所有的代码都是自己写的,但是学长问我,dijkstra算法能处理负权边问题吗?
+我不知道,回答的可以,学长跟我说是不可以的,当时也没在意,谁知道现在复习才发现Bellman-ford算法才能处理负权边问题,这个后面回写一篇博客总结一下.
+PS:数据结构这课我最后还是考了100,由此,分数或成绩并不能衡量一个人技术水平的高低.</p>
+
+<h2>上交软院</h2>
+
+<p>这是我参加保研夏令营去的第一所学校,也给我留了很深的印象.</p>
+
+<p>上交的软院很小(比起大工的来说),但是校区很大,而且建筑设施都很不错.听完院长的介绍我才真正对上交的水平有所了解,实际上我对所有的学校基本都没什么了解..</p>
+
+<p>后来参观实验室,对上交实力最强的<a href="http://ipads.se.sjtu.edu.cn/">IPADS实验室</a>很感兴趣,他们主要是弄内核方向的,而这也是我本科阶段很感兴趣的一个方向,我立刻把答辩的题目换成了IPADS实验室的题目(之前选的是一个机器学习的老师的题目).看了一篇<a href="http://wdtz.org/files/asplos200-dautenhahn.pdf">Nested Kernel</a>的论文就去答辩了,由于临时换题目,只看了两天,只能说对内嵌内核这东西有了个表面上的理解,答辩完自我感觉还行,但是最后收到的通知是待定..</p>
+
+<p>后来陆续给上交软院打过两个电话,都说现在结果出不来.最后知道今天(9.28)我填上了清华的志愿后,才有一个老师打电话来问我还想不想去上交.无奈已经错过了,其实能去上交的顶级实验室玩自己喜欢的方向对我是很有吸引力的,如果上交早一点确定了要我,说不定我就不会去清华了.可是怎么可能事事都顺意,也正是这种挫折感让我坚定了去清华的信心.</p>
+
+<h2>中山-CMU 电面</h2>
+
+<p>中山大学和卡内基梅隆大学的合作项目,一年中山大学,一年卡耐基.</p>
+
+<p>卡耐基梅隆大学应该是每个CS专业的学生的梦想吧,尤其是他们的&lt;深入理解计算机系统>这门招牌课,我一直想去听一下.所以报了这个项目.</p>
+
+<p>电面很简单,一群CMU的老师问了我几个问题,10分钟就结束了,由于英语说得不好,我答的也磕磕巴巴,问题问的还是很深的,比如STL里面map后的数据结构,摄像机的标定等等..要不是我选过虚拟现实这课,我可能连calibration是什么都不知道..</p>
+
+<p>最后还是收到了offer,但是拒绝了,因为他们只肯给我985学生都有的15w入学奖学金.我希望读研不要花家里的钱,另一方面我觉得他们并没有对我很认可,或者我自负地觉得自己值得更多..</p>
+
+<h2>上科大计算机</h2>
+
+<p>上海科技大学,中科院刚成立的一所大学</p>
+
+<p>我是在学校的宣讲会上面对这个大学有了解的,当时我只有北航的一个offer,就毅然决然的报了名,当时想的是拿来保底.但是这学校实际上很不错,都是一些海归的大牛当老师,最后我对象去了那里.</p>
+
+<p>这个大学很人性,都是电面,三个老师面试,面试上科大的时候我已经&#8221;身经百战&#8221;,面试能力达到了巅峰.答得都挺好,包括美赛获奖经历,一些项目上的问题,还有专业课的知识,值得一提的是,两个老师都问了我快排的问题,在中科院计算所的笔试上还考过手写快排的问题,可见快排真的是百问不厌的经典算法,值的深入理解一下.</p>
+
+<p>最后收到了offer,由于不是985,211,家里不让,再加上有了清华的offer,还是拒绝了</p>
+
+<h2>清华软院</h2>
+
+<p>我没有清华梦</p>
+
+<p>我学生时代考不上清华,我也没想过去清华读书,但是没想到我竟然能有机会去清华读研,还是百里挑一的学硕..</p>
+
+<p>我们学院去年有很多学长去了清华软院,所以我根据他们的经验对清华软院了解的也比较多,虽然清华软院没有夏令营,但是只要获得了复试的资格,还是很容易进去的.</p>
+
+<p>我最终进入了复试,但是听说我们学院日语强化的第一名今年由于六级没有通过没能获得复试的资格,我的经历和其他人的经历比起来也显得不那么坎坷了.后来一比才发现,我是同行的所有软院的去清华复试的人里面成绩最差的,我没怎么紧张,毕竟奋力一搏.</p>
+
+<p>复试当天上午机试,三道题,用VS敲,上面还有VA,我平时就用这个,环境方面没有什么问题.第一道题暴力模拟,比较简单,第二道题DFS,一个递归就可以.第三道题我做的时间比较长,最后想出来了一个动态规划的算法(这得益于前面51nod的动态规划的教程).做完了之后我没有直接离开,因为离开了我也没地方去,我就一遍一遍地看代码,没想到还真让我找到了一个小bug(将矩阵读成了方阵),后来我又坐在那里准备面试的自我介绍,这样,到最后交卷我才走.</p>
+
+<p>面试进行的也很顺利,清华的教授们都很nice,我自我介绍的时候一直点头,尤其我说道开发的游戏和网站的时候老师眼前一亮.无奈一个老师突然问了我网络的七层模型(OSI),这个我只记得五层,就直说了五层模型,其它的问题都没啥问题.</p>
+
+<p>后来打电话询问居然过了那边的学硕,老师说我机试做的好才给我调了的.真是瞬间感觉之前刷题的努力都没有白费</p>
+
+<h2>其它</h2>
+
+<p>其实还面了其它一些学校,这些面试大都没什么营养,经历也都各种各样,简单提一句.</p>
+
+<p>北大,这个我夏令营材料就没通过,后来联系老师去面了一下,到了那里,联系的老师对我的自我介绍就不满意,倒是离我最近的老师问了我一些问题,包括支持向量是什么等等,我也都答了,后来还是没有通过.9月正式推免我又投了一次,材料还是没有通过..</p>
+
+<p>北航,我去了北航计算机学院的夏令营,说实话这个夏令营让我感觉北航其实没我想的那么好,机试题目很简单,面试问的问题也都是一些项目经历.但是最后因为没有offer,一直拖着没给北航回复,感觉也是挺对不起这个学校的.</p>
+
+<p>中科院计算所,这个是当时北航要确认,我有点慌神,就报了一下,但是我并不很想去这种和校园不太一样的研究所.后来收到面试通知我还是去了,面试老师问的问题五花八门,从项目经历到家庭信息,就是没问专业知识..期间老师还暗示我这个方向并不是很赚钱..后来面完了老师又让做一个笔试,题目量很大,编程要求手写快排和二分查找..不过中科院效率很高,下午就让我去签字,我跑到那边发现是要签一个保证去中科院的协议,果断放弃掉了..</p>
+
+<hr />
+
+<p>现在,我已经填完了推免申请,等待清华的确认,同时也在找清华的导师收留我,同时还在找实习..</p>
+
+<p>我之前一直想着保研完了就可以放松了,但是我发现我早已停顿不下,来到了一个驿站又到了走向下一个驿站的路上..</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/">Reading Computer Systems(A Programmer’s Perspective):2</a></h1>
     
     
@@ -168,7 +320,7 @@
   
 
 
-<time datetime="2015-08-27T05:07:02+00:00" pubdate data-updated="true"></time>
+<time datetime="2015-08-27T13:07:02+08:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/#comments">Comments</a>
@@ -314,7 +466,7 @@
   
 
 
-<time datetime="2015-08-22T05:22:44+00:00" pubdate data-updated="true"></time>
+<time datetime="2015-08-22T13:22:44+08:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/#comments">Comments</a>
@@ -407,7 +559,7 @@ d = x<em>a + y</em>b
   
 
 
-<time datetime="2015-08-14T07:37:43+00:00" pubdate data-updated="true"></time>
+<time datetime="2015-08-14T15:37:43+08:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1/#comments">Comments</a>
@@ -572,7 +724,7 @@ d = x<em>a + y</em>b
   
 
 
-<time datetime="2015-04-23T13:11:15+00:00" pubdate data-updated="true"></time>
+<time datetime="2015-04-23T21:11:15+08:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/#comments">Comments</a>
@@ -656,7 +808,7 @@ d = x<em>a + y</em>b
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a></h1>
     
     
       <p class="meta">
@@ -672,10 +824,10 @@ d = x<em>a + y</em>b
   
 
 
-<time datetime="2015-04-04T23:38:50+00:00" pubdate data-updated="true"></time>
+<time datetime="2015-04-05T07:38:50+08:00" pubdate data-updated="true"></time>
         
         
-          | <a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/#comments">Comments</a>
+          | <a href="/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/#comments">Comments</a>
         
       </p>
     
@@ -766,7 +918,7 @@ schemes.</p></blockquote>
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/04/04/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a></h1>
+      <h1 class="entry-title"><a href="/blog/2015/04/05/moving-my-blog-to-octopress/">Moving My Blog to Octopress</a></h1>
     
     
       <p class="meta">
@@ -782,10 +934,10 @@ schemes.</p></blockquote>
   
 
 
-<time datetime="2015-04-04T21:34:53+00:00" pubdate data-updated="true"></time>
+<time datetime="2015-04-05T05:34:53+08:00" pubdate data-updated="true"></time>
         
         
-          | <a href="/blog/2015/04/04/moving-my-blog-to-octopress/#comments">Comments</a>
+          | <a href="/blog/2015/04/05/moving-my-blog-to-octopress/#comments">Comments</a>
         
       </p>
     
@@ -897,7 +1049,7 @@ $ rake generate
   
 
 
-<time datetime="2015-03-25T00:00:00+00:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-25T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2015/03/25/Monster-Storm/#comments">Comments</a>
@@ -998,7 +1150,7 @@ $ rake generate
   
 
 
-<time datetime="2015-03-23T00:00:00+00:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-23T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2015/03/23/Review_Vcool-Website/#comments">Comments</a>
@@ -1108,7 +1260,7 @@ $ rake generate
   
 
 
-<time datetime="2015-03-22T00:00:00+00:00" pubdate data-updated="true"></time>
+<time datetime="2015-03-22T00:00:00+08:00" pubdate data-updated="true"></time>
         
         
           | <a href="/blog/2015/03/22/Morris-Traversal/#comments">Comments</a>
@@ -1203,64 +1355,6 @@ if __name__ == '__main__':
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/20/douban-paper-test/">豆瓣笔试</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-03-20T00:00:00+00:00" pubdate data-updated="true"></time>
-        
-        
-          | <a href="/blog/2015/03/20/douban-paper-test/#comments">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>背景</h2>
-
-<p>大三上是软院的找实习季,最近跟风投了几家公司,主要还是想看看自己实力如何,毕竟如果只呆在某个地方会使自我感觉良好.
-前面已经被阿里面过,一面就跪了..面试官只问了两个问题,是两个项目的问题,一个是大二写的微信平台,我讲到一半就不让讲了,确切的说是当我讲到用PHP写的之后,后来开始问我会不会IOS,原来他把cocos2d-x引擎当成IOS开发了,之后大概他就感觉没什么可以和我聊的了直接结束了.一开始以为是问算法和基础知识,准备了挺长时间,也紧张了挺长时间..但是没被问到,算是一点遗憾吧,毕竟一些基础我自我感觉还是不错的</p>
-
-<p>之后觉得项目实在是我的弱点,一是跟面试官聊天太紧张,二是老是不能get到面试官想问的点,比如如果和阿里的面试官聊微信平台的时候如果直接说到正则表达式的话估计也不会这么快就没得聊..当然最重要的是以前做的东西我都忘得差不多了,边想边说肯定不行,所以最近计划把之前做的东西再看一遍,借此复习,并完善一下简历.</p>
-
-<h2>豆瓣笔试</h2>
-
-<p>笔试在下午两点半,在线笔试,这也是我人生第一场笔试,不过估计不久就会有一大波(明天就有去哪儿网的笔试..).笔试之前得到了一个不幸的消息,我们微软创新杯的作品没有通过校赛的选拔,这个东西我们工作量虽然不大,但是也是忙里忙外做了两周,心有不甘.我去问负责人,他说一共要6个我们排在第7,具体评分也没有,再加上负责人自己也参赛了,并且是拿着去年获过奖的作品二次开发,由于他就在我隔壁,我也得知他在提交的前一天才开始二次开发..所以一直比较郁闷</p>
-
-<p>然后就直接去笔试了,前两道题挺简单
- 1. 第一个是写一个正则表达式匹配出来@链接,题目要求比较低,匹配字母数字下划线就行,我个人觉得应该是<code>'@[^:]+'</code>这样最好,就是匹配非空格,非冒号
- 2. 第二个是简答题,设计模式.
- 3. 第三题也比较简单,但是有个坑,由于前面两个我浪费太多时间了,做这题的时候有点着急,并没对输入进行异常处理..
- 4. 第四个就有点难度了,找出一个矩阵中不同行不同列的元素和的最大值,我想了一会感觉和N皇后类似,而且前两天刚做过,就准备打开前两天的代码改一下就行..当我打开自己之前写代码的时候感觉坑了..自己写的这代码可读性太差了,还没有注释,虽然当时通过了OJ,但是急忙修改了一下填上了
- 5. 第五个是数据库设计,我把数据库建表的语句忘得差不多了,就简单写了下思路,估计跪了
- 6. 第六个是大数据,1000万数据中找出出现次数前十,我基本不会,就写了下数据量小的时候的思路(hash加最大堆)</p>
-
-<p>做到最后感觉自己真的很弱,做过的项目都是小项目,写的代码可读性并不好,忘性大还不复习,槽点太多..还是应该把现在最弱的自己记录下来,引以为戒,多加学习~</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="2">&larr; Older</a>
@@ -1295,6 +1389,10 @@ if __name__ == '__main__':
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/09/28/story-continued-bao-yan-zhi-lu/">Story Continued &#8211; 保研之路</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/">Reading Computer Systems(A Programmer’s Perspective):2</a>
       </li>
     
@@ -1308,10 +1406,6 @@ if __name__ == '__main__':
     
       <li class="post">
         <a href="/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/">Half Way Conclusion of 3rd Grade in College</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/">git远程代码管理，SSH还是HTTPS</a>
       </li>
     
   </ul>

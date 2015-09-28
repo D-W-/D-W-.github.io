@@ -4,7 +4,7 @@
   <title><![CDATA[D W]]></title>
   <link href="http://d-w-.github.io/atom.xml" rel="self"/>
   <link href="http://d-w-.github.io/"/>
-  <updated>2015-08-27T10:42:35+00:00</updated>
+  <updated>2015-09-28T18:48:42+08:00</updated>
   <id>http://d-w-.github.io/</id>
   <author>
     <name><![CDATA[Harry]]></name>
@@ -14,9 +14,124 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Story Continued -- 保研之路]]></title>
+    <link href="http://d-w-.github.io/blog/2015/09/28/story-continued-bao-yan-zhi-lu/"/>
+    <updated>2015-09-28T15:16:58+08:00</updated>
+    <id>http://d-w-.github.io/blog/2015/09/28/story-continued-bao-yan-zhi-lu</id>
+    <content type="html"><![CDATA[<p>这是一篇关于保研的总结,记录我可能持续了整个大三的保研之路..</p>
+
+<p>但是在此之前,先说个技术问题.
+关于powershell的.
+一开始在windows上面用git是直接下了个windows版的github,桌面版还挺好用的.随之而来的还有一个叫gitshell的东西,就是一个windows上用的shell,里面预装了git,能直接用git的各种指令,感觉还挺好.
+后来我的windows升级到win10之后这个就出了问题,中文输入输不进去后来查了一下是页面编码的问题.
+原因是这个shell编码由原来的GBK变成了UTF8,识别不了中文了,只要用</p>
+
+<pre><code>&gt;&gt;&gt;chcp 936
+</code></pre>
+
+<p>就可以了,这个是将当前页的编码改成936(GBK),change current code page
+但是用 <code>rake new_post</code> 发博客的时候还是会遇到错误</p>
+
+<blockquote><p> (UTF-8 regexp with GBK string)</p></blockquote>
+
+<p>这个只要把字体改一下就可以,改一个可以支持中文的字体</p>
+
+<hr />
+
+<p>下面进入正文</p>
+
+<h2>准备</h2>
+
+<p>之前不确定要读研,说实话直到<a href="http://d-w-.github.io/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/">找实习不顺利</a>我才确定我这水平还是先读个研来的比较妥当.
+但是我从大三一开始就做了一些相关的准备,这些准备到了最后也是确实起到了很大的帮助.
+其实全部的准备工作就是刷OJ,一开始想法很简单,找工作算法能力也很重要,保研的话也会有机试,直接刷一下OJ锻炼一下算法能力也是很好的.</p>
+
+<p>没想到我还挺喜欢刷题的,有空了就去leetcode上面做题,遇到难题可能好几天也想不出来,最后忍不住了去看别人分享的答案,毕竟这是少数,大多数题目思考一下还是能想出来的.
+到最后,我在某一个时间点把leetcode上的题做完了(后来没怎么做过leetcode,新题都没做),通过代码的积累,算法也提升了一些.</p>
+
+<p>做完了leetcode又去poj上面做题,但是上面题太多,就找了个经验贴,按上面的顺序做题,做了几天又发现了一个保研机试的oj,九度oj,上面的题都比较简单.用来练手热身都很合适,但是后来也放弃了.</p>
+
+<p>直到我遇到了51nod这个oj,这个oj真的非常棒,中国社区,有很多活跃的大神在上面,而且题目有难度分级,还有一些教程,尤其是动态规划的,对于我这种从来没接受过专业ACM训练的人来说真是再好不过了.事实上,这个动态规划的训练到后来真的帮了我很多.</p>
+
+<p>中间还兴致勃勃地报名了微软的编程之美,水了件T恤回来.</p>
+
+<p>粗略算下来,oj上面的题我也刷了三四百道,逐渐对算法理解也更多,更深刻了.这些东西想想也真的是教不来,只能自己慢慢做,慢慢体会.</p>
+
+<p>除了刷OJ之外,我也没进行其他的复习,也就是数据结构与算法,我找了好几本书,看了很多,也对以前学过的算法有了更多的理解.
+复习的时候看的书很多,一个算法一本书上说的不明白我就去看另一本.不过主要看的就是 英文的&lt;数据结构与算法分析:C语言描述>,看算法还能练练英语,还有就是学校图书馆借的Sedgewick的&lt;算法>,里面对于图那一块讲的挺好的.</p>
+
+<p>到现在记忆比较深的就是最短路径算法,记得当时上机给学长检查,学长为了检查代码是不是自己写的都要问几个问题,这个我大学所有的代码都是自己写的,但是学长问我,dijkstra算法能处理负权边问题吗?
+我不知道,回答的可以,学长跟我说是不可以的,当时也没在意,谁知道现在复习才发现Bellman-ford算法才能处理负权边问题,这个后面回写一篇博客总结一下.
+PS:数据结构这课我最后还是考了100,由此,分数或成绩并不能衡量一个人技术水平的高低.</p>
+
+<h2>上交软院</h2>
+
+<p>这是我参加保研夏令营去的第一所学校,也给我留了很深的印象.</p>
+
+<p>上交的软院很小(比起大工的来说),但是校区很大,而且建筑设施都很不错.听完院长的介绍我才真正对上交的水平有所了解,实际上我对所有的学校基本都没什么了解..</p>
+
+<p>后来参观实验室,对上交实力最强的<a href="http://ipads.se.sjtu.edu.cn/">IPADS实验室</a>很感兴趣,他们主要是弄内核方向的,而这也是我本科阶段很感兴趣的一个方向,我立刻把答辩的题目换成了IPADS实验室的题目(之前选的是一个机器学习的老师的题目).看了一篇<a href="http://wdtz.org/files/asplos200-dautenhahn.pdf">Nested Kernel</a>的论文就去答辩了,由于临时换题目,只看了两天,只能说对内嵌内核这东西有了个表面上的理解,答辩完自我感觉还行,但是最后收到的通知是待定..</p>
+
+<p>后来陆续给上交软院打过两个电话,都说现在结果出不来.最后知道今天(9.28)我填上了清华的志愿后,才有一个老师打电话来问我还想不想去上交.无奈已经错过了,其实能去上交的顶级实验室玩自己喜欢的方向对我是很有吸引力的,如果上交早一点确定了要我,说不定我就不会去清华了.可是怎么可能事事都顺意,也正是这种挫折感让我坚定了去清华的信心.</p>
+
+<h2>中山-CMU 电面</h2>
+
+<p>中山大学和卡内基梅隆大学的合作项目,一年中山大学,一年卡耐基.</p>
+
+<p>卡耐基梅隆大学应该是每个CS专业的学生的梦想吧,尤其是他们的&lt;深入理解计算机系统>这门招牌课,我一直想去听一下.所以报了这个项目.</p>
+
+<p>电面很简单,一群CMU的老师问了我几个问题,10分钟就结束了,由于英语说得不好,我答的也磕磕巴巴,问题问的还是很深的,比如STL里面map后的数据结构,摄像机的标定等等..要不是我选过虚拟现实这课,我可能连calibration是什么都不知道..</p>
+
+<p>最后还是收到了offer,但是拒绝了,因为他们只肯给我985学生都有的15w入学奖学金.我希望读研不要花家里的钱,另一方面我觉得他们并没有对我很认可,或者我自负地觉得自己值得更多..</p>
+
+<h2>上科大计算机</h2>
+
+<p>上海科技大学,中科院刚成立的一所大学</p>
+
+<p>我是在学校的宣讲会上面对这个大学有了解的,当时我只有北航的一个offer,就毅然决然的报了名,当时想的是拿来保底.但是这学校实际上很不错,都是一些海归的大牛当老师,最后我对象去了那里.</p>
+
+<p>这个大学很人性,都是电面,三个老师面试,面试上科大的时候我已经&#8221;身经百战&#8221;,面试能力达到了巅峰.答得都挺好,包括美赛获奖经历,一些项目上的问题,还有专业课的知识,值得一提的是,两个老师都问了我快排的问题,在中科院计算所的笔试上还考过手写快排的问题,可见快排真的是百问不厌的经典算法,值的深入理解一下.</p>
+
+<p>最后收到了offer,由于不是985,211,家里不让,再加上有了清华的offer,还是拒绝了</p>
+
+<h2>清华软院</h2>
+
+<p>我没有清华梦</p>
+
+<p>我学生时代考不上清华,我也没想过去清华读书,但是没想到我竟然能有机会去清华读研,还是百里挑一的学硕..</p>
+
+<p>我们学院去年有很多学长去了清华软院,所以我根据他们的经验对清华软院了解的也比较多,虽然清华软院没有夏令营,但是只要获得了复试的资格,还是很容易进去的.</p>
+
+<p>我最终进入了复试,但是听说我们学院日语强化的第一名今年由于六级没有通过没能获得复试的资格,我的经历和其他人的经历比起来也显得不那么坎坷了.后来一比才发现,我是同行的所有软院的去清华复试的人里面成绩最差的,我没怎么紧张,毕竟奋力一搏.</p>
+
+<p>复试当天上午机试,三道题,用VS敲,上面还有VA,我平时就用这个,环境方面没有什么问题.第一道题暴力模拟,比较简单,第二道题DFS,一个递归就可以.第三道题我做的时间比较长,最后想出来了一个动态规划的算法(这得益于前面51nod的动态规划的教程).做完了之后我没有直接离开,因为离开了我也没地方去,我就一遍一遍地看代码,没想到还真让我找到了一个小bug(将矩阵读成了方阵),后来我又坐在那里准备面试的自我介绍,这样,到最后交卷我才走.</p>
+
+<p>面试进行的也很顺利,清华的教授们都很nice,我自我介绍的时候一直点头,尤其我说道开发的游戏和网站的时候老师眼前一亮.无奈一个老师突然问了我网络的七层模型(OSI),这个我只记得五层,就直说了五层模型,其它的问题都没啥问题.</p>
+
+<p>后来打电话询问居然过了那边的学硕,老师说我机试做的好才给我调了的.真是瞬间感觉之前刷题的努力都没有白费</p>
+
+<h2>其它</h2>
+
+<p>其实还面了其它一些学校,这些面试大都没什么营养,经历也都各种各样,简单提一句.</p>
+
+<p>北大,这个我夏令营材料就没通过,后来联系老师去面了一下,到了那里,联系的老师对我的自我介绍就不满意,倒是离我最近的老师问了我一些问题,包括支持向量是什么等等,我也都答了,后来还是没有通过.9月正式推免我又投了一次,材料还是没有通过..</p>
+
+<p>北航,我去了北航计算机学院的夏令营,说实话这个夏令营让我感觉北航其实没我想的那么好,机试题目很简单,面试问的问题也都是一些项目经历.但是最后因为没有offer,一直拖着没给北航回复,感觉也是挺对不起这个学校的.</p>
+
+<p>中科院计算所,这个是当时北航要确认,我有点慌神,就报了一下,但是我并不很想去这种和校园不太一样的研究所.后来收到面试通知我还是去了,面试老师问的问题五花八门,从项目经历到家庭信息,就是没问专业知识..期间老师还暗示我这个方向并不是很赚钱..后来面完了老师又让做一个笔试,题目量很大,编程要求手写快排和二分查找..不过中科院效率很高,下午就让我去签字,我跑到那边发现是要签一个保证去中科院的协议,果断放弃掉了..</p>
+
+<hr />
+
+<p>现在,我已经填完了推免申请,等待清华的确认,同时也在找清华的导师收留我,同时还在找实习..</p>
+
+<p>我之前一直想着保研完了就可以放松了,但是我发现我早已停顿不下,来到了一个驿站又到了走向下一个驿站的路上..</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Reading Computer Systems(A Programmer’s Perspective):2]]></title>
     <link href="http://d-w-.github.io/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2/"/>
-    <updated>2015-08-27T05:07:02+00:00</updated>
+    <updated>2015-08-27T13:07:02+08:00</updated>
     <id>http://d-w-.github.io/blog/2015/08/27/reading-computer-systems-a-programmers-perspective-2</id>
     <content type="html"><![CDATA[<h2>第五章 优化程序性能</h2>
 
@@ -132,7 +247,7 @@
   <entry>
     <title type="html"><![CDATA[乘法逆元 Euclid定理和中国剩余定理]]></title>
     <link href="http://d-w-.github.io/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li/"/>
-    <updated>2015-08-22T05:22:44+00:00</updated>
+    <updated>2015-08-22T13:22:44+08:00</updated>
     <id>http://d-w-.github.io/blog/2015/08/22/cheng-fa-ni-yuan-euclidding-li-he-zhong-guo-sheng-yu-ding-li</id>
     <content type="html"><![CDATA[<p>今天刷题的时候遇到了一道<a href="http://www.51nod.com/onlineJudge/questionCode.html#!problemId=1079">中国剩余定理的题</a>,当年在网络安全这门课上学过这个算法,但是到现在只记得这个名字了,就回去翻课件回顾了一下,结果发现了很多知识点,就在这整理一下.</p>
 
@@ -195,7 +310,7 @@ d = x<em>a + y</em>b
   <entry>
     <title type="html"><![CDATA[Reading Computer Systems(A Programmer's Perspective):1]]></title>
     <link href="http://d-w-.github.io/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1/"/>
-    <updated>2015-08-14T07:37:43+00:00</updated>
+    <updated>2015-08-14T15:37:43+08:00</updated>
     <id>http://d-w-.github.io/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1</id>
     <content type="html"><![CDATA[<p>深入理解计算机系统这本书大二的时候就买了,因为有很多学长推荐,而且很多计算机名校也用它当&lt;计算机组成原理>的教材.但是由于各种原因一直拖着没读,大三利用寒假读了一下,感觉受益匪浅,但是没有读完,大三下学期断断续续不仅没有继续读,还把前面读了的忘了个差不多,现在准备利用暑假读完,并记一下笔记,以防忘记.</p>
 
@@ -330,7 +445,7 @@ d = x<em>a + y</em>b
   <entry>
     <title type="html"><![CDATA[Half Way Conclusion of 3rd Grade in College]]></title>
     <link href="http://d-w-.github.io/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/"/>
-    <updated>2015-04-23T13:11:15+00:00</updated>
+    <updated>2015-04-23T21:11:15+08:00</updated>
     <id>http://d-w-.github.io/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college</id>
     <content type="html"><![CDATA[<p>距离上次写博客已经过去了半个多月,我兴致勃勃迁移博客的热情也减少了很多,从开学充满激情海投简历到现在也认清了自己的水平,昨天受到腾讯大连HR的启发,准备对自己的人生进行思考,规划自己的生涯.</p>
 
@@ -399,9 +514,9 @@ d = x<em>a + y</em>b
   
   <entry>
     <title type="html"><![CDATA[git远程代码管理，SSH还是HTTPS]]></title>
-    <link href="http://d-w-.github.io/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/"/>
-    <updated>2015-04-04T23:38:50+00:00</updated>
-    <id>http://d-w-.github.io/blog/2015/04/04/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https</id>
+    <link href="http://d-w-.github.io/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https/"/>
+    <updated>2015-04-05T07:38:50+08:00</updated>
+    <id>http://d-w-.github.io/blog/2015/04/05/gityuan-cheng-dai-ma-guan-li-,sshhuan-shi-https</id>
     <content type="html"><![CDATA[<p>之前学习git的过程中就遇到了这个问题，电脑并不能使用ssh连接远程仓库，例如<code>clone git@github.com/xx.git</code> 这样的工程会失败。我就必须改成使用HTTPS协议，把连接改成 https 的，或者直接配置一个环境变量</p>
 
 <pre><code>git config --global url."https://".insteadOf git://
@@ -479,9 +594,9 @@ schemes.</p></blockquote>
   
   <entry>
     <title type="html"><![CDATA[Moving My Blog to Octopress]]></title>
-    <link href="http://d-w-.github.io/blog/2015/04/04/moving-my-blog-to-octopress/"/>
-    <updated>2015-04-04T21:34:53+00:00</updated>
-    <id>http://d-w-.github.io/blog/2015/04/04/moving-my-blog-to-octopress</id>
+    <link href="http://d-w-.github.io/blog/2015/04/05/moving-my-blog-to-octopress/"/>
+    <updated>2015-04-05T05:34:53+08:00</updated>
+    <id>http://d-w-.github.io/blog/2015/04/05/moving-my-blog-to-octopress</id>
     <content type="html"><![CDATA[<h2>前言</h2>
 
 <p>最近在读侯捷老师的《STL源码剖析》一书，收获简直太大。一激动就想把学的东西赶紧记下来写篇博客，然后想到我以前的博客系统，bug无穷，于是决定亲自配一个Octopress的博客，因为之前的博客是Jekyll的，博文都用的markdown写的，Octopress也是markdown语法，这样可以直接连文字带样式轻松移植过来，想的挺轻松，但是实际操纵起来简直折腾了我好几天。。</p>
@@ -565,7 +680,7 @@ $ rake generate
   <entry>
     <title type="html"><![CDATA[Monster Storm]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/25/Monster-Storm/"/>
-    <updated>2015-03-25T00:00:00+00:00</updated>
+    <updated>2015-03-25T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/25/Monster-Storm</id>
     <content type="html"><![CDATA[<p>Monster Storm</p>
 
@@ -636,7 +751,7 @@ $ rake generate
   <entry>
     <title type="html"><![CDATA[Review VCool Website]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/23/Review_Vcool-Website/"/>
-    <updated>2015-03-23T00:00:00+00:00</updated>
+    <updated>2015-03-23T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/23/Review_Vcool-Website</id>
     <content type="html"><![CDATA[<p>以前做过的一些东西的简单回顾，避免面试官问起来都忘了，也能在简历上面写得更加得心应手</p>
 
@@ -716,7 +831,7 @@ $ rake generate
   <entry>
     <title type="html"><![CDATA[Morris Traversal]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/22/Morris-Traversal/"/>
-    <updated>2015-03-22T00:00:00+00:00</updated>
+    <updated>2015-03-22T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/22/Morris-Traversal</id>
     <content type="html"><![CDATA[<p>Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度只要O(1),时间复杂度也只有O(n)
 这里根据<a href="http://www.cnblogs.com/AnnieKim/archive/2013/06/15/MorrisTraversal.html">博客园上的文章</a>进行了学习.整个算法我感觉主要有两部分不太容易懂 ,一是具体的算法部分,也就是如何利用线索二叉树找前驱节点的方法的;另一个就是如何证明这个算法是O(n)的.对于第一部分可以在代码里面说明,这里先说一下第二部分,借用原文中的话:</p>
@@ -802,7 +917,7 @@ if __name__ == '__main__':
   <entry>
     <title type="html"><![CDATA[豆瓣笔试]]></title>
     <link href="http://d-w-.github.io/blog/2015/03/20/douban-paper-test/"/>
-    <updated>2015-03-20T00:00:00+00:00</updated>
+    <updated>2015-03-20T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2015/03/20/douban-paper-test</id>
     <content type="html"><![CDATA[<h2>背景</h2>
 
@@ -830,7 +945,7 @@ if __name__ == '__main__':
   <entry>
     <title type="html"><![CDATA[LeetCode上面的Distinct Subsequences总结]]></title>
     <link href="http://d-w-.github.io/blog/2014/12/20/Distinct-Subsequences/"/>
-    <updated>2014-12-20T00:00:00+00:00</updated>
+    <updated>2014-12-20T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2014/12/20/Distinct-Subsequences</id>
     <content type="html"><![CDATA[<p>最近做了挺多东西,从中也学了不少,觉得总结一下比较好,一直没有时间就一直拖着,现在终于有点空闲的时间,觉得像我这种记性不太好的人还是多做一些code review,否则做一点忘一点,最后反而学不到什么东西.</p>
 
@@ -952,7 +1067,7 @@ t 0 0 0 0 0 0 0 3
   <entry>
     <title type="html"><![CDATA[LeetCode上面的WordLadder总结]]></title>
     <link href="http://d-w-.github.io/blog/2014/11/25/Word-Ladder/"/>
-    <updated>2014-11-25T00:00:00+00:00</updated>
+    <updated>2014-11-25T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2014/11/25/Word-Ladder</id>
     <content type="html"><![CDATA[<p>按通过率来说,WordLadder应该是Leetcode上面最难的一道题了
 其中的第二道我提交了8次才成功,多数原因是TLE,这实在令人沮丧</p>
@@ -1005,7 +1120,7 @@ t 0 0 0 0 0 0 0 3
   <entry>
     <title type="html"><![CDATA[Linux文件系统基础]]></title>
     <link href="http://d-w-.github.io/blog/2014/11/14/Linux-File-System/"/>
-    <updated>2014-11-14T00:00:00+00:00</updated>
+    <updated>2014-11-14T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2014/11/14/Linux-File-System</id>
     <content type="html"><![CDATA[<h2>鸟哥的Linux私房菜学习笔记(0)</h2>
 
@@ -1056,7 +1171,7 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   <entry>
     <title type="html"><![CDATA[第一篇博客]]></title>
     <link href="http://d-w-.github.io/blog/2014/10/15/First-Blog/"/>
-    <updated>2014-10-15T00:00:00+00:00</updated>
+    <updated>2014-10-15T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2014/10/15/First-Blog</id>
     <content type="html"><![CDATA[<h2>我这个人，执行力很差。</h2>
 
@@ -1088,7 +1203,7 @@ block记录<em>该目录下文件名和该文件名占用的inode号码数据</e
   <entry>
     <title type="html"><![CDATA[Markdown Style Guide]]></title>
     <link href="http://d-w-.github.io/blog/2014/03/03/Hello-World/"/>
-    <updated>2014-03-03T00:00:00+00:00</updated>
+    <updated>2014-03-03T00:00:00+08:00</updated>
     <id>http://d-w-.github.io/blog/2014/03/03/Hello-World</id>
     <content type="html"><![CDATA[<p>This is a demo of all styled elements in Jekyll Now.</p>
 

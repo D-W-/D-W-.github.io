@@ -3,7 +3,7 @@ layout: post
 title: "Reading Computer Systems(A Programmer’s Perspective):2"
 date: 2015-08-27 05:07:02 +0000
 comments: true
-categories: [深入理解计算机系统 读书笔记]
+categories: [深入理解计算机系统, 读书笔记]
 ---
 
 ## 第五章 优化程序性能 ##

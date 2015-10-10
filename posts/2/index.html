@@ -9,8 +9,8 @@
   <meta name="author" content="Harry">
 
   
-  <meta name="description" content="背景 大三上是软院的找实习季,最近跟风投了几家公司,主要还是想看看自己实力如何,毕竟如果只呆在某个地方会使自我感觉良好.
-前面已经被阿里面过,一面就跪了..面试官只问了两个问题,是两个项目的问题,一个是大二写的微信平台,我讲到一半就不让讲了,确切的说是当我讲到用PHP写的之后, &hellip;">
+  <meta name="description" content="Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度只要O(1),时间复杂度也只有O(n)
+这里根据博客园上的文章进行了学习.整个算法我感觉主要有两部分不太容易懂 ,一是具体的算法部分,也就是如何利用线索二叉树找前驱节点的方法的;另一个就是如何证明这个算法是O(n)的. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,11 @@
     <span id="btn-list" onclick="turnList()">></span>
 <div id="list" class="off">
 <h2>Posts List</h2>
+
+    <h5>
+    <a href="/blog/2015/10/10/zui-duan-lu-jing-wen-ti/">最短路径问题</a>
+    <span>October 10, 2015</span>  
+    </h5>
 
     <h5>
     <a href="/blog/2015/09/28/story-continued-bao-yan-zhi-lu/">Story Continued &#8211; 保研之路</a>
@@ -152,6 +157,122 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/22/Morris-Traversal/">Morris Traversal</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-22T00:00:00+08:00" pubdate data-updated="true"></time>
+        
+        
+          | <a href="/blog/2015/03/22/Morris-Traversal/#comments">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Morris Traversal 是深度优先遍历二叉树的一种方法,空间复杂度只要O(1),时间复杂度也只有O(n)
+这里根据<a href="http://www.cnblogs.com/AnnieKim/archive/2013/06/15/MorrisTraversal.html">博客园上的文章</a>进行了学习.整个算法我感觉主要有两部分不太容易懂 ,一是具体的算法部分,也就是如何利用线索二叉树找前驱节点的方法的;另一个就是如何证明这个算法是O(n)的.对于第一部分可以在代码里面说明,这里先说一下第二部分,借用原文中的话:</p>
+
+<blockquote><p>直觉上，认为它的复杂度是O(nlgn)，因为找单个节点的前驱节点与树的高度有关。但事实上，寻找所有节点的前驱节点只需要O(n)时间。n个节点的二叉树中一共有n-1条边，整个过程中每条边<strong>最多只走2次</strong>，一次是为了定位到某个节点，另一次是为了寻找上面某个节点的前驱节点，如下图所示，其中红色是为了定位到某个节点，黑色线是为了找到前驱节点。所以复杂度为O(n)。
+<img src="http://images.cnitblog.com/blog/300640/201306/15150628-5285f29bab234750a62e2309394b6e14.jpg" alt="此处输入图片的描述" /></p></blockquote>
+
+<p>原文在这里讲的已经很详细了,这里补充一点,我感觉每条边并不是最多只会被走两次,而是最多会走3次,因为找前驱结点的话会走两次,a:第一次遍历到该节点,找到它的前驱节点,并把前驱节点的右孩子设为当前节点;b:第二次遍历到该节点,找到它的前驱结点,这时前驱结点的右孩子是当前节点(形成了一个环),这时把前驱结点恢复成NULL,并设置当前孩子的右孩子为当前节点.</p>
+
+<p>这里我用python实现了一下<strong>中序遍历</strong></p>
+
+<pre><code>#!/usr/bin/env python
+#coding:utf-8
+
+# Morris traversal
+# O(1) space O(n) time
+
+# 算法基本思想:类似于线索二叉树,找到每个节点的前驱节点,并用前驱节点的右孩子指向当前节点,最后再把该指针删除
+
+'''算法步骤
+1. 如果当前节点的左孩子为空，则输出当前节点并将其右孩子作为当前节点。
+
+2. 如果当前节点的左孩子不为空，在当前节点的左子树中找到当前节点在中序遍历下的前驱节点。
+
+   a) 如果前驱节点的右孩子为空，将它的右孩子设置为当前节点。当前节点更新为当前节点的左孩子。
+
+   b) 如果前驱节点的右孩子为当前节点，将它的右孩子重新设为空（恢复树的形状）。输出当前节点。当前节点更新为当前节点的右孩子。
+
+3. 重复以上1、2直到当前节点为空。
+'''
+
+# 二叉树
+class TreeNode:
+    def __init__(self,x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class MorrisTraversal:
+    '只是一个封装类,把各种遍历封装起来'
+    @staticmethod
+    def inOrder(root):
+        now = root
+        while now:
+            if now.left == None:
+                print now.val
+                now = now.right
+            else:
+                pre = now.left
+                # 寻找前驱,当第二次寻找now的时候now的前驱的right已经被设定成了now,也就是成了一个环,要注意,这里用 pre.right != now 来避免
+                # 左边的最右就是前驱
+                while pre.right and pre.right != now:
+                    pre = pre.right
+                if pre.right == now:
+                    pre.right = None
+                    print now.val
+                    now = now.right
+                else:
+                    pre.right = now
+                    now = now.left
+
+if __name__ == '__main__':
+    t1 = TreeNode(1)
+    t2 = TreeNode(2)
+    t3 = TreeNode(3)
+    t4 = TreeNode(4)
+    t5 = TreeNode(5)
+    t6 = TreeNode(6)
+    t7 = TreeNode(7)
+
+    t1.left = t2
+    t1.right = t3
+    t2.left = t4
+    t2.right = t5
+    t3.left = t6
+    t3.right = t7
+
+    MorrisTraversal.inOrder(t1)
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -729,6 +850,10 @@ to create linebreak tags</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/10/10/zui-duan-lu-jing-wen-ti/">最短路径问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/09/28/story-continued-bao-yan-zhi-lu/">Story Continued &#8211; 保研之路</a>
       </li>
     
@@ -742,10 +867,6 @@ to create linebreak tags</p>
     
       <li class="post">
         <a href="/blog/2015/08/14/reading-computer-systems-a-programmers-perspective-1/">Reading Computer Systems(A Programmer&#8217;s Perspective):1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/23/half-way-conclusion-of-3rd-grade-in-college/">Half Way Conclusion of 3rd Grade in College</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[D W]]></title>
   <link href="http://d-w-.github.io/atom.xml" rel="self"/>
   <link href="http://d-w-.github.io/"/>
-  <updated>2015-09-28T18:48:42+08:00</updated>
+  <updated>2015-10-10T21:33:10+08:00</updated>
   <id>http://d-w-.github.io/</id>
   <author>
     <name><![CDATA[Harry]]></name>
@@ -12,6 +12,124 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[最短路径问题]]></title>
+    <link href="http://d-w-.github.io/blog/2015/10/10/zui-duan-lu-jing-wen-ti/"/>
+    <updated>2015-10-10T20:21:35+08:00</updated>
+    <id>http://d-w-.github.io/blog/2015/10/10/zui-duan-lu-jing-wen-ti</id>
+    <content type="html"><![CDATA[<p>这是一篇一直想写的总结. 主要是复习的时候详细复习(这里应该说是学习了..)了一下最短路径问题. 发现当年学的还有很多不足.. 很多算法没学过,学过的算法的局限性我也不知道.</p>
+
+<p>就像当年数据结构上机,练习dijkstra算法,虽然我自己敲了出来,但是学长问我这个能不能处理负权边的问题的时候我还是不知道..</p>
+
+<p>这里就以负权边为索引详细说一下几个最短路径算法..</p>
+
+<h2>1. Dijkstra算法</h2>
+
+<p>这个应该比较熟悉了,所有的涉及到最短路径的问题都会提到这个算法.
+算法原理是贪心
+解决单源最短路径问题</p>
+
+<p>先选择一个源点,也就是路径的起点.
+然后重复 k 轮,每一轮添加一个点到目前生成的树里面,所以 k 是除源点外节点的数目
+每一轮中分为两步</p>
+
+<ol>
+<li><strong>选择</strong> : 选择源点到达距离最短的点当做下一个加入生成树里面的点</li>
+<li><strong>更新</strong> : 由刚刚选择的点更新源点到每个点的距离</li>
+</ol>
+
+
+<p>其中.选择这一步跟时间复杂度有点关系</p>
+
+<ol>
+<li>比较朴素的方法,既然要选最小的,那就<strong>遍历</strong>一遍
+
+<ul>
+<li>这种方法在图比较稠密的时候比较好用,时间复杂度为:</li>
+</ul>
+</li>
+<li>既然要找最小的,建一个<strong>最小堆</strong>就可以了,这样时间复杂度<strong>好像</strong>比较低
+
+<ul>
+<li>实际上这样做的话比较复杂,时间复杂度也不一定低.</li>
+<li>复杂点 1 在堆里面要存一对元素(pair),因为我们需要距离这个值来进行比较,维护这个堆,还需要最小的距离对应的节点的编号,因为后面我们需要找到这个节点进行更新</li>
+<li>复杂点 2 在于这个堆不是一成不变的,而需要<strong>更新</strong>,每次更新的时候都涉及堆结构的变化,会带来额外的复杂度</li>
+<li>这种方法在图比较稀疏的时候比较好用,时间复杂度为:</li>
+</ul>
+</li>
+</ol>
+
+
+<p>最后,这个算法没有办法解决负权边的问题
+因为上文提到,这个算法逐步生成一棵树的,而每一步新生成的节点都代表了源点到它的最短路径.
+如果有负权边的话,上面那句话就无法保证,有可能会出现后面的一条负权边导致前面已经生成完毕的树里面的某个点遭到破坏</p>
+
+<h2>2. Bellman-Ford算法</h2>
+
+<p>这个算法有改进,权值可以为负</p>
+
+<p>dist k[u] 代表最多经过 k 条边,源点到 u 的最短距离</p>
+
+<p>dist n[u] 就是源点到 u 的最短距离, n 为顶点数(因为最短路径边数目小于顶点数,没有负权环)</p>
+
+<p>可以得到推导式</p>
+
+<pre><code>dist k[u] = min{dist k-1[u], min{dist k-1[j] + E[j][u] } }
+</code></pre>
+
+<p>由源点最多经过 k 条边,到 u 的最短距离是 { 最多经过 k-1 条边的最短距离 } 和  { 最多经过 k-1 条边到某个边的最短距离加上这个边到 u 的距离 }里面更小的那个</p>
+
+<p>伪代码如下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>for(k = 2 : n)
+</span><span class='line'>    for(u = 0 : n)
+</span><span class='line'>        for(i = 0:n)
+</span><span class='line'>            if(E[i][u] &gt; 0 && dist[u] &gt; E[i][u] + dist[i])
+</span><span class='line'>                dist[u] = E[i][u] + dist[i]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面提到了,这个算法不允许图中有负权环
+因为出现了负权环,就不存在最短路径问题了,一直在负权环上面循环可以使路径趋近于无穷小..</p>
+
+<h2>3.发现负权环</h2>
+
+<p>上面提到了负权环,如何判断图中有没有负权环呢?</p>
+
+<p>先看看如何发现环
+可以进行一波深度优先搜索,如果发现搜索的过程中搜索到了已经搜到了的元素,就有环
+或者进行一下拓扑排序,如果运行到最后还有元素,就能判断有环</p>
+
+<p>由于和题目不太相关,这里先不多说了</p>
+
+<h2>4.Floyd算法</h2>
+
+<p>上面说了单源最短路径的算法,这里说一个多源的,就是求出整个图上每两点之间的最短路径</p>
+
+<p>A ij[k] 代表从 i 到 j ,中转点序号小于等于 k 的最短路径</p>
+
+<p>A ij[n] 就是从 i 到 j 的最短路径, n 为节点的数目,也就是节点序号的最大值</p>
+
+<p>可以得到推导式</p>
+
+<pre><code>A ij[k] = min{ A ij[k-1] , A ik[k-1] + A kj[k-1]}
+</code></pre>
+
+<p>从 i 到 j ,中转点序号小于等于 k 的最短路径等于 { 中转点序号小于 k-1 的最短路径 } 和 { 中转点序号最大为 k 的最短路径(中转点包含k) }里面最小的一个</p>
+
+<hr />
+
+<p>总结结束..
+今天看到了一个有趣的单词
+redraw re-draw 重画
+我一开始看成了 red-raw 红红的原始的..</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Story Continued -- 保研之路]]></title>

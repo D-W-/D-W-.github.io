@@ -4,7 +4,7 @@
   <title><![CDATA[D W]]></title>
   <link href="http://d-w-.github.io/atom.xml" rel="self"/>
   <link href="http://d-w-.github.io/"/>
-  <updated>2015-10-10T22:06:27+08:00</updated>
+  <updated>2016-04-12T22:16:05+08:00</updated>
   <id>http://d-w-.github.io/</id>
   <author>
     <name><![CDATA[Harry]]></name>
@@ -12,6 +12,122 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mount Windows Partitions on Ubuntu]]></title>
+    <link href="http://d-w-.github.io/blog/2016/04/12/mount-windows-partitions-on-ubuntu/"/>
+    <updated>2016-04-12T21:42:03+08:00</updated>
+    <id>http://d-w-.github.io/blog/2016/04/12/mount-windows-partitions-on-ubuntu</id>
+    <content type="html"><![CDATA[<p>这篇文章可谓来之不易, 因为太长时间没写了, 中间换了系统, 之前配好的环境都没了, 就费了很大力气又装了一边&hellip; 这里就不详细说明了</p>
+
+<p>这里主要记录一下 ubuntu 下挂载 Windows 分区的问题</p>
+
+<h2>mount</h2>
+
+<p>既然是挂载, 就先说一下这个命令, 一般来说, 格式是这样的</p>
+
+<blockquote><p>mount <em>dir</em></p></blockquote>
+
+<p><em>dir</em> 就是要挂载的分区所在的地方, 一般是类似 <code>/dev/sda1</code> 这样的地址</p>
+
+<p>但是记住每个 windows 分区对应那个sda 后面的数字太麻烦了, <a href="http://www.cyberciti.biz/faq/rhel-centos-debian-fedora-mount-partition-label/">直接根据分区挂载</a>:</p>
+
+<blockquote><p>mount -L  label_name_here  /path/to/mount/point</p></blockquote>
+
+<p>或者, 查一下 LABEL 和 NAME 的对应关系,</p>
+
+<p><a href="https://askubuntu.com/questions/527790/list-all-partition-labels">使用 list block</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo lsblk -o NAME,LABEL
+</span><span class='line'>NAME                    LABEL
+</span><span class='line'>sda                     
+</span><span class='line'>├─sda1                  System Reserved
+</span><span class='line'>├─sda2                  windows
+</span><span class='line'>├─sda3                  ubuntu
+</span><span class='line'>├─sda4                  
+</span><span class='line'>├─sda5                  arch
+</span><span class='line'>├─sda6                  
+</span><span class='line'>│ └─lvmg-homelvm (dm-0) homelb
+</span><span class='line'>└─sda7                  
+</span><span class='line'>sdb                     
+</span><span class='line'>└─sdb1                  
+</span><span class='line'>  └─lvmg-homelvm (dm-0) homelb</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://askubuntu.com/questions/527790/list-all-partition-labels">使用 block id</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo blkid -o list
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>device          fs_type  label     mount point         UUID
+</span><span class='line'>----------------------------------------------------------------------------------
+</span><span class='line'>/dev/sda1       ntfs     WINRE_DRV (not mounted)       604C3A6A4C3A3B5C
+</span><span class='line'>/dev/sda2       vfat     SYSTEM_DRV (not mounted)      6C3C-72E3
+</span><span class='line'>/dev/sda3       vfat     LRS_ESP   (not mounted)       5240-1BEE
+</span><span class='line'>/dev/sda5       ntfs     Windows8_OS /media/Win8       A47A42FF7A42CDAC
+</span><span class='line'>/dev/sda6       ntfs     Daten     /media/Daten        72860971860936DF
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>自动挂载</h2>
+
+<p>windows 的分区是不会在开机的时候自动被挂载的, 想自动挂载的话需要<a href="https://askubuntu.com/questions/182446/how-do-i-view-all-available-hdds-partitions">修改系统文件</a> <code>/etc/fstab</code></p>
+
+<p>其中针对每个分区可以进行挂载的参数配置, 如下:</p>
+
+<blockquote><p>UUID=AA8C58748C583CCF /media/harry/code ntfs umask=0033,gid=1000,uid=1000 0 1</p></blockquote>
+
+<p>UUID是磁盘的id, 后面是挂载地址, 分区格式, 参数, 等等..</p>
+
+<p>这里说一下参数</p>
+
+<h3>umask</h3>
+
+<p>是打开文件之后文件<strong>去掉</strong>的读写权限</p>
+
+<p>0 代表什么权限都不去掉, 也就是读写执行都有</p>
+
+<p>1 代表去掉执行 2 代表去掉写 4 代表去掉读</p>
+
+<p>它们互相组合就得到了总共需要去掉的权限</p>
+
+<p>033 就代表了文件所有者有所有权限, 同组或者其他组的其他人只能读</p>
+
+<h3>gid uid</h3>
+
+<p>挂载这个分区中所有的文件的所有者, 组
+1000表示默认用户</p>
+
+<p>另外也可以手动给mount<a href="https://superuser.com/questions/320415/linux-mount-device-with-specific-user-rights">加参数挂载</a></p>
+
+<pre><code> mount -t deviceFileFormat -o umask=filePermissons,gid=ownerGroupID,uid=ownerID /device /mountpoint
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[最短路径问题]]></title>

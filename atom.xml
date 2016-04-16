@@ -4,7 +4,7 @@
   <title><![CDATA[D W]]></title>
   <link href="http://d-w-.github.io/atom.xml" rel="self"/>
   <link href="http://d-w-.github.io/"/>
-  <updated>2016-04-16T21:54:58+08:00</updated>
+  <updated>2016-04-16T22:02:27+08:00</updated>
   <id>http://d-w-.github.io/</id>
   <author>
     <name><![CDATA[Harry]]></name>
@@ -129,7 +129,7 @@
 </ul>
 
 
-<p>[source][<a href="http://vbird.dic.ksu.edu.tw/linux_basic/0220filemanager_4.php#umask">http://vbird.dic.ksu.edu.tw/linux_basic/0220filemanager_4.php#umask</a>]</p>
+<p><a href="http://vbird.dic.ksu.edu.tw/linux_basic/0220filemanager_4.php#umask">source</a></p>
 
 <hr />
 
@@ -157,9 +157,8 @@
 
 <p>所以,最后的配置变成了这样</p>
 
-<blockquote><h1>mount windows partition code volumn</h1>
-
-<p>UUID=AA8C58748C583CCF /media/harry/code ntfs uid=1000,gid=1000,dmask=022,fmask=133 0 1</p></blockquote>
+<blockquote><p># mount windows partition code volumn
+UUID=AA8C58748C583CCF /media/harry/code ntfs uid=1000,gid=1000,dmask=022,fmask=133 0 1</p></blockquote>
 ]]></content>
   </entry>
   

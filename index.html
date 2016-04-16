@@ -282,6 +282,8 @@
 
 <h3>umask</h3>
 
+<p>user mask</p>
+
 <p>是打开文件之后文件<strong>去掉</strong>的读写权限</p>
 
 <p>0 代表什么权限都不去掉, 也就是读写执行都有</p>
@@ -292,6 +294,30 @@
 
 <p>033 就代表了文件所有者有所有权限, 同组或者其他组的其他人只能读</p>
 
+<p>那么, 从<strong>哪里</strong>减去呢?</p>
+
+<p>是从默认权限里面减去, 文件的默认权限是 666, 文件夹的默认权限是 777</p>
+
+<ul>
+<li>创建文件时：(-rw-rw-rw-) - (&mdash;&ndash;w&ndash;w-) ==> -rw-r&ndash;r&ndash;</li>
+<li>创建目录时：(drwxrwxrwx) - (d&mdash;-w&ndash;w-) ==> drwxr-xr-x</li>
+</ul>
+
+
+<p>[source][<a href="http://vbird.dic.ksu.edu.tw/linux_basic/0220filemanager_4.php#umask">http://vbird.dic.ksu.edu.tw/linux_basic/0220filemanager_4.php#umask</a>]</p>
+
+<hr />
+
+<p>比较 tricky 的一点, 挂载一个windows硬盘的时候, 默认是给所有文件所有权限的</p>
+
+<p>如果只想把文件的 执行 权限去掉的话, 就不能使用 umask 来控制permission了(那样会把文件夹的执行权限也去掉..从而访问不了任何文件)</p>
+
+<p>这里就要引进 fmask 和 dmask 了</p>
+
+<h3>fmask dmask</h3>
+
+<p>很简单 file mask , 和 directory mask, 分别控制文件和文件夹需要去掉的权限</p>
+
 <h3>gid uid</h3>
 
 <p>挂载这个分区中所有的文件的所有者, 组
@@ -301,6 +327,14 @@
 
 <pre><code> mount -t deviceFileFormat -o umask=filePermissons,gid=ownerGroupID,uid=ownerID /device /mountpoint
 </code></pre>
+
+<hr />
+
+<p>所以,最后的配置变成了这样</p>
+
+<blockquote><h1>mount windows partition code volumn</h1>
+
+<p>UUID=AA8C58748C583CCF /media/harry/code ntfs uid=1000,gid=1000,dmask=022,fmask=133 0 1</p></blockquote>
 </div>
   
   

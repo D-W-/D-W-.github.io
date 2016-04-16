@@ -72,6 +72,8 @@ UUID是磁盘的id, 后面是挂载地址, 分区格式, 参数, 等等..
 
 ###umask 
 
+user mask
+
 是打开文件之后文件**去掉**的读写权限
 
 0 代表什么权限都不去掉, 也就是读写执行都有
@@ -82,6 +84,26 @@ UUID是磁盘的id, 后面是挂载地址, 分区格式, 参数, 等等..
 
 033 就代表了文件所有者有所有权限, 同组或者其他组的其他人只能读
 
+那么, 从**哪里**减去呢?
+
+是从默认权限里面减去, 文件的默认权限是 666, 文件夹的默认权限是 777
+
+ - 创建文件时：(-rw-rw-rw-) - (-----w--w-) ==> -rw-r--r--
+ - 创建目录时：(drwxrwxrwx) - (d----w--w-) ==> drwxr-xr-x
+
+[source](http://vbird.dic.ksu.edu.tw/linux_basic/0220filemanager_4.php#umask)
+
+---
+比较 tricky 的一点, 挂载一个windows硬盘的时候, 默认是给所有文件所有权限的
+
+如果只想把文件的 执行 权限去掉的话, 就不能使用 umask 来控制permission了(那样会把文件夹的执行权限也去掉..从而访问不了任何文件)
+
+这里就要引进 fmask 和 dmask 了
+
+###fmask dmask
+
+很简单 file mask , 和 directory mask, 分别控制文件和文件夹需要去掉的权限
+
 ###gid uid
 
 挂载这个分区中所有的文件的所有者, 组
@@ -91,7 +113,12 @@ UUID是磁盘的id, 后面是挂载地址, 分区格式, 参数, 等等..
 
      mount -t deviceFileFormat -o umask=filePermissons,gid=ownerGroupID,uid=ownerID /device /mountpoint
 
+---
 
+所以,最后的配置变成了这样
+
+>\# mount windows partition code volumn
+>UUID=AA8C58748C583CCF /media/harry/code ntfs uid=1000,gid=1000,dmask=022,fmask=133 0 1
 
   
 
